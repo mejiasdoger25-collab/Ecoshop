@@ -6,12 +6,9 @@ import lombok.NoArgsConstructor;
 
 @Data
 @AllArgsConstructor @NoArgsConstructor
-public class Product {
+public class Customer {
 
 	private String name;
-	private double price;
-	private int stock;
-	private String origin;
-	private boolean ecoCertificate;
-	
+	private String email;
+	private String phone;
 }
