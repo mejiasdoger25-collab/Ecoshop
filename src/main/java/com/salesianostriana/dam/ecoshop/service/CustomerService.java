@@ -1,5 +1,6 @@
 package com.salesianostriana.dam.ecoshop.service;
 
+import java.time.LocalDateTime;
 import java.util.Arrays;
 import java.util.List;
 
@@ -15,8 +16,8 @@ public class CustomerService {
 
 	public List<Customer> getLista() {
 		return Arrays.asList(
-				new Customer("Pepe", "pepe@gmail.com", "954 331 488"),
-				new Customer("Pepita", "pepita@gmail.com", "954 625 360")
+				new Customer(1L, "Pepe", "pepe@gmail.com", "954 331 488", LocalDateTime.now(), 10000, true),
+				new Customer(2L, "Pepita", "pepita@gmail.com", "954 625 360", LocalDateTime.now(), 5, false)
 				);		
 	}
 	

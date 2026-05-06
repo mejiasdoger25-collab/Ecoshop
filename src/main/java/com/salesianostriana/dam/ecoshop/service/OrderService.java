@@ -17,8 +17,8 @@ public class OrderService {
 
 	public List<Order> getLista() {
 		return Arrays.asList(
-				new Order("123ABC", LocalDateTime.now(), 73.99),
-				new Order("121ABA", LocalDateTime.now(), 2.50)
+				new Order("123ABC", LocalDateTime.now(), 73.99, "sent", null),
+				new Order("121ABA", LocalDateTime.now(), 2.50, "sent", null)
 				);		
 	}
 	
