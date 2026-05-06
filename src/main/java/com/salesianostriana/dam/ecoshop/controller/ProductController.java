@@ -4,13 +4,12 @@ import org.springframework.stereotype.Controller;
 
 import com.salesianostriana.dam.ecoshop.service.ProductService;
 
-import lombok.AllArgsConstructor;
 import lombok.Data;
-//import lombok.NoArgsConstructor;
+import lombok.RequiredArgsConstructor;
 
 @Controller
-@Data
-@AllArgsConstructor 
+@Data //@Getter @Setter @RequiredArgsConstructor @ToString @EqualsAndHashCode
+@RequiredArgsConstructor 
 public class ProductController {
 
 	private final ProductService service;
