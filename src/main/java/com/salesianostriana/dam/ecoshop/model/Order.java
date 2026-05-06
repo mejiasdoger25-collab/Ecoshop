@@ -1,14 +1,16 @@
 package com.salesianostriana.dam.ecoshop.model;
 
 import java.time.LocalDateTime;
-
-//import jakarta.persistence.Entity;
+import jakarta.persistence.Entity;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-@Data
+@Entity
+@Data //@Getter @Setter @RequiredArgsConstructor @ToString @EqualsAndHashCode
 @AllArgsConstructor @NoArgsConstructor
+@Builder
 public class Order {
 
 	private String code;

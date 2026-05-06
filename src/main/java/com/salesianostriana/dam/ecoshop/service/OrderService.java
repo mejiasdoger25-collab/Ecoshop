@@ -8,8 +8,11 @@ import org.springframework.stereotype.Service;
 
 import com.salesianostriana.dam.ecoshop.model.Order;
 
+import lombok.RequiredArgsConstructor;
+
 
 @Service
+@RequiredArgsConstructor
 public class OrderService {
 
 	public List<Order> getLista() {

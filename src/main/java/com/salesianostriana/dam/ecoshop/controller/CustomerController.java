@@ -2,7 +2,7 @@ package com.salesianostriana.dam.ecoshop.controller;
 
 import org.springframework.stereotype.Controller;
 
-import com.salesianostriana.dam.ecoshop.service.OrderService;
+import com.salesianostriana.dam.ecoshop.service.CustomerService;
 
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
@@ -10,7 +10,7 @@ import lombok.RequiredArgsConstructor;
 @Controller
 @Data //@Getter @Setter @RequiredArgsConstructor @ToString @EqualsAndHashCode
 @RequiredArgsConstructor
-public class OrderController {
+public class CustomerController {
 
-	private final OrderService service;
+	private final CustomerService service;
 }

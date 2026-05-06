@@ -1,11 +1,15 @@
 package com.salesianostriana.dam.ecoshop.model;
 
+import jakarta.persistence.Entity;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-@Data
+@Entity
+@Data //@Getter @Setter @RequiredArgsConstructor @ToString @EqualsAndHashCode
 @AllArgsConstructor @NoArgsConstructor
+@Builder
 public class Product {
 
 	private String name;
