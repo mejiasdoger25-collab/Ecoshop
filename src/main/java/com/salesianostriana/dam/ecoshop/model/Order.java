@@ -14,7 +14,9 @@ import lombok.NoArgsConstructor;
 public class Order {
 
 	private String code;
-	private LocalDateTime date;
+	private LocalDateTime shippingDate;
 	private double total;
+	private String status;
+	private LocalDateTime returnDate;
 	
 }
