@@ -1,10 +1,12 @@
 package com.salesianostriana.dam.ecoshop.model;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -29,4 +31,8 @@ public class Product {
 	private String description;
 	private LocalDate expirationDate;
 	
+	
+	//relación con líneas
+	@OneToMany(mappedBy = "product")
+	private final ArrayList<OrderLine> lines = new ArrayList<>();
 }

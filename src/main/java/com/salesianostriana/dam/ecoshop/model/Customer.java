@@ -1,10 +1,12 @@
 package com.salesianostriana.dam.ecoshop.model;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -26,4 +28,8 @@ public class Customer {
 	private LocalDateTime registrationDate;
 	private double totalSpent;
 	private boolean vip;
+	
+	// Un cliente tiene muchos pedidos
+    @OneToMany(mappedBy = "customer")
+    private final ArrayList<Order> orders = new ArrayList<>();
 }
