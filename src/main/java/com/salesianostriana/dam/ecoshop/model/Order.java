@@ -5,6 +5,8 @@ import java.util.ArrayList;
 
 
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
+import jakarta.persistence.ForeignKey;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
@@ -27,11 +29,12 @@ public class Order {
 	
 	
 	//relación con customer
-    @ManyToOne
-    @JoinColumn(name = "customer_id")
+    @ManyToOne(fetch=FetchType.EAGER)
+    @JoinColumn(foreignKey = @ForeignKey (name = "customer_id"))
     private Customer customer;
 
     //relación con líneas
-    @OneToMany(mappedBy = "order")
+    @OneToMany(mappedBy = "order", fetch=FetchType.EAGER)
+    @Builder.Default
     private final ArrayList<OrderLine> lines = new ArrayList<>();
 }

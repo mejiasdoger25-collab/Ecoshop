@@ -4,6 +4,7 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
@@ -33,6 +34,7 @@ public class Product {
 	
 	
 	//relación con líneas
-	@OneToMany(mappedBy = "product")
+	@OneToMany(mappedBy = "product", fetch=FetchType.EAGER)
+	@Builder.Default
 	private final ArrayList<OrderLine> lines = new ArrayList<>();
 }

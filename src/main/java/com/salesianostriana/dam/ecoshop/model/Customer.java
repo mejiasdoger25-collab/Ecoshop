@@ -4,6 +4,7 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
@@ -29,7 +30,8 @@ public class Customer {
 	private double totalSpent;
 	private boolean vip;
 	
-	// Un cliente tiene muchos pedidos
-    @OneToMany(mappedBy = "customer")
+	//relación con pedidos
+    @OneToMany(mappedBy = "customer", fetch=FetchType.EAGER)
+    @Builder.Default
     private final ArrayList<Order> orders = new ArrayList<>();
 }

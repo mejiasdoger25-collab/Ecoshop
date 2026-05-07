@@ -1,6 +1,7 @@
 package com.salesianostriana.dam.ecoshop.model;
 
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
@@ -27,12 +28,12 @@ public class OrderLine {
 	private double subTotal;
 	
 	//relación con Order
-	@ManyToOne
+	@ManyToOne(fetch=FetchType.EAGER)
 	@JoinColumn(foreignKey = @ForeignKey (name="order_id"))//el name en la bbdd es formato camel, no con mayus
 	private Order order;
 	
 	//relación con Product
-	@ManyToOne
+	@ManyToOne(fetch=FetchType.EAGER)
 	@JoinColumn(foreignKey = @ForeignKey (name="product_id"))//el name en la bbdd es formato camel, no con mayus
 	private Product product;
 
