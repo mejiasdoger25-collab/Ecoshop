@@ -11,7 +11,9 @@ import jakarta.persistence.OneToMany;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 
 @Entity
 @Data //@Getter @Setter @RequiredArgsConstructor @ToString @EqualsAndHashCode
@@ -33,5 +35,7 @@ public class Customer {
 	//relación con pedidos
     @OneToMany(mappedBy = "customer", fetch=FetchType.EAGER)
     @Builder.Default
+    @ToString.Exclude
+    @EqualsAndHashCode.Exclude
     private final ArrayList<Order> orders = new ArrayList<>();
 }
