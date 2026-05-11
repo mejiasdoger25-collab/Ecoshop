@@ -33,7 +33,7 @@ public class ProductController {
 	@GetMapping("/newCustomer")
 	public String newCustomer (Model model) {
 		model.addAttribute("product", new Product());
-		return "form";
+		return "newCustomerForm";
 	}
 	
 	@PostMapping("/newCustomer/submit")
