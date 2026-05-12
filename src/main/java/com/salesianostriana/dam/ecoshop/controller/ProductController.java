@@ -1,8 +1,12 @@
 package com.salesianostriana.dam.ecoshop.controller;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 
+import com.salesianostriana.dam.ecoshop.model.Product;
 import com.salesianostriana.dam.ecoshop.service.ProductService;
 
 import lombok.Data;
@@ -19,4 +23,24 @@ public class ProductController {
     public String home() {
         return "home"; 
     }
+	
+	
+	
+	
+	
+	
+	//test-1st-form
+	@GetMapping("/newProduct")
+	public String newCustomer (Model model) {
+		model.addAttribute("product", new Product());
+		return "newCustomerForm";
+	}
+	
+	@PostMapping("/newProduct/submit")
+	public String newCustomerSubmit (@ModelAttribute("produt") Product product) {
+		service.add(product);
+		return "redirect:/newCustomer";
+	}
+	
+	
 }
