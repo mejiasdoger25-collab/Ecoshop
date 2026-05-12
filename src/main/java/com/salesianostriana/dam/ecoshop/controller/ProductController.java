@@ -30,13 +30,13 @@ public class ProductController {
 	
 	
 	//test-1st-form
-	@GetMapping("/newCustomer")
+	@GetMapping("/newProduct")
 	public String newCustomer (Model model) {
 		model.addAttribute("product", new Product());
 		return "newCustomerForm";
 	}
 	
-	@PostMapping("/newCustomer/submit")
+	@PostMapping("/newProduct/submit")
 	public String newCustomerSubmit (@ModelAttribute("produt") Product product) {
 		service.add(product);
 		return "redirect:/newCustomer";
