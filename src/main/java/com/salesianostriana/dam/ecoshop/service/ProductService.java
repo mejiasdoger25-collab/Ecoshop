@@ -7,15 +7,28 @@ import java.util.List;
 
 import org.springframework.stereotype.Service;
 
+import com.salesianostriana.dam.ecoshop.model.OrderLine;
 import com.salesianostriana.dam.ecoshop.model.Product;
+import com.salesianostriana.dam.ecoshop.repository.CustomerRepository;
+import com.salesianostriana.dam.ecoshop.repository.OrderLineRepository;
+import com.salesianostriana.dam.ecoshop.repository.ProductRepository;
+import com.salesianostriana.dam.ecoshop.service.base.BaseServiceImp;
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.NoArgsConstructor;
 import lombok.RequiredArgsConstructor;
 
 
 @Service
-@RequiredArgsConstructor
-public class ProductService {
+public class ProductService extends BaseServiceImp <Product, Long, ProductRepository>{
 
+	public ProductService(ProductRepository repository) {
+        super(repository);
+    }
+	
+	/*
+	private final ProductRepository repository;
 	private List<Product> productList = new ArrayList<Product>();
 	
 	public List<Product> getLista() {
@@ -29,4 +42,5 @@ public class ProductService {
 		productList.add(product);
 	}
 	
+	*/
 }

@@ -38,7 +38,7 @@ public class ProductController {
 	
 	@PostMapping("/newProduct/submit")
 	public String newCustomerSubmit (@ModelAttribute("produt") Product product) {
-		service.add(product);
+		service.save(product);
 		return "redirect:/newCustomer";
 	}
 	
