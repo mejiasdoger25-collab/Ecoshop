@@ -18,7 +18,6 @@ import lombok.RequiredArgsConstructor;
 //@RequiredArgsConstructor
 //@AllArgsConstructor @NoArgsConstructor
 public class CustomerService extends BaseServiceImp <Customer, Long, CustomerRepository> {
-
 	
 
 	private final CustomerRepository repository;
