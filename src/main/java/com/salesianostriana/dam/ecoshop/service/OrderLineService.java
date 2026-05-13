@@ -17,6 +17,11 @@ import lombok.RequiredArgsConstructor;
 @Service
 public class OrderLineService extends BaseServiceImp <OrderLine, Long, OrderLineRepository>{
 
+	public OrderLineService(OrderLineRepository repository) {
+        super(repository);
+    }
+	
+	/*
 	private final OrderLineRepository repository;
 	
 	public List<OrderLine> getLista() {
@@ -27,4 +32,5 @@ public class OrderLineService extends BaseServiceImp <OrderLine, Long, OrderLine
 				.subTotal(15)
 				.build();		
 	}
+	*/
 }

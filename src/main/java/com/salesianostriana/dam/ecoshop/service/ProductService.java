@@ -23,6 +23,11 @@ import lombok.RequiredArgsConstructor;
 @Service
 public class ProductService extends BaseServiceImp <Product, Long, ProductRepository>{
 
+	public ProductService(ProductRepository repository) {
+        super(repository);
+    }
+	
+	/*
 	private final ProductRepository repository;
 	private List<Product> productList = new ArrayList<Product>();
 	
@@ -37,4 +42,5 @@ public class ProductService extends BaseServiceImp <Product, Long, ProductReposi
 		productList.add(product);
 	}
 	
+	*/
 }

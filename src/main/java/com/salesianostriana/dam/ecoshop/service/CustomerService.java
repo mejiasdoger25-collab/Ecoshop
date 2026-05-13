@@ -14,6 +14,12 @@ import com.salesianostriana.dam.ecoshop.service.base.BaseServiceImp;
 @Service
 public class CustomerService extends BaseServiceImp <Customer, Long, CustomerRepository> {
 
+	
+	public CustomerService(CustomerRepository repository) {
+        super(repository);
+    }
+	
+	/*
 	public CustomerService(CustomerRepository repository) {
 		this.repository = null;//CHECKEAR
 		super(repository);
@@ -31,10 +37,11 @@ public class CustomerService extends BaseServiceImp <Customer, Long, CustomerRep
 				new Customer(2L, "Pepita", "pepita@gmail.com", "954 625 360", LocalDateTime.now(), 5, false, null)
 				);		
 	}
-	*/
+	
 	
 	public void addCustomer (Customer c) {
 		repository.save(new Customer(1L, "Pepe", "pepe@gmail.com", "954 331 488", LocalDateTime.now(), 10000, true, null));
 	}
+	*/
 	
 }

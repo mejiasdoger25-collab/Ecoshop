@@ -25,6 +25,11 @@ import lombok.RequiredArgsConstructor;
 @Service
 public class OrderService extends BaseServiceImp <Order, Long, OrderRepository>{
 
+	public OrderService(OrderRepository repository) {
+        super(repository);
+    }
+	
+	/*
 	private final OrderRepository repository;
 	
 	public List<Order> getLista() {
@@ -33,5 +38,6 @@ public class OrderService extends BaseServiceImp <Order, Long, OrderRepository>{
 				new Order(2L, "121ABA", LocalDateTime.now(), 2.50, "sent", null, new Customer(), null)
 				);		
 	}
+	*/
 	
 }
