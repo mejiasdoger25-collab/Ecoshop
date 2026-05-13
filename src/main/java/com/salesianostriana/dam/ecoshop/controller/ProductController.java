@@ -5,6 +5,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.salesianostriana.dam.ecoshop.model.Product;
 import com.salesianostriana.dam.ecoshop.service.ProductService;
@@ -15,6 +16,7 @@ import lombok.RequiredArgsConstructor;
 @Controller
 @Data //@Getter @Setter @RequiredArgsConstructor @ToString @EqualsAndHashCode
 @RequiredArgsConstructor 
+@RequestMapping("/products")
 public class ProductController {
 
 	private final ProductService service;
@@ -51,5 +53,12 @@ public class ProductController {
 		return "redirect:/products";
 	}
 	
+	
+	
+	@GetMapping//no tiene url para que se ejecute siempre que se entre en la ruta del requestmapping y así se actualice siempre
+	public String findAll (Model model) {
+		model.addAttribute("products", service.findAll());
+		return "products/list";
+	}
 	
 }
