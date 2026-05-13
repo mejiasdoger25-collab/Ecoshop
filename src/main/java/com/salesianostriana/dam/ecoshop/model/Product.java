@@ -21,6 +21,8 @@ import lombok.ToString;
 @Builder
 public class Product {
 
+	//faltan todas las validaciones de los datos para la bbdd
+	
 	@Id
 	@GeneratedValue
 	private Long id;

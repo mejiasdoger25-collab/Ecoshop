@@ -19,15 +19,11 @@ public class ProductController {
 
 	private final ProductService service;
 	
+	/*
 	@GetMapping({"/", "/home"})
     public String home() {
         return "home"; 
     }
-	
-	
-	
-	
-	
 	
 	//test-1st-form
 	@GetMapping("/newProduct")
@@ -40,6 +36,19 @@ public class ProductController {
 	public String newCustomerSubmit (@ModelAttribute("produt") Product product) {
 		service.save(product);
 		return "redirect:/newCustomer";
+	}
+	*/
+	
+	@GetMapping("/new")
+	public String createForm(Model model) {
+		model.addAttribute("product", new Product());
+		return "products/form";
+	}
+	
+	@PostMapping("/save")
+	public String save (Product product) {
+		service.save(product);
+		return "redirect:/products";
 	}
 	
 	
