@@ -9,15 +9,18 @@ import org.springframework.stereotype.Service;
 
 import com.salesianostriana.dam.ecoshop.model.OrderLine;
 import com.salesianostriana.dam.ecoshop.model.Product;
+import com.salesianostriana.dam.ecoshop.repository.CustomerRepository;
 import com.salesianostriana.dam.ecoshop.repository.OrderLineRepository;
 import com.salesianostriana.dam.ecoshop.repository.ProductRepository;
 import com.salesianostriana.dam.ecoshop.service.base.BaseServiceImp;
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.NoArgsConstructor;
 import lombok.RequiredArgsConstructor;
 
 
 @Service
-@RequiredArgsConstructor
 public class ProductService extends BaseServiceImp <Product, Long, ProductRepository>{
 
 	private final ProductRepository repository;

@@ -5,15 +5,16 @@ import java.util.List;
 import org.springframework.stereotype.Service;
 
 import com.salesianostriana.dam.ecoshop.model.OrderLine;
+import com.salesianostriana.dam.ecoshop.repository.CustomerRepository;
 import com.salesianostriana.dam.ecoshop.repository.OrderLineRepository;
 import com.salesianostriana.dam.ecoshop.service.base.BaseServiceImp;
 
+import lombok.AllArgsConstructor;
 import lombok.Builder;
+import lombok.NoArgsConstructor;
 import lombok.RequiredArgsConstructor;
 
 @Service
-@RequiredArgsConstructor
-@Builder
 public class OrderLineService extends BaseServiceImp <OrderLine, Long, OrderLineRepository>{
 
 	private final OrderLineRepository repository;

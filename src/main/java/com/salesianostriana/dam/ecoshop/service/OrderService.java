@@ -11,15 +11,18 @@ import com.salesianostriana.dam.ecoshop.model.Customer;
 import com.salesianostriana.dam.ecoshop.model.Order;
 //import com.salesianostriana.dam.ecoshop.model.OrderLine;
 import com.salesianostriana.dam.ecoshop.model.OrderLine;
+import com.salesianostriana.dam.ecoshop.repository.CustomerRepository;
 import com.salesianostriana.dam.ecoshop.repository.OrderLineRepository;
 import com.salesianostriana.dam.ecoshop.repository.OrderRepository;
 import com.salesianostriana.dam.ecoshop.service.base.BaseServiceImp;
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.NoArgsConstructor;
 import lombok.RequiredArgsConstructor;
 
 
 @Service
-@RequiredArgsConstructor
 public class OrderService extends BaseServiceImp <Order, Long, OrderRepository>{
 
 	private final OrderRepository repository;
