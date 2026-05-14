@@ -14,59 +14,49 @@
 
 <body><!--falta ipmlementar todos los estilos-->
 
-    <div class="container mt-5">
+	<div class="container mt-5">
 
-        <div class="d-flex justify-content-between align-items-center mb-4">
-            <h1>List of products</h1>
-            <a th:href="@{/products/new}" class="btn btn-success">New product </a>
-        </div>
+			    <h1>Product form</h1>
 
+			    <form th:action="@{/products/save}" th:object="${product}" method="post">
+			        <input th:field="*{id}"><!--type="hidden", lo enseño porque es para testing-->
 
-        <table class="table table-bordered table-hover">
+			        <div class="mb-3">
+			            <label>Name</label>
+			            <input type="text" th:field="*{name}" class="form-control">
+			        </div>
 
-            <thead class="table-dark">
-                <tr>
-                    <th>ID</th>
-                    <th>Name</th>
-                    <th>Price</th>
-                    <th>Stock</th>
-                    <th>Origin</th>
-                    <th>ecoCertificate</th>
-                    <th>Actions</th>
-                </tr>
-            </thead>
+			        <div class="mb-3">
+			            <label>Price</label>
+			            <input type="number" step="0.01" th:field="*{price}" class="form-control">
+			        </div>
 
-            <tbody>
+			        <div class="mb-3">
+			            <label>Stock</label>
+			            <input type="number" th:field="*{stock}" class="form-control">
+			        </div>
 
-                <tr th:each="product : ${products}">
+			        <div class="mb-3">
+			            <label>Origin</label>
+			            <input type="text" th:field="*{origin}" class="form-control">
+			        </div>
+					
+					<div class="mb-3">
+						<label>Description</label>
+						<input type="text" th:field="*{description}" class="form-control">
+					</div>
 
-                    <td th:text="${product.id}">testing</td>
-                    <td th:text="${product.name}"></td>
-                    <td th:number="${product.price}"></td>
-                    <td th:number="${product.stock}"></td>
-                    <td th:text="${product.origin}"></td>
-                    <td th:text="${product.description}"></td>
-                    <td th:checkbox="${product.ecoCertificate}"></td>
+			        <div class="form-check mb-3">
+			            <input type="checkbox" th:field="*{ecoCertificate}" class="form-check-input">
+			            <label class="form-check-label">Ecologic certificate</label>
+			        </div>
 
-                    <td>
-                        <span th:if="${product.ecoCertificate}" class="badge bg-success">Yes</span>
-                        <span th:unless="${product.ecoCertificate}" class="badge bg-danger">No</span>
-                    </td>
+			        <button type="submit" class="btn btn-success">Save</button>
+			        <a th:href="@{/products}" class="btn btn-secondary">Cancel</a>
 
-                    <!--para el futuro edit button de la siguiente feature-->
-                    <td>
-                        <a th:href="@{/products/edit/{id}(id=${product.id})}" class="btn btn-warning btn-sm">Edit</a>
-                        <a th:href="@{/products/delete/{id}(id=${product.id})}" class="btn btn-danger btn-sm delete-btn" data-confirm="¿Delete product?">Delete</a><!--con js porque Rafa no quiere onclick ;V-->
-                    </td>
+			    </form>
 
-                </tr>
-
-            </tbody>
-
-        </table>
-
-
-    </div>
+			</div>
 
 </body>
 
