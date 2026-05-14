@@ -38,7 +38,7 @@
 	        <tr th:each="order : ${orders}">
 	            <td th:text="${order.id}"></td>
 	            <td th:text="${order.code}"></td>
-	            <td th:text="${order.date}"></td>
+	            <td th:text="${order.shippingDate}"></td>
 	            <td th:text="${order.total}"></td>
 	            <td th:text="${order.customer.name}"></td>
 	            <td>
