@@ -68,7 +68,7 @@ public class ProductController {
 	
 	
 	
-	@GetMapping("/edit{id}")
+	@GetMapping("/edit/{id}")
 	public String editForm (@PathVariable Long id, Model model) {
 		
 		Optional<Product> product = service.findById(id);
@@ -80,7 +80,7 @@ public class ProductController {
 	
 	
 	
-	@GetMapping("/delete{id}")
+	@GetMapping("/delete/{id}")
 	public String delete (@PathVariable Long id, Model model) {
 		
 		Optional<Product> product = service.findById(id);

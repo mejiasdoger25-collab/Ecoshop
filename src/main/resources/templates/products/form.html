@@ -18,7 +18,7 @@
 
 			    <h1>Product form</h1>
 
-			    <form th:action="@{/new/submit}" th:object="${product}" method="post">
+			    <form th:action="@{/products/new/submit}" th:object="${product}" method="post">
 					
 			        <input th:field="*{id}"><!--type="hidden", lo enseño porque es para testing-->
 
@@ -52,7 +52,7 @@
 			            <label class="form-check-label">Ecologic certificate</label>
 			        </div>
 
-			        <button type="submit" class="btn btn-success">Save</button>
+			        <button type="submit" name="submit" value="submit" class="btn btn-success">Save</button>
 			        <a th:href="@{/products}" class="btn btn-secondary">Cancel</a>
 
 			    </form>
