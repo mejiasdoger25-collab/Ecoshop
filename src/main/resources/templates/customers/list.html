@@ -12,7 +12,7 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
 </head>
 
-<body><!--falta ipmlementar todos los estilos-->
+<body><!--falta ipmlementar todos los estilos y validaciones-->
 <div class="container mt-5">
 
 	
@@ -22,14 +22,7 @@
         <a th:href="@{/customers/new}" class="btn btn-success"> New customer</a>
 
     </div>
-
 	
-    <div th:if="${success}"
-         class="alert alert-success">
-        <span th:text="${success}"></span>
-
-    </div>
-
 	
     <table class="table table-bordered table-hover">
 
