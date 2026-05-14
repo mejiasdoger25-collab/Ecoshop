@@ -76,4 +76,17 @@ public class ProductController {
 		return "products/form";
 	}
 	
+	
+	
+	@GetMapping("/delete{id}")
+	public String delete (@PathVariable Long id, Model model) {
+		
+		Optional<Product> product = service.findById(id);
+		
+		if(product.isPresent()) 
+			service.delete(product.get());
+		
+		return "redirect:/";
+	}
+	
 }
