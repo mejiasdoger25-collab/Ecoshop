@@ -1,5 +1,7 @@
 package com.salesianostriana.dam.ecoshop.controller;
 
+import java.util.Optional;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -54,5 +56,17 @@ public class OrderController {
 		model.addAttribute("customers", customerService.findAll());
 		
 		return "/orders/form";
+	}
+	
+	
+	@GetMapping("/delete/{id}")
+	public String delete (@PathVariable Long id, Model model) {
+		
+		Optional<Order> order = service.findById(id);
+		
+		if(order.isPresent())
+			service.deleteById(id);
+		
+		return "redirect:/orders/list";
 	}
 }
