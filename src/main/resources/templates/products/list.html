@@ -25,15 +25,16 @@
         <table class="table table-bordered table-hover">
 
             <thead class="table-dark">
-                <tr>
-                    <th>ID</th>
-                    <th>Name</th>
-                    <th>Price</th>
-                    <th>Stock</th>
-                    <th>Origin</th>
-                    <th>ecoCertificate</th>
-                    <th>Actions</th>
-                </tr>
+				<tr>
+					<th>ID</th>
+				    <th>Name</th>
+				    <th>Price</th>
+				    <th>Stock</th>
+				    <th>Origin</th>
+				    <th>Description</th>
+				    <th>EcoCertificate</th>
+				    <th>Actions</th>
+				</tr>
             </thead>
 
             <tbody>
@@ -42,12 +43,10 @@
 
                     <td th:text="${product.id}"></td>
                     <td th:text="${product.name}"></td>
-                    <td th:number="${product.price}"></td>
-                    <td th:number="${product.stock}"></td>
+					<td th:text="${product.price}"></td>
+					<td th:text="${product.stock}"></td>
                     <td th:text="${product.origin}"></td>
                     <td th:text="${product.description}"></td>
-                    <td th:checkbox="${product.ecoCertificate}"></td>
-
                     <td>
                         <span th:if="${product.ecoCertificate}" class="badge bg-success">Yes</span>
                         <span th:unless="${product.ecoCertificate}" class="badge bg-danger">No</span>

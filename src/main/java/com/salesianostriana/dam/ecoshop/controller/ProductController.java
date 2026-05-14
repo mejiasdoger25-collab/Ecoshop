@@ -44,36 +44,51 @@ public class ProductController {
 	}
 	*/
 	
+	@GetMapping({"/", "/list"})
+	public String findAll (Model model) {
+		model.addAttribute("products", service.findAll());
+		return "products/list";
+	}
+	
 	@GetMapping("/new")
 	public String createForm(Model model) {
 		model.addAttribute("product", new Product());
 		return "products/form";
 	}
 	
-	@PostMapping("/save")
-	public String save (Product product) {
+	@PostMapping("/new/submit")
+	public String save (@ModelAttribute("product") Product product) {
 		service.save(product);
-		return "redirect:/createForm";
+		return "redirect:/products/list";
 	}
 	
 	
 	
-	@GetMapping//no tiene url para que se ejecute siempre que se entre en la ruta del requestmapping y así se actualice siempre
-	public String findAll (Model model) {
-		model.addAttribute("products", service.findAll());
-		return "products/list";
-	}
 	
 	
 	
-	@GetMapping("/edit{id}")
+	
+	@GetMapping("/edit/{id}")
 	public String editForm (@PathVariable Long id, Model model) {
 		
-		Optional<Product> product = service.findById(id);
+		Product product = service.findById(id).orElse(null);
 		model.addAttribute("product", product);
 		
 		//se reutiliza el form de create new products
 		return "products/form";
+	}
+	
+	
+	
+	@GetMapping("/delete/{id}")
+	public String delete (@PathVariable Long id, Model model) {
+		
+		Optional<Product> product = service.findById(id);
+		
+		if(product.isPresent()) 
+			service.delete(product.get());
+		
+		return "redirect:/products/list";
 	}
 	
 }

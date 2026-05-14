@@ -2,6 +2,7 @@ package com.salesianostriana.dam.ecoshop.model;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.List;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
@@ -42,5 +43,5 @@ public class Product {
 	@Builder.Default
 	@ToString.Exclude
 	@EqualsAndHashCode.Exclude
-	private final ArrayList<OrderLine> lines = new ArrayList<>();
+	private final List<OrderLine> lines = new ArrayList<>();
 }
