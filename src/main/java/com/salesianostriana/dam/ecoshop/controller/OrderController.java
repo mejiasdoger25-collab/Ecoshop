@@ -4,6 +4,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -42,5 +43,16 @@ public class OrderController {
 		service.save(order);
 		
 		return "redirect:/orders/list";
+	}
+	
+	
+	@GetMapping("/edit/{id}")
+	public String editForm (@PathVariable Long id, Model model) {
+		
+		Order order = service.findById(id).orElse(null);
+		model.addAttribute("order", order);
+		model.addAttribute("customers", customerService.findAll());
+		
+		return "/orders/form";
 	}
 }
