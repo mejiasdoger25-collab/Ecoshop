@@ -53,7 +53,7 @@ public class ProductController {
 	@PostMapping("/save")
 	public String save (Product product) {
 		service.save(product);
-		return "redirect:/products";
+		return "redirect:/createForm";
 	}
 	
 	
