@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.salesianostriana.dam.ecoshop.model.Customer;
+import com.salesianostriana.dam.ecoshop.model.Product;
 import com.salesianostriana.dam.ecoshop.service.CustomerService;
 
 import lombok.Data;
@@ -38,6 +39,19 @@ public class CustomerController {
 	public String findAll (Model model) {
 		model.addAttribute("customer", service.findAll());
 		return "customers/list";
+	}
+	
+	
+	@GetMapping("/new")
+	public String createForm (Model model) {
+		model.addAttribute("customer", new Customer());
+		return "customers/form";
+	}
+	
+	@PostMapping("/new/submit")
+	public String save (@ModelAttribute("customer") Customer customer) {
+		service.save(customer);
+		return "redirect:/customers/list";
 	}
 	
 }
