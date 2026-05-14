@@ -37,7 +37,7 @@ public class CustomerController {
 	
 	@GetMapping({"/", "/list"})
 	public String findAll (Model model) {
-		model.addAttribute("customer", service.findAll());
+		model.addAttribute("customers", service.findAll());
 		return "customers/list";
 	}
 	
