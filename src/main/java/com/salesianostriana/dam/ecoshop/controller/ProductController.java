@@ -71,7 +71,7 @@ public class ProductController {
 	@GetMapping("/edit/{id}")
 	public String editForm (@PathVariable Long id, Model model) {
 		
-		Optional<Product> product = service.findById(id);
+		Product product = service.findById(id).orElse(null);
 		model.addAttribute("product", product);
 		
 		//se reutiliza el form de create new products
@@ -88,7 +88,7 @@ public class ProductController {
 		if(product.isPresent()) 
 			service.delete(product.get());
 		
-		return "redirect:/";
+		return "redirect:/products/list";
 	}
 	
 }

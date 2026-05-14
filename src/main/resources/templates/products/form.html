@@ -18,9 +18,9 @@
 
 			    <h1>Product form</h1>
 
-			    <form th:action="@{/products/new/submit}" th:object="${product}" method="post">
+			    <form th:action="${product.id != 0} ? @{/edit} : @{/new/submit}" th:object="${product}" method="post">
 					
-			        <input th:field="*{id}"><!--type="hidden", lo enseño porque es para testing-->
+			        <input type="hidden" th:field="*{id}"><!--type="hidden", lo enseño porque es para testing-->
 
 			        <div class="mb-3">
 			            <label>Name</label>
