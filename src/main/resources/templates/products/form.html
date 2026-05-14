@@ -18,7 +18,8 @@
 
 			    <h1>Product form</h1>
 
-			    <form th:action="@{/products/save}" th:object="${product}" method="post">
+			    <form th:action="@{/products/}" th:object="${product}" method="post">
+					
 			        <input th:field="*{id}"><!--type="hidden", lo enseño porque es para testing-->
 
 			        <div class="mb-3">

@@ -51,14 +51,14 @@ public class ProductController {
 	}
 	
 	@PostMapping("/save")
-	public String save (Product product) {
+	public String save (@ModelAttribute("product") Product product) {
 		service.save(product);
-		return "redirect:/createForm";
+		return "redirect:/products/";
 	}
 	
 	
 	
-	@GetMapping//no tiene url para que se ejecute siempre que se entre en la ruta del requestmapping y así se actualice siempre
+	@GetMapping({"/", "/list"})//no tiene url para que se ejecute siempre que se entre en la ruta del requestmapping y así se actualice siempre
 	public String findAll (Model model) {
 		model.addAttribute("products", service.findAll());
 		return "products/list";
