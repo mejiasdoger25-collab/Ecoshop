@@ -1,5 +1,6 @@
 package com.salesianostriana.dam.ecoshop.model;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -32,10 +33,10 @@ public class Order {
 	private Long id;
 	
 	private String code;
-	private LocalDateTime shippingDate;
+	private LocalDate shippingDate;//en lugar de localdatetime
 	private double total;
 	private String status;
-	private LocalDateTime returnDate;
+	private LocalDate returnDate;//en lugar de localdatetime
 	
 	
 	//relación con customer
