@@ -4,8 +4,11 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.data.jpa.repository.JpaRepository;
+
+import lombok.Data;
 import lombok.RequiredArgsConstructor;
 
+@Data
 @RequiredArgsConstructor
 public abstract class BaseServiceImp<T, ID, R extends JpaRepository<T, ID>> implements BaseServiceI<T, ID> {
 

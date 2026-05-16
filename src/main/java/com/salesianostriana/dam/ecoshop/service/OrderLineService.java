@@ -27,7 +27,7 @@ public class OrderLineService extends BaseServiceImp <OrderLine, OrderLinePK, Or
 	
 	public List<OrderLine> getLista() {
 		return (List<OrderLine>) OrderLine.builder()
-				.id(1L)
+				.id(new OrderLinePK(orderId, lineNumber))
 				.amount(3)
 				.unitPrice(5)
 				.subTotal(15)
