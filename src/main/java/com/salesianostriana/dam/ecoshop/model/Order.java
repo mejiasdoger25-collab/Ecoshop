@@ -1,10 +1,10 @@
 package com.salesianostriana.dam.ecoshop.model;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.ForeignKey;
@@ -45,7 +45,7 @@ public class Order {
     private Customer customer;
 
     //relación con líneas
-    @OneToMany(mappedBy = "order", fetch=FetchType.EAGER)
+    @OneToMany(mappedBy = "order", fetch=FetchType.EAGER, cascade = CascadeType.ALL, orphanRemoval = true)
     @Builder.Default
     @ToString.Exclude
     @EqualsAndHashCode.Exclude
