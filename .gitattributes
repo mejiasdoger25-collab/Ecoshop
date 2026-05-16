@@ -1,10 +1,19 @@
 /mvnw text eol=lf
 *.cmd text eol=crlf
 
+
 # Force correct count of Thymeleaf templates
-src/main/resources/templates/**/*.html linguist-language=HTML
-src/main/resources/templates/**/*.html linguist-detectable
+# src/main/resources/templates/**/*.html linguist-language=HTML
+# src/main/resources/templates/**/*.html linguist-detectable
 
 # Force CSS and JavaScript counting
-src/main/resources/static/css/**/*.css linguist-language=CSS
-src/main/resources/static/javascript/**/*.js linguist-language=JavaScript
+# src/main/resources/static/css/**/*.css linguist-language=CSS
+# src/main/resources/static/javascript/**/*.js linguist-language=JavaScript
+
+
+# Thymeleaf templates
+src/main/resources/templates/*.html linguist-language=HTML
+
+# Static resources
+*.css linguist-detectable
+*.js linguist-detectable
