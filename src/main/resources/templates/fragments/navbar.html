@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+
+
+<!--HEAD CON FRAGMENT, para evitar repetir los mismos enlaces en todos los templates-->
+<div th:replace="~{fragments/head :: head}"></div>
+
+
+<body><!--falta ipmlementar todos los estilos-->
+
+	<nav th:fragment="navbar" class="navbar navbar-expand-lg navbar-dark bg-success shadow-sm sticky-top">
+
+		<div class="container">
+
+			<!--logo-->
+			<a class="navbar-brand fw-semibold" th:href="@{/products/list}"><!--implementar el main template /home por ejemplo-->
+				<i class="bi bi-leaf-fill"></i>EcoShop</a>
+
+			<!--mobile button-->
+			<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarContent">
+				<span class="navbar-toggler-icon"></span>
+			</button>
+
+			<!--navbar content-->
+			<div class="collapse navbar-collapse" id="navbarContent">
+
+				<!--left menu-->
+				<ul class="navbar-nav me-auto mb-2 mb-lg-0">
+					<li class="nav-item">
+						<a class="nav-link" th:href="@{/products/list}">
+							<i class="bi bi-box-seam"></i>Products</a>
+					</li>
+
+					<li class="nav-item">
+						<a class="nav-link" th:href="@{/customers/list}">
+							<i class="bi bi-people"></i>Customers</a>
+					</li>
+
+					<li class="nav-item">
+						<a class="nav-link" th:href="@{/orders/list}">
+							<i class="bi bi-bag"></i>Orders</a>
+					</li>
+				</ul>
+
+				
+				<!-- Right buttons -->
+				<div class="dropdown">
+
+				    <button class="btn btn-light btn-sm dropdown-toggle" type="button" data-bs-toggle="dropdown">
+				        <i class="bi bi-plus-circle"></i> New</button>
+
+				    <ul class="dropdown-menu dropdown-menu-end">
+				        <li>
+				            <a class="dropdown-item" th:href="@{/products/new}">
+				                <i class="bi bi-box-seam"></i>Product
+				            </a>
+				        </li>
+
+				        <li>
+				            <a class="dropdown-item" th:href="@{/customers/new}">
+				                <i class="bi bi-people"></i>Customer
+				            </a>
+
+				        </li>
+
+				        <li>
+				            <a class="dropdown-item" th:href="@{/orders/new}">
+				                <i class="bi bi-bag"></i> Order</a>
+				        </li>
+				    </ul>
+
+				</div>
+				
+				
+			</div>
+		</div>
+
+	</nav>
+
+</body>
+</html>
+
+
