@@ -13,46 +13,52 @@
 </head>
 
 <body><!--falta ipmlementar todos los estilos y validaciones-->
-<div class="container mt-5">
-
 	
-    <div class="d-flex justify-content-between mb-4">
-
-        <h1>Customer List</h1>
-        <a th:href="@{/customers/new}" class="btn btn-success"> New customer</a>
-
-    </div>
+	<div th:replace="~{fragments/navbar :: navbar}"></div>
 	
+	<div class="container mt-5">
 	
-    <table class="table table-bordered table-hover">
-
-        <thead class="table-dark">
-        <tr>
-            <th>ID</th>
-            <th>Name</th>
-            <th>Email</th>
-            <th>Phone</th>
-            <th>Actions</th>
-        </tr>
-        </thead>
-
 		
-        <tbody>
-        <tr th:each="customer : ${customers}">
-            <td th:text="${customer.id}"></td>
-            <td th:text="${customer.name}"></td>
-            <td th:text="${customer.email}"></td>
-            <td th:text="${customer.phone}"></td>
-            <td>
-                <a th:href="@{/customers/edit/{id}(id=${customer.id})}" class="btn btn-warning btn-sm"> Edit</a>
-                <a th:href="@{/customers/delete/{id}(id=${customer.id})}" class="btn btn-danger btn-sm delete-btn" data-confirm="¿Delete product?">Delete</a><!--con js porque Rafa no quiere onclick ;V-->
-            </td>
-        </tr>
-        </tbody>
-
+	    <div class="d-flex justify-content-between mb-4">
+	
+	        <h1>Customer List</h1>
+	        <a th:href="@{/customers/new}" class="btn btn-success"> New customer</a>
+	
+	    </div>
 		
-    </table>
+		
+	    <table class="table table-bordered table-hover">
+	
+	        <thead class="table-dark">
+	        <tr>
+	            <th>ID</th>
+	            <th>Name</th>
+	            <th>Email</th>
+	            <th>Phone</th>
+	            <th>Actions</th>
+	        </tr>
+	        </thead>
+	
+			
+	        <tbody>
+	        <tr th:each="customer : ${customers}">
+	            <td th:text="${customer.id}"></td>
+	            <td th:text="${customer.name}"></td>
+	            <td th:text="${customer.email}"></td>
+	            <td th:text="${customer.phone}"></td>
+	            <td>
+	                <a th:href="@{/customers/edit/{id}(id=${customer.id})}" class="btn btn-warning btn-sm"> Edit</a>
+	                <a th:href="@{/customers/delete/{id}(id=${customer.id})}" class="btn btn-danger btn-sm delete-btn" data-confirm="¿Delete product?">Delete</a><!--con js porque Rafa no quiere onclick ;V-->
+	            </td>
+	        </tr>
+	        </tbody>
+	
+			
+	    </table>
+	
+	</div>
+	
+	<div th:replace="~{fragments/footer :: footer}"></div>
 
-</div>
 </body>
 </html>
