@@ -13,20 +13,20 @@
 	<div class="container mt-5">
 
 	    <h1>Order Form</h1>
-	    <form th:action="@{/orders/new/submit}" th:object="${order}" method="post">
+	    <form th:action="@{/orders/new/submit}" th:object="${order}" method="post" class="needs-validation" novalidate>
 
 	        <input type="hidden" th:field="*{id}">
 
 			
 	        <div class="mb-3">
 	            <label>Code</label>
-	            <input type="text" th:field="*{code}" class="form-control">
+	            <input type="text" th:field="*{code}" class="form-control" required>
 	        </div>
 
 			
 	        <div class="mb-3">
 	            <label>Date</label>
-	            <input type="date" th:field="*{shippingDate}" class="form-control">
+	            <input type="date" th:field="*{shippingDate}" class="form-control" required>
 	        </div>
 
 			
@@ -40,7 +40,7 @@
 	            <label>Customer</label>
 	            <select th:field="*{customer}" class="form-select">
 	                <option value=""> Select customer</option>
-	                <option th:each="customer : ${customers}" th:value="${customer.id}" th:text="${customer.name}"></option>
+	                <option th:each="customer : ${customers}" th:value="${customer.id}" th:text="${customer.name}" required></option>
 	            </select>
 	        </div>
 
