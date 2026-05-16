@@ -1,0 +1,42 @@
+body {
+    font-family: 'Poppins', sans-serif;
+    background-color: #f8f9fa;
+}
+
+
+/* Titles */
+h1, h2, h3, h4, h5 {
+    font-weight: 600;
+}
+
+
+/* Tables */
+.table {
+    border-radius: 12px;
+    overflow: hidden;
+}
+
+
+/* Cards */
+.card {
+    border: none;
+    border-radius: 16px;
+}
+
+
+/* Buttons */
+.btn {
+    border-radius: 10px;
+}
+
+
+/* Navbar */
+.navbar-brand {
+    letter-spacing: 0.5px;
+}
+
+
+footer a:hover {
+    color: #198754 !important;
+    transition: 0.2s;
+}
