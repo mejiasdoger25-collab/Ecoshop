@@ -19,7 +19,7 @@
 		<div class="container">
 
 			<!--logo-->
-			<a class="navbar-brand fw-semibold" th:href="@{/}"><!--implementar el main template /home por ejemplo-->
+			<a class="navbar-brand fw-semibold" th:href="@{/products/list}"><!--implementar el main template /home por ejemplo-->
 				<i class="bi bi-leaf-fill"></i>EcoShop</a>
 
 			<!--mobile button-->
@@ -48,12 +48,36 @@
 					</li>
 				</ul>
 
-				<!--right buttons -->
-				<div class="d-flex gap-2">
+				
+				<!-- Right buttons -->
+				<div class="dropdown">
 
-					<a class="btn btn-light btn-sm" th:href="@{/products/new}">
-						<i class="bi bi-plus-circle"></i>New Product</a>
+				    <button class="btn btn-light btn-sm dropdown-toggle" type="button" data-bs-toggle="dropdown">
+				        <i class="bi bi-plus-circle"></i> New</button>
+
+				    <ul class="dropdown-menu dropdown-menu-end">
+				        <li>
+				            <a class="dropdown-item" th:href="@{/products/new}">
+				                <i class="bi bi-box-seam"></i>Product
+				            </a>
+				        </li>
+
+				        <li>
+				            <a class="dropdown-item" th:href="@{/customers/new}">
+				                <i class="bi bi-people"></i>Customer
+				            </a>
+
+				        </li>
+
+				        <li>
+				            <a class="dropdown-item" th:href="@{/orders/new}">
+				                <i class="bi bi-bag"></i> Order</a>
+				        </li>
+				    </ul>
+
 				</div>
+				
+				
 			</div>
 		</div>
 
