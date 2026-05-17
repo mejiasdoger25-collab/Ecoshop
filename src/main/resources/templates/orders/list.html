@@ -15,7 +15,7 @@
 
 	    <div class="d-flex justify-content-between mb-4">
 	        <h1>Order List</h1>
-	        <a th:href="@{/orders/new}" class="btn btn-success">New order</a>
+	        <a sec:authorize="hasRole('ADMIN')" th:href="@{/orders/new}" class="btn btn-success">New order</a>
 	    </div>
 
 	    <table class="table table-bordered">
@@ -38,7 +38,8 @@
 	            <td th:text="${order.shippingDate}"></td>
 	            <td th:text="${order.total}"></td>
 	            <td th:text="${order.customer.name}"></td>
-	            <td>
+				
+	            <td sec:authorize="hasRole('ADMIN')">
 	                <a th:href="@{/orders/edit/{id}(id=${order.id})}" class="btn btn-warning btn-sm">Edit</a>
 	                <a th:href="@{/orders/delete/{id}(id=${order.id})}" class="btn btn-danger btn-sm"> Delete</a>
 	            </td>
