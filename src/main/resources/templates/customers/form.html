@@ -21,19 +21,19 @@
 			
 	        <div class="mb-3">
 	            <label>Name</label>
-	            <input type="text" th:field="*{name}" class="form-control" required>
+	            <input type="text" th:field="*{name}" class="form-control" maxlength="30" required>
 	        </div>
 
 			
 	        <div class="mb-3">
 	            <label>Email</label>
-	            <input type="email" th:field="*{email}" class="form-control" required>
+	            <input type="email" th:field="*{email}" class="form-control" maxlength="320" required>
 	        </div>
 
 			
 	        <div class="mb-3">
 	            <label>Phone</label>
-	            <input type="text" th:field="*{phone}" class="form-control">
+	            <input type="text" th:field="*{phone}" class="form-control" maxlength="15">
 	        </div>
 
 	        <button type="submit"name="submit" value="submit" class="btn btn-success">Save</button>

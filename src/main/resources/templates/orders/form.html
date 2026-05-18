@@ -21,19 +21,19 @@
 			
 	        <div class="mb-3">
 	            <label>Code</label>
-	            <input type="text" th:field="*{code}" class="form-control" required>
+	            <input type="text" th:field="*{code}" class="form-control" maxlength="15" required>
 	        </div>
 
 			
 	        <div class="mb-3">
 	            <label>Date</label>
-	            <input type="date" th:field="*{shippingDate}" class="form-control" required>
+	            <input type="date" th:field="*{shippingDate}" class="form-control" maxlength="10" required>
 	        </div>
 
 			
 	        <div class="mb-3">
 	            <label>Total</label>
-	            <input type="number" step="0.01" th:field="*{total}" class="form-control">
+	            <input type="number" step="0.01" th:field="*{total}" class="form-control" maxlength="4">
 	        </div>
 
 			
