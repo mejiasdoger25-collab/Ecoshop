@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<html lang="es" xmlns:th="http://www.thymeleaf.org"
+			xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 
 
 <!--HEAD CON FRAGMENT, para evitar repetir los mismos enlaces en todos los templates-->
@@ -41,7 +42,7 @@
 	                        <a th:href="@{/products/list}" class="text-decoration-none text-light-emphasis"> Products</a>
 	                    </li>
 
-	                    <li class="mb-2">
+	                    <li class="mb-2" sec:authorize="hasRole('ADMIN')">
 	                        <a th:href="@{/customers/list}" class="text-decoration-none text-light-emphasis">Customers</a>
 	                    </li>
 

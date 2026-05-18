@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<html lang="es" xmlns:th="http://www.thymeleaf.org"
+			xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 
 
 <!--HEAD CON FRAGMENT, para evitar repetir los mismos enlaces en todos los templates-->
@@ -31,7 +32,7 @@
 							<i class="bi bi-box-seam"></i>Products</a>
 					</li>
 
-					<li class="nav-item">
+					<li class="nav-item" sec:authorize="hasRole('ADMIN')">
 						<a class="nav-link" th:href="@{/customers/list}">
 							<i class="bi bi-people"></i>Customers</a>
 					</li>
@@ -50,20 +51,20 @@
 				        <i class="bi bi-plus-circle"></i> New</button>
 
 				    <ul class="dropdown-menu dropdown-menu-end">
-				        <li>
+				        <li sec:authorize="hasRole('ADMIN')">
 				            <a class="dropdown-item" th:href="@{/products/new}">
 				                <i class="bi bi-box-seam"></i>Product
 				            </a>
 				        </li>
 
-				        <li>
+				        <li sec:authorize="hasRole('ADMIN')">
 				            <a class="dropdown-item" th:href="@{/customers/new}">
 				                <i class="bi bi-people"></i>Customer
 				            </a>
 
 				        </li>
 
-				        <li>
+				        <li sec:authorize="hasAnyRole('USER','USER_VIP','ADMIN')">
 				            <a class="dropdown-item" th:href="@{/orders/new}">
 				                <i class="bi bi-bag"></i> Order</a>
 				        </li>
