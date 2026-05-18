@@ -26,7 +26,7 @@ public class SecurityConfig {
                     "/products/list",
                     "/css/**",
                     "/javascript/**",
-                    "/img/**"
+                    "/images/**"//acceso cambiado para el login background
                 ).permitAll()
 
                 // ADMIN
