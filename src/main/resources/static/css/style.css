@@ -42,6 +42,10 @@ footer a:hover {
 }
 
 /* Background image */
-.background{
-	background-image: url(/src/main/resources/static/images/eco-bg-2.jpg);
+.background {
+    background-image: url(/images/eco-bg-2.jpg);
+    background-size: cover;       
+    background-position: center;   
+    background-repeat: no-repeat;
+    min-height: 100vh;            
 }
