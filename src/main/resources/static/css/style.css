@@ -35,8 +35,13 @@ h1, h2, h3, h4, h5 {
     letter-spacing: 0.5px;
 }
 
-
+/* Footer */
 footer a:hover {
     color: #198754 !important;
     transition: 0.2s;
+}
+
+/* Background image */
+.background{
+	background-image: url(/src/main/resources/static/images/eco-bg-2.jpg);
 }
