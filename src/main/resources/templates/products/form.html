@@ -19,11 +19,13 @@
 					
 			        <input type="hidden" th:field="*{id}"><!--type="hidden", lo enseño porque es para testing-->
 
-			        <div class="mb-3">
-			            <label>Name</label>
-			            <input type="text" th:field="*{name}" class="form-control" maxlength="15" required>
+			        <div class="mb-3" th:classappend="${#fields.hasErrors('name')} ? 'is-invalid' : ''">
+			            <label id="name">Name</label>
+			            <input for="name" type="text" th:field="*{name}" class="form-control" maxlength="15" required>
 			        </div>
-					<div th:if="${param.error}" class="invalid-feedback">Please enter a valid name</div>
+					<div class="invalid-feedback">
+						<span th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></span>
+					</div>
 
 					
 			        <div class="mb-3">
