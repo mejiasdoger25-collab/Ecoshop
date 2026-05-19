@@ -27,7 +27,7 @@
 			
 	        <div class="mb-3">
 	            <label>Date</label>
-	            <input type="date" th:field="*{shippingDate}" class="form-control" maxlength="10" required>
+	            <input type="date" th:field="*{shippingDate}" th:value="${order.shippingDate}" class="form-control" maxlength="10" required>
 	        </div>
 
 			
@@ -45,7 +45,7 @@
 	            </select>
 	        </div>
 
-			
+			<!--<input type="hidden" th:field="*{id}">-->
 	        <button type="submit" class="btn btn-success">Save</button>
 	        <a th:href="@{/orders/list}" class="btn btn-secondary">Cancel</a>
 
