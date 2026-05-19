@@ -20,23 +20,23 @@
 
 	        <div class="mb-3">
 	            <label>Name</label>
-	            <input type="text" th:field="*{name}" class="form-control" maxlength="30" required>
+	            <input type="text" th:field="*{name}" class="form-control" maxlength="30" th:errorclass="is-invalid" required>
 	        </div>
-			<div th:if="${param.error}" class="invalid-feedback">Please enter a valid username</div>
+			<div class="invalid-feedback"><span th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></span></div>
 
 			
 	        <div class="mb-3">
 	            <label>Email</label>
-	            <input type="email" th:field="*{email}" class="form-control" maxlength="320" required>
+	            <input type="email" th:field="*{email}" class="form-control" maxlength="320" th:errorclass="is-invalid" required>
 	        </div>
-			<div th:if="${param.error}" class="invalid-feedback">Please enter a valid email</div>
+			<div class="invalid-feedback"><span th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></span></div>
 
 			
 	        <div class="mb-3">
 	            <label>Phone</label>
-	            <input type="text" th:field="*{phone}" class="form-control" maxlength="15">
+	            <input type="text" th:field="*{phone}" class="form-control" maxlength="15" th:errorclass="is-invalid">
 	        </div>
-			<div th:if="${param.error}" class="invalid-feedback">Please enter a valid phone number</div>
+			<div class="invalid-feedback"><span th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></span></div>
 			
 			
 	        <button type="submit"name="submit" value="submit" class="btn btn-success">Save</button>

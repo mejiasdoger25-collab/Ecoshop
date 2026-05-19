@@ -19,41 +19,39 @@
 					
 			        <input type="hidden" th:field="*{id}"><!--type="hidden", lo enseño porque es para testing-->
 
-			        <div class="mb-3" th:classappend="${#fields.hasErrors('name')} ? 'is-invalid' : ''">
+			        <div class="mb-3">
 			            <label id="name">Name</label>
-			            <input for="name" type="text" th:field="*{name}" class="form-control" maxlength="15" required>
+			            <input for="name" type="text" th:field="*{name}" class="form-control" maxlength="15" th:errorclass="is-invalid" required>
 			        </div>
-					<div class="invalid-feedback">
-						<span th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></span>
-					</div>
+					<div class="invalid-feedback"><span th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></span></div>
 
 					
 			        <div class="mb-3">
 			            <label>Price</label>
-			            <input type="number" step="0.01" th:field="*{price}" class="form-control" maxlength="4" min="0" max="4" required>
+			            <input type="number" step="0.01" th:field="*{price}" class="form-control" maxlength="4" min="0" max="4" th:errorclass="is-invalid" required>
 			        </div>
-					<div th:if="${param.error}" class="invalid-feedback">Please enter a valid price number</div>
+					<div class="invalid-feedback"><span th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></span></div>
 
 					
 			        <div class="mb-3">
 			            <label>Stock</label>
-			            <input type="number" th:field="*{stock}" class="form-control" maxlength="6" min="0" max="4" required>
+			            <input type="number" th:field="*{stock}" class="form-control" maxlength="6" min="0" max="4" th:errorclass="is-invalid" required>
 			        </div>
-					<div th:if="${param.error}" class="invalid-feedback">Please enter a valid phone number</div>
+					<div class="invalid-feedback"><span th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></span></div>
 					
 
 			        <div class="mb-3">
 			            <label>Origin</label>
-			            <input type="text" th:field="*{origin}" class="form-control" maxlength="30" required>
+			            <input type="text" th:field="*{origin}" class="form-control" maxlength="30" th:errorclass="is-invalid" required>
 			        </div>
-					<div th:if="${param.error}" class="invalid-feedback">Please enter a valid phone number</div>
+					<div class="invalid-feedback"><span th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></span></div>
 					
 					
 					<div class="mb-3">
 						<label>Description</label>
-						<textarea type="text" th:field="*{description}" class="form-control" maxlength="100"></textarea>
+						<textarea type="text" th:field="*{description}" class="form-control" maxlength="100" th:errorclass="is-invalid"></textarea>
 					</div>
-					<div th:if="${param.error}" class="invalid-feedback">Please enter a valid description</div>
+					<div class="invalid-feedback"><span th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></span></div>
 					
 
 			        <div class="form-check mb-3">
