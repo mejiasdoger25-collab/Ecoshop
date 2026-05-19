@@ -21,19 +21,19 @@
 			
 	        <div class="mb-3">
 	            <label>Code</label>
-	            <input type="text" th:field="*{code}" class="form-control" required>
+	            <input type="text" th:field="*{code}" class="form-control" maxlength="15" min="1" max="15" required>
 	        </div>
-
+			
 			
 	        <div class="mb-3">
 	            <label>Date</label>
-	            <input type="date" th:field="*{shippingDate}" class="form-control" required>
+	            <input type="date" th:field="*{shippingDate}" th:value="${order.shippingDate}" class="form-control" maxlength="10" required>
 	        </div>
 
 			
 	        <div class="mb-3">
 	            <label>Total</label>
-	            <input type="number" step="0.01" th:field="*{total}" class="form-control">
+	            <input type="number" step="0.01" th:field="*{total}" class="form-control" maxlength="10" min="0" max="4">
 	        </div>
 
 			
@@ -45,7 +45,7 @@
 	            </select>
 	        </div>
 
-			
+			<!--<input type="hidden" th:field="*{id}">-->
 	        <button type="submit" class="btn btn-success">Save</button>
 	        <a th:href="@{/orders/list}" class="btn btn-secondary">Cancel</a>
 
