@@ -23,18 +23,21 @@
 	            <label>Code</label>
 	            <input type="text" th:field="*{code}" class="form-control" maxlength="15" min="1" max="15" required>
 	        </div>
-
+			<div th:if="${param.error}" class="invalid-feedback">Please enter a valid code</div>
+			
 			
 	        <div class="mb-3">
 	            <label>Date</label>
 	            <input type="date" th:field="*{shippingDate}" class="form-control" maxlength="10" required>
 	        </div>
+			<div th:if="${param.error}" class="invalid-feedback">Please enter a valid date</div>
 
 			
 	        <div class="mb-3">
 	            <label>Total</label>
 	            <input type="number" step="0.01" th:field="*{total}" class="form-control" maxlength="10" min="0" max="4">
 	        </div>
+			<div th:if="${param.error}" class="invalid-feedback">Please enter a valid total</div>
 
 			
 	        <div class="mb-3">
@@ -44,6 +47,7 @@
 	                <option th:each="customer : ${customers}" th:value="${customer.id}" th:text="${customer.name}" required></option>
 	            </select>
 	        </div>
+			<div th:if="${param.error}" class="invalid-feedback">Please select a valid customer</div>
 
 			
 	        <button type="submit" class="btn btn-success">Save</button>
