@@ -4,6 +4,7 @@ import java.util.Optional;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -13,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import com.salesianostriana.dam.ecoshop.model.Product;
 import com.salesianostriana.dam.ecoshop.service.ProductService;
 
+import jakarta.validation.Valid;
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
 
@@ -57,7 +59,10 @@ public class ProductController {
 	}
 	
 	@PostMapping("/new/submit")
-	public String save (@ModelAttribute("product") Product product) {
+	public String save (@Valid @ModelAttribute("product") Product product, BindingResult bindingResult) {
+		if (bindingResult.hasErrors()) {
+            return "products/form";
+		}
 		service.save(product);
 		return "redirect:/products/list";
 	}
