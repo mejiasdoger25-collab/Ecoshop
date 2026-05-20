@@ -12,17 +12,17 @@ public class ExceptionControllerAdvice {
 	//Own exception
     @ExceptionHandler(InsufficientStockException.class)
     public String handleInsufficientStock(InsufficientStockException ex, Model model) {
-        model.addAttribute("errorTitulo", "Error de Matriculación");
-        model.addAttribute("errorMensaje", ex.getMessage());
-        return "error/error"; //terminar de poner el template del error
+        model.addAttribute("tittleError", "Insufficient stock");
+        model.addAttribute("messageError", ex.getMessage());
+        return "error/error"; 
     }
     
     //Own exception 
     @ExceptionHandler(InvalidCertificateException.class)
     public String handleInvalidCertificate(InvalidCertificateException ex, Model model) {
-        model.addAttribute("errorTitulo", "Error de Matriculación");
-        model.addAttribute("errorMensaje", ex.getMessage());
-        return "error/error"; //terminar de poner el template del error
+        model.addAttribute("errorTitulo", "Invalid certificate");
+        model.addAttribute("messageError", ex.getMessage());
+        return "error/error"; 
     }
     
   //Own exception 
@@ -30,7 +30,7 @@ public class ExceptionControllerAdvice {
     public String handleInsufficientBalance(InsufficientBalanceException ex, Model model) {
         model.addAttribute("tittleError", "Insufficient balance");
         model.addAttribute("messageError", ex.getMessage());
-        return "error/error"; //terminar de poner el template del error
+        return "error/error"; 
     }
     
 
