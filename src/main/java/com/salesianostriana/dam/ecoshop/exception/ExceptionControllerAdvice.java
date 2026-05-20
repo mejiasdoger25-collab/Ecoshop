@@ -26,7 +26,7 @@ public class ExceptionControllerAdvice {
     }
     
   //Own exception 
-    @ExceptionHandler(InvalidCertificateException.class)
+    @ExceptionHandler(InsufficientBalanceException.class)
     public String handleInsufficientBalance(InsufficientBalanceException ex, Model model) {
         model.addAttribute("tittleError", "Insufficient balance");
         model.addAttribute("messageError", ex.getMessage());
