@@ -9,16 +9,39 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 @ControllerAdvice
 public class ExceptionControllerAdvice {
 
-	//1 Manejo de nuestra excepción personalizada
+	//Own exception
+    @ExceptionHandler(InsufficientStockException.class)
+    public String handleSinPlazas(InsufficientStockException ex, Model model) {
+        model.addAttribute("errorTitulo", "Error de Matriculación");
+        model.addAttribute("errorMensaje", ex.getMessage());
+        return "error"; //terminar de poner el template del error
+    }
+    
+    //Own exception 
+    @ExceptionHandler(InvalidCertificateException.class)
+    public String handleSinPlazas(InvalidCertificateException ex, Model model) {
+        model.addAttribute("errorTitulo", "Error de Matriculación");
+        model.addAttribute("errorMensaje", ex.getMessage());
+        return "error"; //terminar de poner el template del error
+    }
     
 
-    //2 Manejo de una excepción propia del API de Java 
-    //(Ej: Buscar un ID que no existe)
-   
+    //Api java exception 
+    //Find an Id that doesnt exists
+    @ExceptionHandler(NoSuchElementException.class)
+    public String handleNotFound(NoSuchElementException ex, Model model) {
+        model.addAttribute("tittleError", "Element not found");
+        model.addAttribute("messageError", "The requested product does not exist in our database.");
+        return "error";
+    }
 
-    //3 Manejo de otra excepción del API de Java 
-    //(Argumento ilegal o inválido en lógica de negocio)
-    
-   
+    //Api java exception
+    //Illegal or invalid argument in business logic
+    @ExceptionHandler(IllegalArgumentException.class)
+    public String handleIllegalArgument(IllegalArgumentException ex, Model model) {
+        model.addAttribute("tittleError", "Invalid argument");
+        model.addAttribute("messageError", ex.getMessage());
+        return "error";
+    }
 	
 }
