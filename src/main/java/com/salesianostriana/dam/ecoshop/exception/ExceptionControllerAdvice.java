@@ -1,19 +1,24 @@
 package com.salesianostriana.dam.ecoshop.exception;
 
-import org.springframework.stereotype.Controller;
+import java.util.NoSuchElementException;
 
-import com.salesianostriana.dam.ecoshop.controller.OrderController;
-import com.salesianostriana.dam.ecoshop.service.CustomerService;
-import com.salesianostriana.dam.ecoshop.service.OrderService;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ControllerAdvice;
+import org.springframework.web.bind.annotation.ExceptionHandler;
 
-import lombok.Data;
-import lombok.RequiredArgsConstructor;
-
-@Controller
-@Data //@Getter @Setter @RequiredArgsConstructor @ToString @EqualsAndHashCode
-@RequiredArgsConstructor
+@ControllerAdvice
 public class ExceptionControllerAdvice {
 
-	
+	//1 Manejo de nuestra excepción personalizada
+    
+
+    //2 Manejo de una excepción propia del API de Java 
+    //(Ej: Buscar un ID que no existe)
+   
+
+    //3 Manejo de otra excepción del API de Java 
+    //(Argumento ilegal o inválido en lógica de negocio)
+    
+   
 	
 }
