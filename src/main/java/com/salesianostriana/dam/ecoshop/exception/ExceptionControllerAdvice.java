@@ -14,7 +14,7 @@ public class ExceptionControllerAdvice {
     public String handleSinPlazas(InsufficientStockException ex, Model model) {
         model.addAttribute("errorTitulo", "Error de Matriculación");
         model.addAttribute("errorMensaje", ex.getMessage());
-        return "error"; //terminar de poner el template del error
+        return "error/error"; //terminar de poner el template del error
     }
     
     //Own exception 
@@ -22,7 +22,7 @@ public class ExceptionControllerAdvice {
     public String handleSinPlazas(InvalidCertificateException ex, Model model) {
         model.addAttribute("errorTitulo", "Error de Matriculación");
         model.addAttribute("errorMensaje", ex.getMessage());
-        return "error"; //terminar de poner el template del error
+        return "error/error"; //terminar de poner el template del error
     }
     
 
@@ -32,7 +32,7 @@ public class ExceptionControllerAdvice {
     public String handleNotFound(NoSuchElementException ex, Model model) {
         model.addAttribute("tittleError", "Element not found");
         model.addAttribute("messageError", "The requested product does not exist in our database.");
-        return "error";
+        return "error/error";
     }
 
     //Api java exception
@@ -41,7 +41,7 @@ public class ExceptionControllerAdvice {
     public String handleIllegalArgument(IllegalArgumentException ex, Model model) {
         model.addAttribute("tittleError", "Invalid argument");
         model.addAttribute("messageError", ex.getMessage());
-        return "error";
+        return "error/error";
     }
 	
 }
