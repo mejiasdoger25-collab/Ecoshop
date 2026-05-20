@@ -32,6 +32,7 @@ public class Customer {
 	private LocalDateTime registrationDate;
 	private double totalSpent;
 	private boolean vip;
+	private double balance;
 	
 	//relación con pedidos
     @OneToMany(mappedBy = "customer", fetch=FetchType.EAGER)
