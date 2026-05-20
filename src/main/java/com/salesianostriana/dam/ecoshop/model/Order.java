@@ -14,6 +14,15 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.Pattern;
+import jakarta.validation.constraints.Positive;
+import jakarta.validation.constraints.PositiveOrZero;
+import jakarta.validation.constraints.Future;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -32,16 +41,28 @@ public class Order {
 	@GeneratedValue
 	private Long id;
 	
+	@NotEmpty(message = "Order code is required")
+	@Size(min = 3, max = 20, message = "Order code must be between 3 and 20 characters")
 	private String code;
+	
+	@NotNull(message = "Shipping date is required")
 	private LocalDate shippingDate;//en lugar de localdatetime
+	
+	@PositiveOrZero(message = "Order total cannot be negative")
 	private double total;
+	
+	@NotEmpty(message = "Order status is required")
+	@Size(max = 30, message = "Status cannot exceed 30 characters")
 	private String status;
+	
+	
 	private LocalDate returnDate;//en lugar de localdatetime
 	
 	
 	//relación con customer
     @ManyToOne(fetch=FetchType.EAGER)
     @JoinColumn(foreignKey = @ForeignKey (name = "customer_id"))
+    @NotNull(message = "Order must be associated with a customer")
     private Customer customer;
 
     //relación con líneas
