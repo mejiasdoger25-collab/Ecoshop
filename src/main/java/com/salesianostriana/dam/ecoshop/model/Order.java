@@ -51,8 +51,8 @@ public class Order {
 	@PositiveOrZero(message = "Order total cannot be negative")
 	private double total;
 	
-	@NotEmpty(message = "Order status is required")
-	@Size(max = 30, message = "Status cannot exceed 30 characters")
+	/*@NotEmpty(message = "Order status is required")
+	@Size(max = 30, message = "Status cannot exceed 30 characters")*/
 	private String status;
 	
 	
