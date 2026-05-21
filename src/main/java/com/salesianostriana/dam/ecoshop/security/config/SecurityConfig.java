@@ -55,7 +55,14 @@ public class SecurityConfig {
 
             )
 
-            .logout(logout -> logout.permitAll());
+            .logout(logout -> logout
+            	       .logoutUrl("/logout")
+            	       .logoutSuccessUrl("/login?logout")
+            	       .invalidateHttpSession(true)//sesión destruida
+            	       .deleteCookies("JSESSIONID")//cookies borradas
+            	       .permitAll()
+            	);
+
 
         return http.build();
 
