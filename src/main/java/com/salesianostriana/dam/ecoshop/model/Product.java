@@ -38,7 +38,7 @@ public class Product {
 	private Long id;
 	
 	@NotEmpty(message = "Product name is required")
-	@Size(min = 2, max = 100, message = "Product name must be between 2 and 100 characters")
+	@Size(min = 5, max = 15, message = "Product name must be between 2 and 100 characters")
 	private String name;
 	
 	@Positive(message = "Price must be greater than 0")
@@ -51,13 +51,13 @@ public class Product {
 	private int minimumStock;
 	
 	@NotEmpty(message = "Product origin is required")
-	@Size(max = 80, message = "Origin cannot exceed 80 characters")
+	@Size(max = 30, message = "Origin cannot exceed 80 characters")
 	private String origin;
 	
 	private boolean ecoCertificate;
 	
 	@NotEmpty(message = "Description is required")
-	@Size(min = 10, max = 500, message = "Description must be between 10 and 500 characters")
+	@Size(max = 100, message = "Description must be between 10 and 500 characters")
 	private String description;
 	
 	@Future(message = "Expiration date must be in the future")
