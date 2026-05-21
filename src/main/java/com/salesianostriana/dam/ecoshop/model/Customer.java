@@ -45,18 +45,18 @@ public class Customer {
 	private String email;
 	
 	@NotEmpty(message = "Phone number is required")
-	@Size(min = 9, max = 9, message = "Phone number must contain 9 digits")
+	@Pattern( regexp = "^[0-9]{9}$")
 	private String phone;
 	
-	@NotNull(message = "Registration date is required")
+	//@NotNull(message = "Registration date is required")
 	private LocalDateTime registrationDate;
 	
-	@PositiveOrZero(message = "Total spent cannot be negative")
+	//@PositiveOrZero(message = "Total spent cannot be negative")
 	private double totalSpent;
 	
 	private boolean vip;
 	
-	@PositiveOrZero(message = "Balance cannot be negative")
+	//@PositiveOrZero(message = "Balance cannot be negative")
 	private double balance;
 	
 	//relación con pedidos
