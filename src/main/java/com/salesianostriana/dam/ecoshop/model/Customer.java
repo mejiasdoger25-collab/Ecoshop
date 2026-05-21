@@ -36,12 +36,12 @@ public class Customer {
 	private Long id;
 	
 	@NotEmpty(message = "Customer name is required")
-	@Size(min = 2, max = 100, message = "Customer name must be between 2 and 100 characters")
+	@Size(min = 2, max = 30, message = "Customer name must be between 2 and 100 characters")
 	private String name;
 	
 	@NotEmpty(message = "Email is required")
 	@Email(message = "Invalid email format")
-	@Size(max = 120, message = "Email cannot exceed 120 characters")
+	@Size(max = 320, message = "Email cannot exceed 120 characters")
 	private String email;
 	
 	@NotEmpty(message = "Phone number is required")
