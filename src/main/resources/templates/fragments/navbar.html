@@ -45,7 +45,7 @@
 
 				
 				<!-- Right buttons -->
-				<div class="dropdown">
+				<div class="dropdown" sec:authorize="isAuthenticated()">
 
 				    <button class="btn btn-light btn-sm dropdown-toggle" type="button" data-bs-toggle="dropdown">
 				        <i class="bi bi-plus-circle"></i> New</button>
@@ -70,6 +70,34 @@
 				        </li>
 				    </ul>
 
+					
+					
+					<!--logout-->
+					<button class="btn btn-light btn-sm dropdown-toggle" type="button" data-bs-toggle="dropdown">
+					        <i class="bi bi-person-circle"></i><span sec:authentication="name"></span>
+					</button>
+
+					    <ul class="dropdown-menu dropdown-menu-end">
+					        <li>
+					            <span class="dropdown-item-text text-muted small">Logged in</span>
+					        </li>
+					        <li><hr class="dropdown-divider"></li>
+					        <li>
+					            <form th:action="@{/logout}" method="post">
+					                <button type="submit" class="dropdown-item text-danger">
+					                    <i class="bi bi-box-arrow-right"></i>Log out</button>
+					            </form>
+					        </li>
+					    </ul>
+					
+					
+						
+						
+				</div>
+				
+				
+				<div sec:authorize="!isAuthenticated()">
+				    <a th:href="@{/login}" class="btn btn-outline-light btn-sm"><i class="bi bi-box-arrow-in-right"></i>Login</a>
 				</div>
 				
 				
