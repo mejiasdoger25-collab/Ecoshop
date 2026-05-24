@@ -2,6 +2,7 @@ package com.salesianostriana.dam.ecoshop.controller;
 
 import java.util.Optional;
 
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -52,12 +53,14 @@ public class ProductController {
 		return "products/list";
 	}
 	
+	@PreAuthorize("hasRole('ADMIN')")
 	@GetMapping("/new")
 	public String createForm(Model model) {
 		model.addAttribute("product", new Product());
 		return "products/form";
 	}
 	
+	@PreAuthorize("hasRole('ADMIN')")
 	@PostMapping("/new/submit")
 	public String save (@Valid @ModelAttribute("product") Product product, BindingResult bindingResult) {
 		if (bindingResult.hasErrors()) {
@@ -72,7 +75,7 @@ public class ProductController {
 	
 	
 	
-	
+	@PreAuthorize("hasRole('ADMIN')")
 	@GetMapping("/edit/{id}")
 	public String editForm (@PathVariable Long id, Model model) {
 		
@@ -85,6 +88,7 @@ public class ProductController {
 	
 	
 	
+	@PreAuthorize("hasRole('ADMIN')")
 	@GetMapping("/delete/{id}")
 	public String delete (@PathVariable Long id, Model model) {
 		
