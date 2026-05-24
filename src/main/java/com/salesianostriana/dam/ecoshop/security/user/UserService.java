@@ -2,13 +2,16 @@ package com.salesianostriana.dam.ecoshop.security.user;
 
 import jakarta.annotation.PostConstruct;
 import lombok.RequiredArgsConstructor;
+
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 @Service
 @RequiredArgsConstructor
 public class UserService {
 
-    private final UserRepository userRepository;
+	private final UserRepository userRepository;
+	private final PasswordEncoder passwordEncoder;
 
 
     @PostConstruct
@@ -19,7 +22,7 @@ public class UserService {
             userRepository.save(
                     User.builder()
                             .username("admin")
-                            .password("{noop}admin")
+                            .password(passwordEncoder.encode("admin"))
                             .role(Role.ADMIN)
                             .build()
             );
@@ -27,7 +30,7 @@ public class UserService {
             userRepository.save(
                     User.builder()
                             .username("user")
-                            .password("{noop}user")
+                            .password(passwordEncoder.encode("user"))
                             .role(Role.USER)
                             .build()
             );
@@ -35,7 +38,7 @@ public class UserService {
             userRepository.save(
                     User.builder()
                             .username("vip")
-                            .password("{noop}vip")
+                            .password(passwordEncoder.encode("vip"))
                             .role(Role.VIP)
                             .build()
             );
