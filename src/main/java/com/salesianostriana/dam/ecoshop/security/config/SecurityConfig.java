@@ -9,11 +9,15 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 import org.springframework.security.web.SecurityFilterChain;
+
+import lombok.RequiredArgsConstructor;
+
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 @Configuration
 @EnableWebSecurity
+@RequiredArgsConstructor
 public class SecurityConfig {
 
 	@Bean
@@ -47,7 +51,7 @@ public class SecurityConfig {
                 // USER
                 .requestMatchers(
                     "/orders/**"
-                ).hasAnyRole("USER", "USER_VIP", "ADMIN")
+                ).hasAnyRole("USER", "VIP", "ADMIN")
 
                 // everything else
                 .anyRequest().authenticated()
