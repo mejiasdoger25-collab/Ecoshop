@@ -37,7 +37,7 @@
 	            <td th:text="${order.code}"></td>
 	            <td th:text="${order.shippingDate}"></td>
 	            <td th:text="${order.total}"></td>
-	            <td th:text="${order.customer.name}"></td>
+	            <td sec:authorize="hasRole('ADMIN')" th:text="${order.customer.name}"></td>
 				
 	            <td sec:authorize="hasRole('ADMIN')">
 	                <a th:href="@{/orders/edit/{id}(id=${order.id})}" class="btn btn-warning btn-sm">Edit</a>

@@ -17,3 +17,8 @@ public class HomeController {
 	}
 	
 }
+
+/*
+de momento inútil dado que no aporta nada diff de /products/list, por ende, se podría implementar como mejora de tal forma que /home o / tenga algo distinto 
+a lo que se aprecia en /products/list, como por ejemplo los más vendidos, últimos añadidos, ofertas, poco stock, etc ---->> lógica de negocio
+*/

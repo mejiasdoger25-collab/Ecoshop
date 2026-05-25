@@ -37,13 +37,27 @@
 	        </div>
 
 			
-	        <div class="mb-3">
-	            <label>Customer</label>
-	            <select th:field="*{customer}" class="form-select">
-	                <option value=""> Select customer</option>
-	                <option th:each="customer : ${customers}" th:value="${customer.id}" th:text="${customer.name}" required></option>
-	            </select>
-	        </div>
+			<div class="mb-3">
+			    <label sec:authorize="hasRole('ADMIN')">Customer</label>
+			    <!--ADMIN-->
+			    <div th:if="${isAdmin}">
+			        <select th:field="*{customer}" class="form-select">
+			            <option value="">Select customer</option>
+			            <option
+			                    th:each="customer : ${customers}"
+			                    th:value="${customer.id}"
+			                    th:text="${customer.name}">
+			            </option>
+			        </select>
+			    </div>
+			    <!--USER&VIP-->
+				<div th:unless="${isAdmin}">
+				    <input
+				            type="hidden"
+				            th:field="*{customer.id}"
+				            th:value="${customers[0].id}" />
+				</div>
+			</div>
 
 			<!--<input type="hidden" th:field="*{id}">-->
 	        <button type="submit" class="btn btn-success">Save</button>
