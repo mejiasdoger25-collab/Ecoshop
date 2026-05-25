@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org"
+			xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+<body>
+
+<div th:fragment="userModal" class="modal fade" id="userModal" tabindex="-1" aria-hidden="true">
+
+    <div class="modal-dialog modal-dialog-centered">
+
+        <div class="modal-content">
+
+            <div class="modal-header bg-dark text-white">
+                <h5 class="modal-title">User information</h5>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+            </div>
+
+            <div class="modal-body">
+                <div class="mb-3">
+                    <strong>Username:</strong>
+                    <span sec:authentication="name"></span>
+                </div>
+
+				<div class="mb-3">
+				    <strong>Role:</strong>
+				    <span sec:authorize="hasRole('ADMIN')">ADMIN</span>
+				    <span sec:authorize="hasRole('USER')">USER</span>
+				    <span sec:authorize="hasRole('VIP')">VIP</span>
+				</div>
+
+                <hr>
+                <p class="text-muted mb-0">Welcome to EcoShop</p>
+            </div>
+
+            <div class="modal-footer">
+                <form th:action="@{/logout}" method="post">
+                    <button type="submit" class="btn btn-danger">Log out</button>
+                </form>
+				
+				<a th:href="@{/orders/list}" class="btn btn-info">My orders</a>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+</body>
+</html>
