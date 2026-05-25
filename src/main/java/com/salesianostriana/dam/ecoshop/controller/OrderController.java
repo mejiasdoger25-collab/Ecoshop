@@ -25,6 +25,8 @@ import jakarta.validation.Valid;
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
 
+import jakarta.validation.Validator;
+
 @Controller
 @Data //@Getter @Setter @RequiredArgsConstructor @ToString @EqualsAndHashCode
 @RequiredArgsConstructor
@@ -33,6 +35,7 @@ public class OrderController {
 
 	private final OrderService service;
 	private final CustomerService customerService;
+	private final Validator validator;
 	
 	@PreAuthorize("hasAnyRole('USER','VIP','ADMIN')")
 	@GetMapping({"/", "/list"})
@@ -71,6 +74,8 @@ public class OrderController {
 	        model.addAttribute("customers", List.of(customer));
 	    }
 
+	    model.addAttribute("isAdmin", principal.getName().equals("admin"));
+	    
 	    return "orders/form";
 	}
 	
@@ -90,22 +95,24 @@ public class OrderController {
 	            model.addAttribute("customers", List.of(customer));
 	        }
 
+	        model.addAttribute("isAdmin", principal.getName().equals("admin"));//para pasar al form template y coger el id auto si no eres rol admin
+
 	        return "orders/form";
 	    }
 
-	    if(!principal.getName().equals("admin")) {
+		 if(!principal.getName().equals("admin")) {
 
-	        Customer customer = customerService
-	                .findByUsername(principal.getName())
-	                .orElse(null);
+		        Customer customer = customerService
+		                .findByUsername(principal.getName())
+		                .orElse(null);
 
-	        order.setCustomer(customer);
-	    }
+		        order.setCustomer(customer);
+		    }
 
-	    service.save(order);
+		    service.save(order);
 
-	    return "redirect:/orders/list";
-	}
+		    return "redirect:/orders/list";
+		}
 	
 	
 	
