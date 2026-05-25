@@ -3,6 +3,7 @@ package com.salesianostriana.dam.ecoshop.service;
 import java.time.LocalDateTime;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.stereotype.Service;
 
@@ -14,9 +15,12 @@ import com.salesianostriana.dam.ecoshop.service.base.BaseServiceImp;
 @Service
 public class CustomerService extends BaseServiceImp <Customer, Long, CustomerRepository> {
 
+	private final CustomerRepository repository;
 	
 	public CustomerService(CustomerRepository repository) {
-        super(repository);
+		super(repository);
+        this.repository = repository;
+		
     }
 	
 	/*
@@ -26,7 +30,7 @@ public class CustomerService extends BaseServiceImp <Customer, Long, CustomerRep
 	}
 
 
-	private final CustomerRepository repository;
+	
 	
 	//NO CRUDS, clase para servicios personalizados
 	
@@ -43,5 +47,9 @@ public class CustomerService extends BaseServiceImp <Customer, Long, CustomerRep
 		repository.save(new Customer(1L, "Pepe", "pepe@gmail.com", "954 331 488", LocalDateTime.now(), 10000, true, null));
 	}
 	*/
+	
+	public Optional<Customer> findByUsername(String username) {
+        return repository.findByUserUsername(username);
+    }
 	
 }
