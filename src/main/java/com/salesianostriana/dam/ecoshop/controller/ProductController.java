@@ -100,4 +100,19 @@ public class ProductController {
 		return "redirect:/products/list";
 	}
 	
+	
+	
+	@GetMapping("/details/{id}")
+	public String details(@PathVariable Long id, Model model) {
+
+	    Optional<Product> product = service.findById(id);
+
+	    if(product.isEmpty())
+	        return "redirect:/products/list";
+
+	    model.addAttribute("product", product.get());
+
+	    return "products/details";
+	}
+	
 }

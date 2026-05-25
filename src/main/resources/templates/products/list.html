@@ -30,7 +30,7 @@
 				    <th>Origin</th>
 				    <th>Description</th>
 				    <th>EcoCertificate</th>
-				    <th sec:authorize="hasRole('ADMIN')">Actions</th>
+				    <th >Actions</th><!--sec:authorize="hasAnyRole('USER','VIP','ADMIN')"-->
 				</tr>
             </thead>
 
@@ -50,9 +50,10 @@
                     </td>
 
                     <!--para el futuro edit button de la siguiente feature-->
-                    <td sec:authorize="hasRole('ADMIN')">
-                        <a th:href="@{/products/edit/{id}(id=${product.id})}" class="btn btn-warning btn-sm">Edit</a>
-                        <a th:href="@{/products/delete/{id}(id=${product.id})}" class="btn btn-danger btn-sm delete-btn" data-confirm="¿Delete product?">Delete</a><!--con js porque Rafa no quiere onclick ;V-->
+                    <td >
+                        <a sec:authorize="hasRole('ADMIN')" th:href="@{/products/edit/{id}(id=${product.id})}" class="btn btn-warning btn-sm">Edit</a>
+                        <a sec:authorize="hasRole('ADMIN')" th:href="@{/products/delete/{id}(id=${product.id})}" class="btn btn-danger btn-sm delete-btn" data-confirm="¿Delete product?">Delete</a><!--con js porque Rafa no quiere onclick ;V-->
+						<a th:href="@{/products/details/{id}(id=${product.id})}" class="btn btn-info btn-sm"> Details</a>
                     </td>
 
                 </tr>
