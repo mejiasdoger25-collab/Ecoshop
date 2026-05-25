@@ -64,7 +64,7 @@
 
 				        </li>
 
-				        <li sec:authorize="hasAnyRole('USER','USER_VIP','ADMIN')">
+				        <li sec:authorize="hasAnyRole('USER','VIP','ADMIN')">
 				            <a class="dropdown-item" th:href="@{/orders/new}">
 				                <i class="bi bi-bag"></i> Order</a>
 				        </li>
