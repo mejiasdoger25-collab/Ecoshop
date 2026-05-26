@@ -66,6 +66,7 @@ public class ProductService extends BaseServiceImp <Product, Long, ProductReposi
 	                       	.ecoCertificate(true)
 	                       	.description("Una misteriosa fruta de dudosa procedencia")
 	                       	.expirationDate(LocalDate.now().plusWeeks(1))
+	                       	.image("https://images.unsplash.com/photo-1547514701-42782101795e")
 	                       	//.lines(null) builder.default
 	                        .build()
 	        );
@@ -81,6 +82,7 @@ public class ProductService extends BaseServiceImp <Product, Long, ProductReposi
 		                   	.ecoCertificate(true)
 		                   	.description("Realizada con material reciclado")
 		                   	.expirationDate(null)//nunca
+		                   	.image("https://images.unsplash.com/photo-1547514701-42782101795e")
 		                   	//.lines(null) builder.default
 		                    .build()
 	    	);
@@ -96,6 +98,7 @@ public class ProductService extends BaseServiceImp <Product, Long, ProductReposi
 		                   	.ecoCertificate(false)
 		                   	.description("Un dispositivo con tecnología punta")
 		                   	.expirationDate(null)//nunca
+		                   	.image("https://images.unsplash.com/photo-1547514701-42782101795e")
 		                   	//.lines(null) builder.default
 		                    .build()
 	    	);
@@ -110,6 +113,7 @@ public class ProductService extends BaseServiceImp <Product, Long, ProductReposi
 	    		        .ecoCertificate(true)
 	    		        .description("Manzana roja ecológica, dulce y jugosa")
 	    		        .expirationDate(LocalDate.now().plusWeeks(2))
+	    		        .image("https://images.unsplash.com/photo-1547514701-42782101795e")
 	    		        .build()
 	    		);
 
@@ -123,6 +127,7 @@ public class ProductService extends BaseServiceImp <Product, Long, ProductReposi
 	    		        .ecoCertificate(true)
 	    		        .description("Camiseta de algodón orgánico 100%")
 	    		        .expirationDate(null)
+	    		        .image("https://images.unsplash.com/photo-1547514701-42782101795e")
 	    		        .build()
 	    		);
 
@@ -136,6 +141,7 @@ public class ProductService extends BaseServiceImp <Product, Long, ProductReposi
 	    		        .ecoCertificate(false)
 	    		        .description("Sonido envolvente con cancelación de ruido")
 	    		        .expirationDate(null)
+	    		        .image("https://images.unsplash.com/photo-1547514701-42782101795e")
 	    		        .build()
 	    		);
 
@@ -149,6 +155,7 @@ public class ProductService extends BaseServiceImp <Product, Long, ProductReposi
 	    		        .ecoCertificate(true)
 	    		        .description("Leche fresca de vacas de pastoreo")
 	    		        .expirationDate(LocalDate.now().plusDays(10))
+	    		        .image("https://images.unsplash.com/photo-1547514701-42782101795e")
 	    		        .build()
 	    		);
 
@@ -162,6 +169,7 @@ public class ProductService extends BaseServiceImp <Product, Long, ProductReposi
 	    		        .ecoCertificate(false)
 	    		        .description("Tableta de chocolate negro premium")
 	    		        .expirationDate(LocalDate.now().plusMonths(8))
+	    		        .image("https://images.unsplash.com/photo-1547514701-42782101795e")
 	    		        .build()
 	    		);
 
@@ -175,6 +183,7 @@ public class ProductService extends BaseServiceImp <Product, Long, ProductReposi
 	    		        .ecoCertificate(true)
 	    		        .description("Detergente biodegradable para lavadora")
 	    		        .expirationDate(LocalDate.now().plusMonths(18))
+	    		        .image("https://images.unsplash.com/photo-1547514701-42782101795e")
 	    		        .build()
 	    		);
 
