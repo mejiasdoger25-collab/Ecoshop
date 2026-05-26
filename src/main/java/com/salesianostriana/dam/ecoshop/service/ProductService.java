@@ -99,6 +99,84 @@ public class ProductService extends BaseServiceImp <Product, Long, ProductReposi
 		                   	//.lines(null) builder.default
 		                    .build()
 	    	);
+	    	
+	    	productRepository.save(
+	    		    Product.builder()
+	    		        .name("Manzana")
+	    		        .price(1.5)
+	    		        .stock(80)
+	    		        .minimumStock(20)
+	    		        .origin("Lleida")
+	    		        .ecoCertificate(true)
+	    		        .description("Manzana roja ecológica, dulce y jugosa")
+	    		        .expirationDate(LocalDate.now().plusWeeks(2))
+	    		        .build()
+	    		);
+
+	    		productRepository.save(
+	    		    Product.builder()
+	    		        .name("Camiseta Básica")
+	    		        .price(12.99)
+	    		        .stock(150)
+	    		        .minimumStock(25)
+	    		        .origin("Portugal")
+	    		        .ecoCertificate(true)
+	    		        .description("Camiseta de algodón orgánico 100%")
+	    		        .expirationDate(null)
+	    		        .build()
+	    		);
+
+	    		productRepository.save(
+	    		    Product.builder()
+	    		        .name("Auriculares Bluetooth")
+	    		        .price(45.5)
+	    		        .stock(35)
+	    		        .minimumStock(8)
+	    		        .origin("China")
+	    		        .ecoCertificate(false)
+	    		        .description("Sonido envolvente con cancelación de ruido")
+	    		        .expirationDate(null)
+	    		        .build()
+	    		);
+
+	    		productRepository.save(
+	    		    Product.builder()
+	    		        .name("Leche Entera")
+	    		        .price(1.1)
+	    		        .stock(200)
+	    		        .minimumStock(50)
+	    		        .origin("Galicia")
+	    		        .ecoCertificate(true)
+	    		        .description("Leche fresca de vacas de pastoreo")
+	    		        .expirationDate(LocalDate.now().plusDays(10))
+	    		        .build()
+	    		);
+
+	    		productRepository.save(
+	    		    Product.builder()
+	    		        .name("Chocolate Negro 70%")
+	    		        .price(2.8)
+	    		        .stock(120)
+	    		        .minimumStock(30)
+	    		        .origin("España")
+	    		        .ecoCertificate(false)
+	    		        .description("Tableta de chocolate negro premium")
+	    		        .expirationDate(LocalDate.now().plusMonths(8))
+	    		        .build()
+	    		);
+
+	    		productRepository.save(
+	    		    Product.builder()
+	    		        .name("Detergente Ecológico")
+	    		        .price(6.75)
+	    		        .stock(90)
+	    		        .minimumStock(15)
+	    		        .origin("Madrid")
+	    		        .ecoCertificate(true)
+	    		        .description("Detergente biodegradable para lavadora")
+	    		        .expirationDate(LocalDate.now().plusMonths(18))
+	    		        .build()
+	    		);
 
 	    }
 

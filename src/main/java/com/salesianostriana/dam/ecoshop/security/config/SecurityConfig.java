@@ -37,7 +37,8 @@ public class SecurityConfig {
                 .requestMatchers(
                     "/",
                     "/products/list",
-                    "/products/details",
+                    "/products/details", 
+                    "/products/details/{id}",
                     "/css/**",
                     "/javascript/**",
                     "/images/**"//acceso cambiado para el login background
