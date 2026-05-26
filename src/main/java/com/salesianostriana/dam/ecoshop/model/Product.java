@@ -57,7 +57,7 @@ public class Product {
 	private boolean ecoCertificate;
 	
 	@NotEmpty(message = "Description is required")
-	@Size(max = 100, message = "Description must be between 10 and 500 characters")
+	@Size(max = 300, message = "Description must be between 10 and 500 characters")
 	private String description;
 	
 	@Future(message = "Expiration date must be in the future")

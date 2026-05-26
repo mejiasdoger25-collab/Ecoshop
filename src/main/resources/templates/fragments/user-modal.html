@@ -33,7 +33,7 @@
             </div>
 
             <div class="modal-footer"><!--cambiado para que Cross Site Request Forgery no pase por thymeleaf con th:action. así no crea la session late y crashea el render-->
-				<a href="/logout" class="btn btn-danger">Log out</a><!--hecho con if porque el token no existe en todas las request, solo en algunas-->
+				<a th:href="@{/logout}" class="btn btn-danger">Log out</a><!--hecho con if porque el token no existe en todas las request, solo en algunas-->
 				<a th:href="@{/orders/list}" class="btn btn-info">My orders</a><!--es por esto que lo he hecho con un enlace en lugar de formulario, para evitar todo el tema de los tokens-->
             </div>
 
