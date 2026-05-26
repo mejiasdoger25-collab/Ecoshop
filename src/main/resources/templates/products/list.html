@@ -23,9 +23,9 @@
 
             <thead class="table-dark">
 				<tr>
-					<th>ID</th>
+					<!--<th>ID</th>-->
 				    <th>Name</th>
-				    <th>Price</th>
+				    <th>Price (€)</th>
 				    <th>Stock</th>
 				    <th>Origin</th>
 				    <th>Description</th>
@@ -38,7 +38,7 @@
 
                 <tr th:each="product : ${products}">
 
-                    <td th:text="${product.id}"></td>
+                    <!--<td th:text="${product.id}"></td>-->
                     <td th:text="${product.name}"></td>
 					<td th:text="${product.price}"></td>
 					<td th:text="${product.stock}"></td>

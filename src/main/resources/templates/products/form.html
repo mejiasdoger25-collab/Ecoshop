@@ -28,16 +28,16 @@
 					
 			        <div class="mb-3">
 			            <label>Price</label>
-			            <input type="number" step="0.01" th:field="*{price}" class="form-control" maxlength="4" min="0" max="4" th:errorclass="is-invalid" required>
+			            <input type="number" step="0.01" th:field="*{price}" class="form-control" maxlength="6" min="0.1" max="999.99" th:errorclass="is-invalid" required><!--6 porque hasta 999, la coma y dos decimales = 6-->
 			        </div>
 					<div class="invalid-feedback"><span th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></span></div>
 
 					
 			        <div class="mb-3">
 			            <label>Stock</label>
-			            <input type="number" th:field="*{stock}" class="form-control" maxlength="6" min="0" max="4" th:errorclass="is-invalid" required>
+			            <input type="number" th:field="*{stock}" class="form-control" maxlength="6" min="0.1" max="999.99" th:errorclass="is-invalid" required>
 			        </div>
-					<div class="invalid-feedback"><span th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></span></div>
+					<div class="invalid-feedback"><span th:if="${#fields.hasErrors('price')}" th:errors="*{price}"></span></div>
 					
 
 			        <div class="mb-3">

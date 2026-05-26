@@ -9,106 +9,108 @@
 
 <body><!--falta ipmlementar todos los estilos-->
 
-	<nav th:fragment="navbar" class="navbar navbar-expand-lg navbar-dark bg-success shadow-sm sticky-top">
+	<nav th:fragment="navbar" class="navbar navbar-expand-lg navbar-dark bg-success shadow-sm sticky-top py-3">
+	    <div class="container">
 
-		<div class="container">
+	        <!--Llogo-->
+	        <a class="navbar-brand fw-bold fs-4 d-flex align-items-center" th:href="@{/products/list}">
+	            <i class="bi bi-leaf-fill me-2 fs-3"></i>
+	            <span>EcoShop</span>
+	        </a>
 
-			<!--logo-->
-			<a class="navbar-brand fw-semibold" th:href="@{/products/list}"><!--implementar el main template /home por ejemplo-->
-				<i class="bi bi-leaf-fill"></i>EcoShop</a>
+	        <!--mobile toggle-->
+	        <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navbarContent">
+	            <span class="navbar-toggler-icon"></span>
+	        </button>
 
-			<!--mobile button-->
-			<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarContent">
-				<span class="navbar-toggler-icon"></span>
-			</button>
+	        <!--navbar content -->
+	        <div class="collapse navbar-collapse" id="navbarContent">
 
-			<!--navbar content-->
-			<div class="collapse navbar-collapse" id="navbarContent">
+	            <!--left menu-->
+	            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+	                <li class="nav-item">
+	                    <a class="nav-link px-3" th:href="@{/products/list}"><i class="bi bi-box-seam me-1"></i>Products</a>
+	                </li>
 
-				<!--left menu-->
-				<ul class="navbar-nav me-auto mb-2 mb-lg-0">
-					<li class="nav-item">
-						<a class="nav-link" th:href="@{/products/list}">
-							<i class="bi bi-box-seam"></i>Products</a>
-					</li>
+	                <li class="nav-item" sec:authorize="hasRole('ADMIN')">
+	                    <a class="nav-link px-3" th:href="@{/customers/list}"><i class="bi bi-people me-1"></i>Customers</a>
+	                </li>
 
-					<li class="nav-item" sec:authorize="hasRole('ADMIN')">
-						<a class="nav-link" th:href="@{/customers/list}">
-							<i class="bi bi-people"></i>Customers</a>
-					</li>
+	                <li class="nav-item">
+	                    <a class="nav-link px-3" th:href="@{/orders/list}"><i class="bi bi-bag me-1"></i>Orders</a>
+	                </li>
+	            </ul>
 
-					<li class="nav-item">
-						<a class="nav-link" th:href="@{/orders/list}">
-							<i class="bi bi-bag"></i>Orders</a>
-					</li>
-				</ul>
+	            <!--right side -->
+	            <div class="d-flex align-items-center gap-2">
 
-				
-				<!-- Right buttons -->
-				<div class="dropdown" sec:authorize="isAuthenticated()">
+	                <!--new Dropdown -->
+	                <div class="dropdown" sec:authorize="isAuthenticated()">
 
-				    <button class="btn btn-light btn-sm dropdown-toggle" type="button" data-bs-toggle="dropdown">
-				        <i class="bi bi-plus-circle"></i> New</button>
+	                    <button class="btn btn-light btn-sm dropdown-toggle d-flex align-items-center gap-2" type="button" data-bs-toggle="dropdown">
+	                        <i class="bi bi-plus-circle"></i>
+	                        <span class="fw-medium">New</span>
+	                    </button>
 
-				    <ul class="dropdown-menu dropdown-menu-end">
-				        <li sec:authorize="hasRole('ADMIN')">
-				            <a class="dropdown-item" th:href="@{/products/new}">
-				                <i class="bi bi-box-seam"></i>Product
-				            </a>
-				        </li>
+	                    <ul class="dropdown-menu dropdown-menu-end shadow">
+	                        <li sec:authorize="hasRole('ADMIN')">
+	                            <a class="dropdown-item" th:href="@{/products/new}"><i class="bi bi-box-seam text-success me-2"></i>Product</a>
+	                        </li>
+	                        <li sec:authorize="hasRole('ADMIN')">
+	                            <a class="dropdown-item" th:href="@{/customers/new}"><i class="bi bi-people text-success me-2"></i>Customer</a>
+	                        </li>
+	                        <li sec:authorize="hasAnyRole('USER','VIP','ADMIN')">
+	                            <a class="dropdown-item" th:href="@{/orders/new}"><i class="bi bi-bag text-success me-2"></i>Order</a>
+	                        </li>
+	                    </ul>
 
-				        <li sec:authorize="hasRole('ADMIN')">
-				            <a class="dropdown-item" th:href="@{/customers/new}">
-				                <i class="bi bi-people"></i>Customer
-				            </a>
+	                </div>
 
-				        </li>
+	                <!--user section -->
+	                <div sec:authorize="isAuthenticated()" class="d-flex align-items-center gap-2">
 
-				        <li sec:authorize="hasAnyRole('USER','VIP','ADMIN')">
-				            <a class="dropdown-item" th:href="@{/orders/new}">
-				                <i class="bi bi-bag"></i> Order</a>
-				        </li>
-				    </ul>
+	                    <!--user Dropdown -->
+	                    <div class="dropdown">
+							
+	                        <button class="btn btn-light btn-sm dropdown-toggle d-flex align-items-center gap-2" type="button" data-bs-toggle="dropdown">
+	                            <i class="bi bi-person-circle"></i>
+	                            <span sec:authentication="name" class="fw-medium"></span>
+	                        </button>
+							
+	                        <ul class="dropdown-menu dropdown-menu-end shadow">
+	                            <li>
+	                                <span class="dropdown-item-text text-muted small px-3 py-2">
+	                                    Logged in as <strong sec:authentication="name"></strong>
+	                                </span>
+	                            </li>
+	                            <li><hr class="dropdown-divider"></li>
+	                            <li>
+	                                <form th:action="@{/logout}" method="post">
+	                                    <button type="submit" class="dropdown-item text-danger">
+	                                        <i class="bi bi-box-arrow-right me-2"></i>Log out
+	                                    </button>
+	                                </form>
+	                            </li>
+	                        </ul>
+							
+	                    </div>
 
-					
-					
-					<!--logout-->
-					<button class="btn btn-light btn-sm dropdown-toggle" type="button" data-bs-toggle="dropdown">
-					        <i class="bi bi-person-circle"></i><span sec:authentication="name"></span>
-					</button>
-
-					    <ul class="dropdown-menu dropdown-menu-end">
-					        <li>
-					            <span class="dropdown-item-text text-muted small">Logged in</span>
-					        </li>
-					        <li><hr class="dropdown-divider"></li>
-					        <li>
-					            <form th:action="@{/logout}" method="post">
-					                <button type="submit" class="dropdown-item text-danger">
-					                    <i class="bi bi-box-arrow-right"></i>Log out</button>
-					            </form>
-					        </li>
-					    </ul>
-					
-					
-						<!--modal-->
-						<button sec:authorize="isAuthenticated()" class="btn btn-outline-light ms-2" data-bs-toggle="modal"
-						 data-bs-target="#userModal">My account</button>
+	                    <!--my account button --modal-- -->
+	                    <button sec:authorize="isAuthenticated()" class="btn btn-outline-light btn-sm" data-bs-toggle="modal" data-bs-target="#userModal">
+	                        <i class="bi bi-person"></i>
+	                        <span class="ms-1 d-none d-md-inline">My Account</span>
+	                    </button>
 						
-						
-				</div>
-				
-				
-				<div sec:authorize="!isAuthenticated()">
-				    <a th:href="@{/login}" class="btn btn-outline-light btn-sm"><i class="bi bi-box-arrow-in-right"></i>Login</a>
-				</div>
-				
-				
-			</div>
-		</div>
+	                </div>
 
-		
-		
+	                <!-- login (no autenticado) -->
+	                <div sec:authorize="!isAuthenticated()">
+	                    <a th:href="@{/login}" class="btn btn-outline-light btn-sm"><i class="bi bi-box-arrow-in-right me-1"></i>Login</a>
+	                </div>
+
+	            </div>
+	        </div>
+	    </div>
 	</nav>
 
 </body>

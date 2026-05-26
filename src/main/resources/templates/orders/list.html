@@ -21,10 +21,10 @@
 	    <table class="table table-bordered">
 	        <thead class="table-dark">
 	        <tr>
-	            <th>ID</th>
+	            <!--<th>ID</th>-->
 	            <th>Code</th>
 	            <th>Date</th>
-	            <th>Total</th>
+	            <th>Total (€)</th>
 	            <th sec:authorize="hasRole('ADMIN')">Customer</th>
 	            <th sec:authorize="hasRole('ADMIN')">Actions</th>
 	        </tr>
@@ -33,7 +33,7 @@
 			
 	        <tbody>
 	        <tr th:each="order : ${orders}">
-				<td th:text="${order.id}"></td>
+				<!--<td th:text="${order.id}"></td>-->
 	            <td th:text="${order.code}"></td>
 	            <td th:text="${order.shippingDate}"></td>
 	            <td th:text="${order.total}"></td>
