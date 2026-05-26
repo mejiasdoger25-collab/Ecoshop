@@ -39,6 +39,8 @@ public class SecurityConfig {
                     "/products/list",
                     "/products/details", 
                     "/products/details/{id}",
+                    "/fragments/navbar",
+                    "/fragments/footer",
                     "/css/**",
                     "/javascript/**",
                     "/images/**"//acceso cambiado para el login background
