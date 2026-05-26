@@ -39,6 +39,7 @@ public class SecurityConfig {
                     "/products/list",
                     "/products/details", 
                     "/products/details/{id}",
+                    "/error",
                     "/fragments/navbar",
                     "/fragments/footer",
                     "/css/**",

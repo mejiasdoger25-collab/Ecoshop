@@ -33,9 +33,10 @@
             </div>
 
             <div class="modal-footer">
-                <form th:action="@{/logout}" method="post">
-                    <button type="submit" class="btn btn-danger">Log out</button>
-                </form>
+				<form action="/logout" method="post"><!--cambiado para que Cross Site Request Forgery no pase por thymeleaf con th:action. así no crea la session late y crashea el render-->
+					<input type="hidden" th:if="${_csrf != null}" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"/><!--hecho con if porque el token no existe en todas las request, solo en algunas-->
+				    <button type="submit" class="btn btn-danger">Log out</button>
+				</form>
 				
 				<a th:href="@{/orders/list}" class="btn btn-info">My orders</a>
             </div>
