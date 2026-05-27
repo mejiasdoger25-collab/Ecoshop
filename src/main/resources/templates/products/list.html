@@ -27,7 +27,7 @@
             <div class="card h-100 shadow-sm border-0">
 
                 <!--placeholder image-->
-                <img th:src="${product.image != null ? product.image : 'https://placehold.co/600x400?text=EcoShop'}" class="card-img-top" alt="Product image" style="height:200px; object-fit:cover;"><!--cambiar a clase desde css para dar medidas-->
+                <img th:src="${product.image != null ? product.image : 'https://upload.wikimedia.org/wikipedia/commons/thumb/6/65/No-Image-Placeholder.svg/1920px-No-Image-Placeholder.svg.png?utm_source=commons.wikimedia.org&utm_campaign=index&utm_content=thumbnail'}" class="card-img-top card-image" alt="Product image"><!--cambiar a clase desde css para dar medidas-->
 
                 <div class="card-body d-flex flex-column">
 
@@ -57,7 +57,7 @@
                     </div>
 
                     <!--description preview-->
-                    <p class="card-text text-muted flex-grow-1" th:text="${#strings.abbreviate(product.description,80)}">
+                    <p class="card-text text-muted flex-grow-1" th:text="${#strings.abbreviate(product.description,55)}">
                     </p>
 
                     <!--actions-->
