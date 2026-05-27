@@ -103,10 +103,18 @@
 						
 	                </div>
 
-	                <!-- login (no authenticated) -->
-	                <div sec:authorize="!isAuthenticated()">
-	                    <a th:href="@{/login}" class="btn btn-outline-light btn-sm"><i class="bi bi-box-arrow-in-right me-1"></i>Login</a>
-	                </div>
+					<!-- login/register (no authenticated) -->
+					<div sec:authorize="!isAuthenticated()" class="d-flex gap-2">
+
+					    <a th:href="@{/login}" class="btn btn-outline-light btn-sm">
+					        <i class="bi bi-box-arrow-in-right me-1"></i>Login
+					    </a>
+
+					    <a th:href="@{/register}" class="btn btn-light btn-sm">
+					        <i class="bi bi-person-plus me-1"></i> Register
+					    </a>
+
+					</div>
 
 	            </div>
 	        </div>
