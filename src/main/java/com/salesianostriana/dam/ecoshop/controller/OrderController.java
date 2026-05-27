@@ -109,6 +109,14 @@ public class OrderController {
 		        order.setCustomer(customer);
 		    }
 
+		 
+		//generación del code auto order
+		    if (order.getCode() == null || order.getCode().trim().isEmpty()) {
+		        int randomNumber = (int) (Math.random() * 900000) + 100000; //6dígitos
+		        order.setCode("ORD-" + randomNumber);
+		    }
+
+		 
 		    service.save(order);
 
 		    return "redirect:/orders/list";
