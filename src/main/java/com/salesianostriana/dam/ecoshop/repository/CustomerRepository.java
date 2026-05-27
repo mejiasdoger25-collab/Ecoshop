@@ -4,6 +4,8 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import com.salesianostriana.dam.ecoshop.model.Customer;
@@ -12,7 +14,7 @@ import com.salesianostriana.dam.ecoshop.model.Customer;
 public interface CustomerRepository 
 	extends JpaRepository<Customer, Long>{
 
-	//consultaS
+	//consultas derivadas
 	Optional<Customer> findByUserUsername(String username);
 	
 	//consultas derivadas
@@ -29,4 +31,28 @@ public interface CustomerRepository
     //sorted
     List<Customer> findTop10ByTotalSpentDesc();                  //clientes que más gan gastado top 10
 	
+    
+    
+    
+	    //consultas manuales
+    
+    	//customers, ordenados por dinero gastado
+	    @Query("""
+	    	    SELECT c FROM Customer c 
+	    	    ORDER BY c.totalSpent DESC
+	    	    """)
+	    	List<Customer> findTopCustomers();
+
+	    //customers que han gastado > x
+    	@Query("""
+    	    SELECT c FROM Customer c 
+    	    WHERE c.totalSpent > :amount 
+    	    ORDER BY c.totalSpent DESC
+    	    """)
+    	List<Customer> findCustomersByTotalSpentGreaterThan(@Param("amount") double amount);
+
+    	//media gastada entre todos los customers
+    	@Query("SELECT AVG(c.totalSpent) FROM Customer c")
+    	Double getAverageCustomerSpending();
+    
 }
