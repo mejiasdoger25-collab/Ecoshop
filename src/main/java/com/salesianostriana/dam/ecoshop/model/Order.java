@@ -37,8 +37,8 @@ public class Order {
 	@GeneratedValue
 	private Long id;
 	
-	@NotEmpty(message = "Order code is required")
-	@Size(min = 3, max = 20, message = "Order code must be between 3 and 20 characters")
+	/*@NotEmpty(message = "Order code is required")
+	@Size(min = 3, max = 20, message = "Order code must be between 3 and 20 characters")*/
 	private String code;
 	
 	@Future(message = "Shipping date must be in the future")
