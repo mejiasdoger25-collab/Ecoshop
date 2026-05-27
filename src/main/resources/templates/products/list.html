@@ -64,6 +64,11 @@
                     <div class="d-flex gap-2 mt-auto">
 
                         <a th:href="@{/products/details/{id}(id=${product.id})}" class="btn btn-info btn-sm"> Details</a>
+						
+						<!--add product to cart button-->
+						<a th:href="@{/cart/add/{id}(id=${product.id})}"  class="btn btn-success flex-fill">
+							<i class="bi bi-cart-plus"></i>Add
+						</a>
 
                         <span sec:authorize="hasRole('ADMIN')">
                             <a th:href="@{/products/edit/{id}(id=${product.id})}" class="btn btn-warning btn-sm"> Edit</a>
