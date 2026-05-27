@@ -38,7 +38,7 @@ public class Product {
 	private Long id;
 	
 	@NotEmpty(message = "Product name is required")
-	@Size(min = 5, max = 15, message = "Product name must be between 2 and 100 characters")
+	@Size(min = 5, max = 30, message = "Product name must be between 2 and 100 characters")
 	private String name;
 	
 	@Positive(message = "Price must be greater than 0")
@@ -57,12 +57,13 @@ public class Product {
 	private boolean ecoCertificate;
 	
 	@NotEmpty(message = "Description is required")
-	@Size(max = 100, message = "Description must be between 10 and 500 characters")
+	@Size(max = 300, message = "Description must be between 10 and 500 characters")
 	private String description;
 	
 	@Future(message = "Expiration date must be in the future")
 	private LocalDate expirationDate;
 	
+	private String image;
 	
 	//relación con líneas
 	@OneToMany(mappedBy = "product", fetch=FetchType.EAGER)

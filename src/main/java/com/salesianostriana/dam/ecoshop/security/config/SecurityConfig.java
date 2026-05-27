@@ -31,13 +31,27 @@ public class SecurityConfig {
     SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
 
         http
+        
+        /*
+         * <!--cambiado para que Cross Site Request Forgery no pase por thymeleaf con th:action. así no crea la session late y crashea el render-->
+         * 
+         * <!--hecho con if porque el token no existe en todas las request, solo en algunas-->
+         * 
+         * <!--es por esto que lo he hecho con un enlace en lugar de formulario, para evitar todo el tema de los tokens-->
+         * */
+        	.csrf(csrf -> csrf.disable())
+        
             .authorizeHttpRequests(auth -> auth
 
                 // PUBLIC
                 .requestMatchers(
                     "/",
                     "/products/list",
-                    "/products/details",
+                    "/products/details", 
+                    "/products/details/{id}",
+                    "/error",
+                    "/fragments/navbar",
+                    "/fragments/footer",
                     "/css/**",
                     "/javascript/**",
                     "/images/**"//acceso cambiado para el login background

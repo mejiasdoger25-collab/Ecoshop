@@ -1,0 +1,1 @@
+/*INSERT INTO PRODUCT (ID, NAME, PRICE, STOCK, MINIMUMSTOCK, ORIGIN, ECOCERTIFICATE, DESCRIPTION, EXPIRATIONDATE, IMAGE) VALUES (981L, 'Testing', 123, 1, 0, "no sé de dónde viene", false, "no tengo ni la más mínmia idea de qué será", null, "https://unsplash.com/es/fotos/botella-de-plastico-transparente-sobre-mesa-blanca-edBR3b2JAuA");*/
