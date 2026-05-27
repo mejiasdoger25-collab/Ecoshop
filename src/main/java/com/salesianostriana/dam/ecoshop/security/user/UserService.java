@@ -98,10 +98,10 @@ public class UserService {
 	
 	//método para registrar nuevos usuarios
 	// Añadido al final de la clase UserService
-	public void registerUser(String username, String password, String name, String email, String phone) {
+	public User registerUser(String username, String password, String name, String email, String phone) {
 	    
 	    if (userRepository.findByUsername(username).isPresent()) {
-	        throw new IllegalArgumentException("El nombre de usuario ya está en uso");
+	        throw new IllegalArgumentException("The username is already in use");
 	    }
 
 	    User user = User.builder()
@@ -124,6 +124,7 @@ public class UserService {
 	            .build();
 
 	    customerRepository.save(customer);
+	    return user;
 	}
 	
 	
