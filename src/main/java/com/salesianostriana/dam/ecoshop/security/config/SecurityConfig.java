@@ -54,7 +54,8 @@ public class SecurityConfig {
                     "/fragments/footer",
                     "/css/**",
                     "/javascript/**",
-                    "/images/**"//acceso cambiado para el login background
+                    "/images/**",//acceso cambiado para el login background
+                    "/register"
                 ).permitAll()
 
                 // ADMIN

@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" 
+				xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+
+<!--HEAD CON FRAGMENT, para evitar repetir los mismos enlaces en todos los templates-->
+<head th:replace="~{fragments/head :: head}"></head>
+
+<body class="d-flex align-items-center justify-content-center register-bg">
+
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-6 col-lg-5">
+
+                <div class="login-container p-5 mt-5">
+                    
+                    <div class="text-center mb-4">
+                        <h2 class="fw-bold text-success">EcoShop</h2>
+                        <h4>Create account</h4>
+                    </div>
+
+                    <!--error message-->
+                    <div th:if="${error}" class="alert alert-danger">
+                        <span th:text="${error}"></span>
+                    </div>
+
+                    <form th:action="@{/register}" method="post" novalidate>
+
+                        <div class="mb-3">
+                            <label class="form-label">User name</label>
+                            <input type="text" name="username" class="form-control" required>
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label">Password</label>
+                            <input type="password" name="password" class="form-control" required>
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label">Full name</label>
+                            <input type="text" name="name" class="form-control" required>
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label">Email</label>
+                            <input type="email" name="email" class="form-control" required>
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label">Telephone (9 digits)</label>
+                            <input type="text" name="phone" class="form-control" pattern="[0-9]{9}" required>
+                        </div>
+
+                        <button type="submit" class="btn btn-success w-100 mb-3">
+                            Register
+                        </button>
+
+                    </form>
+
+					<button class="btn btn-secondary w-100 rounded-3 mt-2">
+						<a th:href="@{/login}">Already have an account? Log in</a>
+					</button>
+					
+					<button class="btn btn-secondary w-100 rounded-3 mt-2">
+						<a th:href="@{/products/list}">Back to list</a>
+					</button>
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>
