@@ -17,9 +17,11 @@ public interface OrderRepository
 
 	
 	//consultas derivadas
+	/*
 	public List <Order> findById ();
 	
 	public List <Order> findAll ();
+	*/
 	
 	
 	List<Order> findByCustomer(Customer customer);

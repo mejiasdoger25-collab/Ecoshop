@@ -29,7 +29,7 @@ public interface CustomerRepository
     boolean existsByPhone(String phone);						//phones no dobles
     
     //sorted
-    List<Customer> findTop10ByTotalSpentDesc();                  //clientes que más gan gastado top 10
+    List<Customer> findTop10ByOrderByTotalSpentDesc();                  //clientes que más gan gastado top 10
 	
     
     
