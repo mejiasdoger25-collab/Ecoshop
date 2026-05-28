@@ -15,40 +15,50 @@
 
 	    <div class="d-flex justify-content-between mb-4">
 	        <h1>Order List</h1>
-	        <a th:href="@{/orders/new}" class="btn btn-success">New order</a><!--sec:authorize="hasAnyRole(['ADMIN', 'USER', 'VIP'])-->
+	        <a th:href="@{/orders/new}" class="btn btn-success" sec:authorize="hasRole('ADMIN')">New order</a><!--sec:authorize="hasAnyRole(['ADMIN', 'USER', 'VIP'])-->
 	    </div>
 
-	    <table class="table table-bordered">
-	        <thead class="table-dark">
-	        <tr>
-	            <!--<th>ID</th>-->
-	            <th>Code</th>
-	            <th>Date</th>
-	            <th>Total (€)</th>
-	            <th sec:authorize="hasRole('ADMIN')">Customer</th>
-	            <th sec:authorize="hasRole('ADMIN')">Actions</th>
-	        </tr>
-	        </thead>
-
-			
-	        <tbody>
-	        <tr th:each="order : ${orders}">
-				<!--<td th:text="${order.id}"></td>-->
-	            <td th:text="${order.code}"></td>
-	            <td th:text="${order.shippingDate}"></td>
-	            <td th:text="${order.total}"></td>
-	            <td sec:authorize="hasRole('ADMIN')" th:text="${order.customer.name}"></td>
+		<div th:if="${orders.isEmpty()}" class="text-center py-5">
+			<h4>You don't have any order yet</h4>
+			<a th:href="@{/products/list}" class="btn btn-success mt-3">Back to products</a>
+		</div>
+		
+		<div th:if="${not orders.isEmpty()}">
+		
+		    <table class="table table-bordered">
+		        <thead class="table-dark">
+		        <tr>
+		            <!--<th>ID</th>-->
+		            <th>Code</th>
+		            <th>Date</th>
+		            <th>Total (€)</th>
+		            <th sec:authorize="hasRole('ADMIN')">Customer</th>
+		            <th sec:authorize="hasRole('ADMIN')">Actions</th>
+		        </tr>
+		        </thead>
+	
 				
-	            <td sec:authorize="hasRole('ADMIN')">
-	                <a th:href="@{/orders/edit/{id}(id=${order.id})}" class="btn btn-warning btn-sm">Edit</a>
-	                <a th:href="@{/orders/delete/{id}(id=${order.id})}" class="btn btn-danger btn-sm delete-btn" data-confirm="¿Delete product?">Delete</a><!--con js porque Rafa no quiere onclick ;V-->
-	            </td>
-	        </tr>
-	        </tbody>
+		        <tbody>
+					
+		        <tr th:each="order : ${orders}">
+					<!--<td th:text="${order.id}"></td>-->
+		            <td th:text="${order.code}"></td>
+		            <td th:text="${order.shippingDate}"></td>
+		            <td th:text="${order.total}"></td>
+		            <td sec:authorize="hasRole('ADMIN')" th:text="${order.customer.name}"></td>
+					
+		            <td sec:authorize="hasRole('ADMIN')">
+		                <a th:href="@{/orders/edit/{id}(id=${order.id})}" class="btn btn-warning btn-sm">Edit</a>
+		                <a th:href="@{/orders/delete/{id}(id=${order.id})}" class="btn btn-danger btn-sm delete-btn" data-confirm="¿Delete product?">Delete</a><!--con js porque Rafa no quiere onclick ;V-->
+		            </td>
+		        </tr>
+		        </tbody>
+	
+				
+		    </table>
 
+		</div>
 			
-	    </table>
-
 	</div>
 	
 	<div th:replace="~{fragments/user-modal :: userModal}"></div>

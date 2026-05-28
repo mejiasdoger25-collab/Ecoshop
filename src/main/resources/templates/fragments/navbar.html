@@ -39,13 +39,19 @@
 	                <li class="nav-item">
 	                    <a class="nav-link px-3" th:href="@{/orders/list}"><i class="bi bi-bag me-1"></i>Orders</a>
 	                </li>
+					
+					<li class="nav-item">
+					    <a class="nav-link px-3" th:href="@{/cart}"><i class="bi bi-cart3 me-1"></i> Cart
+					        <span class="badge bg-light text-success ms-1" th:text="${cartCount}" th:if="${cartCount > 0}"></span>
+					    </a>
+					</li>
 	            </ul>
 
 	            <!--right side -->
 	            <div class="d-flex align-items-center gap-2">
 
 	                <!--new Dropdown -->
-	                <div class="dropdown" sec:authorize="isAuthenticated()">
+	                <div class="dropdown" sec:authorize="hasRole('ADMIN')">
 
 	                    <button class="btn btn-light btn-sm dropdown-toggle d-flex align-items-center gap-2" type="button" data-bs-toggle="dropdown">
 	                        <i class="bi bi-plus-circle"></i>

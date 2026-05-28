@@ -19,7 +19,7 @@ public class UserService {
 	private final CustomerRepository customerRepository;
 	private final PasswordEncoder passwordEncoder;
 
-
+	/*
 	@PostConstruct
 	public void initUsers() {
 
@@ -91,6 +91,7 @@ public class UserService {
 	    }
 
 	}
+	*/
 	
 	
 	//el method de arriba no debe ir aquí, sino que se debe hacer a través de un import.sql o desde un dataseed
