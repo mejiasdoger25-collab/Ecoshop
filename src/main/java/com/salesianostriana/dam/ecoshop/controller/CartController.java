@@ -41,7 +41,7 @@ public class CartController {
     @GetMapping("/add/{id}")
     public String addToCart(@PathVariable Long id) {
         productService.findById(id).ifPresent(cartService::addProduct);
-        return "redirect:/cart";
+        return "redirect:/products/list";	//add success messge
     }
 
     @GetMapping("/remove/{id}")
