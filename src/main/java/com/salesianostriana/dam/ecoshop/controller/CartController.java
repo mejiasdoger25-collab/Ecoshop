@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import java.security.Principal;
 import java.time.LocalDate;
 import java.util.Map;
+import java.util.NoSuchElementException;
 
 @Controller
 @RequestMapping("/cart")
@@ -44,15 +45,27 @@ public class CartController {
         return "redirect:/products/list";	//add success messge
     }
 
-    @GetMapping("/remove/{id}")
+    @GetMapping("/remove/{id}")//versión más eficaz del delete
     public String removeFromCart(@PathVariable Long id) {
-        cartService.removeProductById(id);
+    	/*
+    	productService.findById(id).ifPresent(product -> cartService.removeProductById(id));
+    	*/
+    	cartService.removeProductById(id);
+    
         return "redirect:/cart";	//tras borrar una cantidad de una línea o la línea entera si solo hay una línea, mostrar un mensaje de éxito
     }
 
-    @GetMapping("/clear")
+    @GetMapping("/clear")	//versión terminada más eficiente para las consutas
     public String clearCart() {
+    	/* v1
         cartService.clearCart();
+        */
+        
+        //v2
+        java.util.Map<Product, Integer> cart = cartService.getProductsInCart();
+        if (cart != null)
+            cartService.clearCart();
+
         return "redirect:/products/list";	//add: success message / invalid feedback
     }
 

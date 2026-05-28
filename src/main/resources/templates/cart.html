@@ -1,68 +1,86 @@
 <!DOCTYPE html>
 <html lang="es" xmlns:th="http://www.thymeleaf.org"
-			xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 
-
-<!--HEAD CON FRAGMENT, para evitar repetir los mismos enlaces en todos los templates-->
 <head th:replace="~{fragments/head :: head}"></head>
 
 <body class="d-flex flex-column min-vh-100">
     <div th:replace="~{fragments/navbar :: navbar}"></div>
 
     <div class="container mt-5">
-        <h2 class="mb-4">Tu Carrito</h2>
+        <h2 class="mb-4">Your cart</h2>
 
         <div th:if="${products.isEmpty()}" class="text-center py-5">
-            <h4>Tu carrito está vacío</h4>
-            <a href="/products/list" class="btn btn-success mt-3">Ver productos</a>
+            <h4>Your cart is empty</h4>
+            <a href="/products/list" class="btn btn-success mt-3">Back to products</a>
         </div>
 
         <div th:if="${not products.isEmpty()}">
-            <table class="table table-hover">
-                <thead class="table-dark">
-                    <tr>
-                        <th>Producto</th>
-                        <th>Precio Unitario</th>
-                        <th>Cantidad</th>
-                        <th>Subtotal</th>
-                        <th>Acciones</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr th:each="entry : ${products}">
-                        <td>
-                            <strong th:text="${entry.key.name}"></strong>
-                        </td>
-                        <td th:text="${entry.key.price} + ' €'"></td>
-                        <td th:text="${entry.value}"></td>
-                        <td th:text="${entry.key.price * entry.value} + ' €'"></td>
-                        <td>
-                            <a th:href="@{/cart/remove/{id}(id=${entry.key.id})}" 
-                               class="btn btn-danger btn-sm">Eliminar</a>
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
+            <div class="table-responsive">
+                <table class="table table-hover align-middle">
+                    <thead class="table-dark">
+                        <tr>
+                            <th>Product</th>
+                            <th class="text-center">Unit price</th>
+                            <th class="text-center">Quantity</th>
+                            <th class="text-center">Subtotal</th>
+                            <th class="text-end">Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr th:each="entry : ${products}">
+                            <td>
+                                <strong th:text="${entry.key.name}"></strong>
+                            </td>
+                            <td class="text-center" th:text="${entry.key.price} + ' €'"></td>
+                            
+                            <!-- Cantidad con estilo más bonito -->
+                            <td class="text-center">
+                                <span class="badge bg-light text-dark fs-6 border px-3 py-2" 
+                                      th:text="${entry.value}"></span>
+                            </td>
+                            
+                            <td class="text-center fw-bold" 
+                                th:text="${entry.key.price * entry.value} + ' €'"></td>
+                            
+                            <!-- Botones + y - -->
+                            <td class="text-end">
+                                <div class="btn-group btn-group-sm" role="group">
+                                    <!-- Quitar una unidad -->
+                                    <a th:href="@{/cart/removeOne/{id}(id=${entry.key.id})}" 
+                                       class="btn btn-outline-secondary"
+                                       title="Remove one unit">
+                                        <i class="bi bi-dash"></i>
+                                    </a>
+                                    
+                                    <!-- Añadir una unidad -->
+                                    <a th:href="@{/cart/add/{id}(id=${entry.key.id})}" 
+                                       class="btn btn-outline-secondary"
+                                       title="Add one unit">
+                                        <i class="bi bi-plus"></i>
+                                    </a>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
 
-            <div class="row">
+            <div class="row mt-4">
                 <div class="col-md-6">
                     <h4>Total: <strong th:text="${total} + ' €'"></strong></h4>
                 </div>
                 <div class="col-md-6 text-end">
-                    <a href="/products/list" class="btn btn-secondary me-2">Seguir comprando</a>
+                    <a href="/products/list" class="btn btn-secondary me-2">Continue shopping</a>
                     <form th:action="@{/cart/checkout}" method="post" style="display: inline;">
-                        <button type="submit" class="btn btn-success">Tramitar Pedido</button>
+                        <button type="submit" class="btn btn-success">Process Order</button>
                     </form>
                 </div>
             </div>
         </div>
     </div>
 
-	
-	<div th:replace="~{fragments/user-modal :: userModal}"></div>
-
-	<div th:replace="~{fragments/footer :: footer}"></div>
-
-
+    <div th:replace="~{fragments/user-modal :: userModal}"></div>
+    <div th:replace="~{fragments/footer :: footer}"></div>
 </body>
 </html>
