@@ -51,6 +51,7 @@ public class ProductService extends BaseServiceImp <Product, Long, ProductReposi
 	
 	*/
 	
+	/*
 	@PostConstruct
 	public void initUsers() {
 
@@ -267,5 +268,6 @@ public class ProductService extends BaseServiceImp <Product, Long, ProductReposi
 	    }
 
 	}
+	*/
 	
 }
