@@ -41,7 +41,7 @@
 	                </li>
 					
 					<li class="nav-item">
-					    <a class="nav-link" th:href="@{/cart}"><i class="bi bi-bag"></i> Cart
+					    <a class="nav-link" th:href="@{/cart}"><i class="bi bi-cart-plus"></i> Cart
 					        <span class="badge bg-success" th:text="${cartCount}" th:if="${cartCount > 0}"></span>
 					    </a>
 					</li>
@@ -51,7 +51,7 @@
 	            <div class="d-flex align-items-center gap-2">
 
 	                <!--new Dropdown -->
-	                <div class="dropdown" sec:authorize="isAuthenticated()">
+	                <div class="dropdown" sec:authorize="hasRole('ADMIN')">
 
 	                    <button class="btn btn-light btn-sm dropdown-toggle d-flex align-items-center gap-2" type="button" data-bs-toggle="dropdown">
 	                        <i class="bi bi-plus-circle"></i>

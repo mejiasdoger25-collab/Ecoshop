@@ -47,25 +47,25 @@ public class CartController {
     @GetMapping("/remove/{id}")
     public String removeFromCart(@PathVariable Long id) {
         cartService.removeProductById(id);
-        return "redirect:/cart";
+        return "redirect:/cart";	//tras borrar una cantidad de una línea o la línea entera si solo hay una línea, mostrar un mensaje de éxito
     }
 
     @GetMapping("/clear")
     public String clearCart() {
         cartService.clearCart();
-        return "redirect:/products/list";
+        return "redirect:/products/list";	//add: success message / invalid feedback
     }
 
     @PostMapping("/checkout")
     public String checkout(Principal principal) {
 
         if (cartService.isEmpty()) {
-            return "redirect:/cart";
+            return "/products/list";
         }
 
         String username = principal.getName();
         Customer customer = customerService.findByUsername(username)
-                .orElseThrow(() -> new IllegalArgumentException("Cliente no encontrado"));
+                .orElseThrow(() -> new IllegalArgumentException("Customer not found"));
 
         //crear el pedido
         Order order = Order.builder()

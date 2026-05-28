@@ -1,10 +1,11 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" lang="es">
-<head>
-    <meta charset="UTF-8">
-    <title>Mi Carrito - EcoShop</title>
-    <div th:replace="~{fragments/head :: head}"></div>
-</head>
+<html lang="es" xmlns:th="http://www.thymeleaf.org"
+			xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+
+<!--HEAD CON FRAGMENT, para evitar repetir los mismos enlaces en todos los templates-->
+<head th:replace="~{fragments/head :: head}"></head>
+
 <body>
     <div th:replace="~{fragments/navbar :: navbar}"></div>
 
@@ -57,6 +58,11 @@
         </div>
     </div>
 
-    <div th:replace="~{fragments/footer :: footer}"></div>
+	
+	<div th:replace="~{fragments/user-modal :: userModal}"></div>
+
+	<div th:replace="~{fragments/footer :: footer}"></div>
+
+
 </body>
 </html>

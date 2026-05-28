@@ -24,11 +24,13 @@
 
         <div class="col-12 col-md-6 col-lg-3" th:each="product : ${products}">
 
-            <div class="card h-100 shadow-sm border-0">
+            <div class="card h-100 shadow-sm border-0 product-card">
 
                 <!--placeholder image-->
-                <img th:src="${product.image != null ? product.image : 'https://upload.wikimedia.org/wikipedia/commons/thumb/6/65/No-Image-Placeholder.svg/1920px-No-Image-Placeholder.svg.png?utm_source=commons.wikimedia.org&utm_campaign=index&utm_content=thumbnail'}" class="card-img-top card-image" alt="Product image"><!--cambiar a clase desde css para dar medidas-->
-
+				<a th:href="@{/products/details/{id}(id=${product.id})}">
+                	<img th:src="${product.image != null ? product.image : 'https://upload.wikimedia.org/wikipedia/commons/thumb/6/65/No-Image-Placeholder.svg/1920px-No-Image-Placeholder.svg.png?utm_source=commons.wikimedia.org&utm_campaign=index&utm_content=thumbnail'}" class="card-img-top card-image" alt="Product image"><!--cambiar a clase desde css para dar medidas-->
+				</a>
+				
                 <div class="card-body d-flex flex-column">
 
                     <!--name-->
