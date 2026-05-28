@@ -48,17 +48,21 @@
                                 <div class="btn-group btn-group-sm" role="group">
                                     <!-- Quitar una unidad -->
                                     <a th:href="@{/cart/removeOne/{id}(id=${entry.key.id})}" 
-                                       class="btn btn-outline-secondary"
-                                       title="Remove one unit">
+                                       class="btn btn-outline-secondary" title="Remove one unit">
                                         <i class="bi bi-dash"></i>
                                     </a>
                                     
-                                    <!-- Añadir una unidad -->
-                                    <a th:href="@{/cart/add/{id}(id=${entry.key.id})}" 
-                                       class="btn btn-outline-secondary"
-                                       title="Add one unit">
+                                    <!-- Añadir una unidad, cambiado el redirect para que no use el del controller y te lleve a /products7list -->
+                                    <a th:href="@{/cart/add/{id}(id=${entry.key.id},redirect='/cart')}"
+                                       class="btn btn-outline-secondary" title="Add one unit">
                                         <i class="bi bi-plus"></i>
                                     </a>
+									
+									<!--los anteriores son para cantidades del mismo product, es decir, +x o -x, este es para borrar la línea entera del tirón-->
+									<a th:href="@{/cart/remove/{id}(id=${entry.key.id})}"
+									   class="btn btn-outline-danger" title="Remove product line">
+									    <i class="bi bi-trash"></i>
+									</a>
                                 </div>
                             </td>
                         </tr>
@@ -70,11 +74,18 @@
                 <div class="col-md-6">
                     <h4>Total: <strong th:text="${total} + ' €'"></strong></h4>
                 </div>
+				
                 <div class="col-md-6 text-end">
                     <a href="/products/list" class="btn btn-secondary me-2">Continue shopping</a>
                     <form th:action="@{/cart/checkout}" method="post" style="display: inline;">
                         <button type="submit" class="btn btn-success">Process Order</button>
                     </form>
+					
+					<!--este es el "tercer nivel" de borrado, es decir, el primero es a nivel de cantidad, el segundo es a nivel de línea de pedido y este es a nivel global, es decir, de todo el carrito-->
+					<a th:href="@{/cart/clear}" class="btn btn-danger">
+						<i class="bi bi-trash3"></i>Clear cart
+					</a>
+					
                 </div>
             </div>
         </div>

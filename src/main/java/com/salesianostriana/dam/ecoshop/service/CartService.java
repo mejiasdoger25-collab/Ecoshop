@@ -43,6 +43,16 @@ public class CartService extends BaseServiceImp<Product, Long, ProductRepository
                 .findFirst()
                 .ifPresent(products::remove);
     }
+    
+    //para el restar -1 cant de product del cart
+    public void removeOneById(Long id) {
+
+        products.keySet().stream()
+                .filter(product -> product.getId().equals(id))
+                .findFirst()
+                .ifPresent(this::removeProduct);
+    }
+    
 
     public Map<Product, Integer> getProductsInCart() {
         return Collections.unmodifiableMap(products);

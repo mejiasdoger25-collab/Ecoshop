@@ -1,5 +1,6 @@
 package com.salesianostriana.dam.ecoshop.controller;
 
+import com.salesianostriana.dam.ecoshop.data.DataSeed;
 import com.salesianostriana.dam.ecoshop.model.Customer;
 import com.salesianostriana.dam.ecoshop.model.Order;
 import com.salesianostriana.dam.ecoshop.model.OrderLine;
@@ -16,6 +17,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.security.Principal;
 import java.time.LocalDate;
@@ -31,6 +33,7 @@ public class CartController {
     private final ProductService productService;
     private final CustomerService customerService;
     private final OrderService orderService;
+    private final DataSeed dataSeed;
 
     @GetMapping
     public String showCart(Model model) {
@@ -39,12 +42,18 @@ public class CartController {
         return "cart";
     }
 
-    @GetMapping("/add/{id}")
-    public String addToCart(@PathVariable Long id) {
-        productService.findById(id).ifPresent(cartService::addProduct);
-        return "redirect:/products/list";	//add success messge
+    @GetMapping("/add/{id}")//cambiado para que hacer el redirect en función del template que haces add, si haces desde el list te quedas ahí, si lo haces desde la línea de pedido, te quedas en el cart
+    public String addToCart( @PathVariable Long id, @RequestParam(defaultValue = "/products/list") String redirect) {
+
+        productService.findById(id)
+                .ifPresent(cartService::addProduct);
+
+        return "redirect:" + redirect;
     }
 
+    
+    
+    //borrar todo
     @GetMapping("/remove/{id}")//versión más eficaz del delete
     public String removeFromCart(@PathVariable Long id) {
     	/*
@@ -55,6 +64,17 @@ public class CartController {
         return "redirect:/cart";	//tras borrar una cantidad de una línea o la línea entera si solo hay una línea, mostrar un mensaje de éxito
     }
 
+   //borrar 1 product
+    @GetMapping("/removeOne/{id}")
+    public String removeOneFromCart(@PathVariable Long id) {
+
+        cartService.removeOneById(id);
+
+        return "redirect:/cart";
+    }
+    
+    
+    
     @GetMapping("/clear")	//versión terminada más eficiente para las consutas
     public String clearCart() {
     	/* v1
@@ -66,7 +86,7 @@ public class CartController {
         if (cart != null)
             cartService.clearCart();
 
-        return "redirect:/products/list";	//add: success message / invalid feedback
+        return "redirect:/cart";	//add: success message / invalid feedback
     }
 
     @PostMapping("/checkout")
