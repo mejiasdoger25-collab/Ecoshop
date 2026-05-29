@@ -44,6 +44,7 @@ public class OrderService extends BaseServiceImp <Order, Long, OrderRepository>{
 	*/
 	
 	//new sample with the new data model, ahora se usa el id con la clase pk, es decir, id(new OrderLinePK(order.getId(), nextLine)) en lugar de usar .id(1L)
+	/*ya no se usa este method, ahora se usa el checkout para las líneas del pedido
 	public OrderLine addProductToOrder(Order order,Product product, int amount) {
 	    Long nextLine =(long) order.getLines().size() + 1;
 
@@ -62,6 +63,7 @@ public class OrderService extends BaseServiceImp <Order, Long, OrderRepository>{
 
 	    return line;
 	}
+	*/
 	
 	
 	/*

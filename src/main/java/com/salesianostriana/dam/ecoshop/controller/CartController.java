@@ -93,7 +93,7 @@ public class CartController {
     public String checkout(Principal principal) {
 
         if (cartService.isEmpty()) {
-            return "/products/list";
+            return "redirect:/products/list";
         }
 
         String username = principal.getName();

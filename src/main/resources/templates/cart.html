@@ -10,10 +10,15 @@
     <div class="container mt-5">
         <h2 class="mb-4">Your cart</h2>
 
-        <div th:if="${products.isEmpty()}" class="text-center py-5">
-            <h4>Your cart is empty</h4>
-            <a href="/products/list" class="btn btn-success mt-3">Back to products</a>
-        </div>
+		<!-- Empty message -->
+		<div class="card bg-sinfo shadow-sm p-5 text-center"  th:if="${products == null or products.isEmpty()}">
+			<i class="bi bi-cart-x fs-1 d-block mb-3 text-muted"></i>
+			<h4 class="card-title">Your cart is empty</h4>
+			<p class="mb-3">You don't have any product added yet</p>
+			<a th:href="@{/}" class="btn btn-primary">
+				<i class="bi bi-arrow-left me-1"></i>Back to products
+			</a>
+		</div>
 
         <div th:if="${not products.isEmpty()}">
             <div class="table-responsive">
@@ -34,15 +39,17 @@
                             </td>
                             <td class="text-center" th:text="${entry.key.price} + ' €'"></td>
                             
-                            <!-- Cantidad con estilo más bonito -->
+                            <!-- Cantidad del product -->
                             <td class="text-center">
                                 <span class="badge bg-light text-dark fs-6 border px-3 py-2" 
-                                      th:text="${entry.value}"></span>
+                                      th:text="${#numbers.formatDecimal(entry.key.price, 1, 2)} + ' €'"></span>
                             </td>
                             
+							<!-- cantidad del orderLine -->
                             <td class="text-center fw-bold" 
-                                th:text="${entry.key.price * entry.value} + ' €'"></td>
+                                th:text="${#numbers.formatDecimal(entry.key.price * entry.value, 1, 2)} + ' €'"></td>
                             
+								
                             <!-- Botones + y - -->
                             <td class="text-end">
                                 <div class="btn-group btn-group-sm" role="group">
@@ -72,7 +79,7 @@
 
             <div class="row mt-4">
                 <div class="col-md-6">
-                    <h4>Total: <strong th:text="${total} + ' €'"></strong></h4>
+                    <h4>Total: <strong th:text="${#numbers.formatDecimal(total, 1, 2)} + ' €'"></strong></h4>
                 </div>
 				
                 <div class="col-md-6 text-end">
