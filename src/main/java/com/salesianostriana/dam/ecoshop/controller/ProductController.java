@@ -155,6 +155,6 @@ public class ProductController {
 		model.addAttribute("products", page);
 		model.addAttribute("selectedCategory", id);
 		
-		return "products/details";
+		return "products/list";
 	}
 }
