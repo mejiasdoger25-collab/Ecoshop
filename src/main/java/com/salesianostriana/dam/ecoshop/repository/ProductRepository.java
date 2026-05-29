@@ -9,6 +9,9 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+
 import com.salesianostriana.dam.ecoshop.model.Product;
 import com.salesianostriana.dam.ecoshop.security.user.User;
 
@@ -90,4 +93,10 @@ public interface ProductRepository
     //productos próximos a caducar, próximos 30 días
     @Query("SELECT p FROM Product p WHERE p.expirationDate IS NOT NULL AND p.expirationDate BETWEEN :now AND :limitDate")
     List<Product> findProductsNearExpiration(@Param("now") LocalDate now, @Param("limitDate") LocalDate limitDate);
+    
+    
+    
+    //para la paginación
+    @Query("SELECT p FROM Product p")
+    Page<Product> findAllPaged(Pageable pageable);
 }

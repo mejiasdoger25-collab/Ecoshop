@@ -13,7 +13,13 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.salesianostriana.dam.ecoshop.model.Product;
+import com.salesianostriana.dam.ecoshop.repository.ProductRepository;
 import com.salesianostriana.dam.ecoshop.service.ProductService;
+
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import jakarta.validation.Valid;
 import lombok.Data;
@@ -26,6 +32,7 @@ import lombok.RequiredArgsConstructor;
 public class ProductController {
 
 	private final ProductService service;
+	private final ProductRepository productRepository;
 	
 	/*
 	@GetMapping({"/", "/home"})
@@ -48,9 +55,13 @@ public class ProductController {
 	*/
 	
 	@GetMapping({"/", "/list"})
-	public String findAll (Model model) {
-		model.addAttribute("products", service.findAll());
-		return "products/list";
+	public String findAll( @RequestParam(defaultValue = "0") int page, @RequestParam(defaultValue = "8") int size, Model model) {
+
+	    Pageable pageable = PageRequest.of(page, size);
+	    Page<Product> productPage = productRepository.findAllPaged(pageable);
+
+	    model.addAttribute("products", productPage);
+	    return "products/list";
 	}
 	
 	@PreAuthorize("hasRole('ADMIN')")
