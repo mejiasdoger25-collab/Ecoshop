@@ -2,6 +2,7 @@ package com.salesianostriana.dam.ecoshop.controller;
 
 import java.security.Principal;
 import java.util.List;
+import java.util.NoSuchElementException;
 import java.util.Optional;
 
 import org.apache.tomcat.util.net.openssl.ciphers.Authentication;
@@ -48,7 +49,7 @@ public class OrderController {
 	    } else {
 	        Customer customer = customerService
 	                .findByUsername(username)
-	                .orElse(null);
+	                .orElseThrow(() -> new NoSuchElementException("Customer not found"));//con exception genérica
 
 	        model.addAttribute("orders",customer.getOrders());
 	    }
@@ -69,7 +70,7 @@ public class OrderController {
 	    } else {
 	        Customer customer = customerService
 	                .findByUsername(principal.getName())
-	                .orElse(null);
+	                .orElseThrow(() -> new NoSuchElementException("Customer not found"));//con exception genérica
 
 	        model.addAttribute("customers", List.of(customer));
 	    }
@@ -90,7 +91,7 @@ public class OrderController {
 
 	            Customer customer = customerService
 	                    .findByUsername(principal.getName())
-	                    .orElse(null);
+	                    .orElseThrow(() -> new NoSuchElementException("Customer not found"));//con exception genérica
 
 	            model.addAttribute("customers", List.of(customer));
 	        }
@@ -104,7 +105,7 @@ public class OrderController {
 
 		        Customer customer = customerService
 		                .findByUsername(principal.getName())
-		                .orElse(null);
+		                .orElseThrow(() -> new NoSuchElementException("Customer not found"));//con exception genérica
 
 		        order.setCustomer(customer);
 		    }
