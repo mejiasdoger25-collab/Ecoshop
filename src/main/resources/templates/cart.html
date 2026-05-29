@@ -34,15 +34,17 @@
                             </td>
                             <td class="text-center" th:text="${entry.key.price} + ' €'"></td>
                             
-                            <!-- Cantidad con estilo más bonito -->
+                            <!-- Cantidad del product -->
                             <td class="text-center">
                                 <span class="badge bg-light text-dark fs-6 border px-3 py-2" 
-                                      th:text="${entry.value}"></span>
+                                      th:text="${#numbers.formatDecimal(entry.key.price, 1, 2)} + ' €'"></span>
                             </td>
                             
+							<!-- cantidad del orderLine -->
                             <td class="text-center fw-bold" 
-                                th:text="${entry.key.price * entry.value} + ' €'"></td>
+                                th:text="${#numbers.formatDecimal(entry.key.price * entry.value, 1, 2)} + ' €'"></td>
                             
+								
                             <!-- Botones + y - -->
                             <td class="text-end">
                                 <div class="btn-group btn-group-sm" role="group">
@@ -72,7 +74,7 @@
 
             <div class="row mt-4">
                 <div class="col-md-6">
-                    <h4>Total: <strong th:text="${total} + ' €'"></strong></h4>
+                    <h4>Total: <strong th:text="${#numbers.formatDecimal(total, 1, 2)} + ' €'"></strong></h4>
                 </div>
 				
                 <div class="col-md-6 text-end">

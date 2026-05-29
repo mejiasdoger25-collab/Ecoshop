@@ -44,7 +44,7 @@
 
                     <!--price-->
                     <h4 class="text-success fw-bold mb-3">
-                        <span th:text="${product.price}"></span>€
+                        <span th:text="${#numbers.formatDecimal(product.price, 1, 2)}"></span>€
                     </h4>
 
                     <!--stock-->

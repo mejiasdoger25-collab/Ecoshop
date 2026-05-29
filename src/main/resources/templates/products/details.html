@@ -44,7 +44,7 @@
 		            <div class="row mb-3">
 		                <div class="col-md-6">
 		                    <strong>Price:</strong>
-		                    <span th:text="${product.price}"></span>€
+		                    <span th:text="${#numbers.formatDecimal(product.price, 1, 2)}"></span>€
 		                </div>
 		
 		                <div class="col-md-6">

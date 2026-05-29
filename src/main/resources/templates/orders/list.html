@@ -44,7 +44,7 @@
 					<!--<td th:text="${order.id}"></td>-->
 		            <td th:text="${order.code}"></td>
 		            <td th:text="${order.shippingDate}"></td>
-		            <td th:text="${order.total}"></td>
+		            <td th:text="${#numbers.formatDecimal(order.total, 1, 2)}"></td>
 		            <td sec:authorize="hasRole('ADMIN')" th:text="${order.customer.name}"></td>
 					
 		            <td sec:authorize="hasRole('ADMIN')">
