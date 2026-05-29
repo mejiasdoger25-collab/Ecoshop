@@ -15,7 +15,7 @@
 
     <!--header-->
     <div class="d-flex justify-content-between align-items-center mb-4">
-        <h1>Products</h1>
+        <!--<h1>Products</h1>-->
         <a sec:authorize="hasRole('ADMIN')" th:href="@{/products/new}" class="btn btn-success">New product</a>
     </div>
 
@@ -26,7 +26,7 @@
 
             <div class="card product-card h-100 shadow-sm border-0">
 
-                <!--placeholder image-->
+                <!--placeholder image not funcional, ahora falta por implementar que el null se detecte como malo, no que != null = bien aunque la url esté mal-->
 				<a th:href="@{/products/details/{id}(id=${product.id})}">
                 	<img th:src="${product.image != null ? product.image : 'https://upload.wikimedia.org/wikipedia/commons/thumb/6/65/No-Image-Placeholder.svg/1920px-No-Image-Placeholder.svg.png?utm_source=commons.wikimedia.org&utm_campaign=index&utm_content=thumbnail'}" class="card-img-top card-image" alt="Product image"><!--cambiar a clase desde css para dar medidas-->
 				</a>
@@ -65,7 +65,7 @@
                     <!--actions-->
                     <div class="d-flex gap-2 mt-auto">
 
-                        <a th:href="@{/products/details/{id}(id=${product.id})}" class="btn btn-info btn-sm"> Details</a>
+                        <a th:href="@{/products/details/{id}(id=${product.id})}" class="btn btn-secondary btn-sm"> Details</a>
 						
 						<!--add product to cart button-->
 						<a th:href="@{/cart/add/{id}(id=${product.id})}"  class="btn btn-success flex-fill">
