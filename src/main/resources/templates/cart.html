@@ -15,7 +15,7 @@
 			<i class="bi bi-cart-x fs-1 d-block mb-3 text-muted"></i>
 			<h4 class="card-title">Your cart is empty</h4>
 			<p class="mb-3">You don't have any product added yet</p>
-			<a th:href="@{/}" class="btn btn-primary">
+			<a th:href="@{/}" class="btn btn-secondary">
 				<i class="bi bi-arrow-left me-1"></i>Back to products
 			</a>
 		</div>
@@ -39,16 +39,17 @@
                             </td>
                             <td class="text-center" th:text="${entry.key.price} + ' €'"></td>
                             
+							<!-- cantidad del orderLine -->
+							<td class="text-center">
+								<span class="badge bg-light text-dark fs-6 border px-3 py-2"
+								th:text="${entry.value}"></span>
+							</td>							
+							
                             <!-- Cantidad del product -->
                             <td class="text-center">
                                 <span class="badge bg-light text-dark fs-6 border px-3 py-2" 
-                                      th:text="${#numbers.formatDecimal(entry.key.price, 1, 2)} + ' €'"></span>
+                                      th:text="${#numbers.formatDecimal(entry.key.price * entry.value, 1, 2)} + ' €'"></span>
                             </td>
-                            
-							<!-- cantidad del orderLine -->
-                            <td class="text-center fw-bold" 
-                                th:text="${#numbers.formatDecimal(entry.key.price * entry.value, 1, 2)} + ' €'"></td>
-                            
 								
                             <!-- Botones + y - -->
                             <td class="text-end">
