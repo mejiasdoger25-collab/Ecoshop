@@ -23,7 +23,7 @@
 	<div class="row">
 
 	    <!--SIDEBAR-->
-	    <div class="col-md-3 mb-4">
+	    <div class="col-lg-2 col-md-3 mb-4 align-self-start">
 
 	        <div
 	            th:replace="~{fragments/sidebar :: sidebar}">
@@ -32,11 +32,11 @@
 	    </div>
 
 	    <!--PRODUCT GRID-->
-	    <div class="col-md-9">
+	    <div class="col-lg-10 col-md-9">
 
 	        <div class="row g-4">
 
-	            <div class="col-12 col-md-6 col-lg-4"
+	            <div class="col-12 col-sm-6 col-md-6 col-lg-3 col-xl-3"
 	                 th:each="product : ${products.content}">
 
 	                <div class="card product-card h-100 shadow-sm border-0">
