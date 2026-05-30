@@ -14,16 +14,16 @@
 <div class="container mt-5">
 
     <!--header-->
-    <div class="d-flex justify-content-between align-items-center mb-4">
+    <div class="d-flex justify-content-end align-items-center mb-4">
         <!--<h1>Products</h1>-->
-        <a sec:authorize="hasRole('ADMIN')" th:href="@{/products/new}" class="btn btn-success">New product</a>
+        <a sec:authorize="hasRole('ADMIN')" th:href="@{/products/new}" class="btn btn-success">Nuevo producto</a>
     </div>
 
 	<!--main layout-->
 	<div class="row">
 
 	    <!--SIDEBAR-->
-	    <div class="col-lg-2 col-md-3 mb-4 align-self-start">
+	    <div class="col-lg-2 col-md-3 mb-4 sidebar-sticky">
 
 	        <div
 	            th:replace="~{fragments/sidebar :: sidebar}">
@@ -36,17 +36,17 @@
 
 	        <div class="row g-4">
 
-	            <div class="col-12 col-sm-6 col-md-6 col-lg-3 col-xl-3"
+	            <div class="col-6 col-sm-6 col-md-6 col-lg-4 col-xl-3"
 	                 th:each="product : ${products.content}">
 
-	                <div class="card product-card h-100 shadow-sm border-0">
+	                <div class="card product-card h-100 shadow border-0">
 
-	                    <!--image-->
-	                    <a th:href="@{/products/details/{id}(id=${product.id})}">
-	                        <img th:src="${product.image != null ? product.image : 'https://upload.wikimedia.org/wikipedia/commons/thumb/6/65/No-Image-Placeholder.svg/1920px-No-Image-Placeholder.svg.png'}"
-	                            class="card-img-top card-image" alt="Product image">
-	                    </a>
-
+	                    <!--image, antes hecho != null, pero si ponías mal url =! null -> bien -> no cargaba. ahora detecta el error y si es así, carga default wiki img-->
+						<a th:href="@{/products/details/{id}(id=${product.id})}">
+							<img th:src="${product.image}" class="card-img-top card-image" alt="Product image"
+							     onerror="this.onerror=null; this.src='https://upload.wikimedia.org/wikipedia/commons/thumb/6/65/No-Image-Placeholder.svg/1920px-No-Image-Placeholder.svg.png';">
+						</a>
+							 
 	                    <div class="card-body d-flex flex-column">
 
 	                        <!--name-->
@@ -54,14 +54,8 @@
 	                            th:text="${product.name}">
 	                        </h5>
 
-	                        <!--origin-->
-	                        <p class="text-muted mb-2">
-	                            <i class="bi bi-geo-alt"></i>
-	                            <span th:text="${product.origin}"></span>
-	                        </p>
-
 	                        <!--price-->
-	                        <h4 class="text-success fw-bold mb-3">
+	                        <h4 class=" fw-bold mb-3 price-c">
 	                            <span th:text="${#numbers.formatDecimal(product.price,1,2)}"></span>€
 	                        </h4>
 
@@ -73,44 +67,48 @@
 	                            </span>
 
 	                            <span th:if="${product.ecoCertificate}"
-	                                class="badge bg-success"> Eco certified
+	                                class="badge bg-success bg-opacity-25 text-success fw-semibold"> Eco
 	                            </span>
 
 	                            <span th:unless="${product.ecoCertificate}"
-	                                class="badge bg-secondary">Standard
+	                                class="badge bg-danger bg-opacity-25 text-danger fw-semibold"> No eco
 	                            </span>
 
 	                        </div>
 
 	                        <!--description-->
 	                        <p class="card-text text-muted flex-grow-1"
-	                           th:text="${#strings.abbreviate(product.description,55)}">
+	                           th:text="${#strings.abbreviate(product.description,48)}">
 	                        </p>
 
 	                        <!--actions-->
 	                        <div class="d-flex gap-2 mt-auto">
 
+								<a th:href="@{/cart/add/{id}(id=${product.id})}"
+									class="btn btn-success flex-fill">
+									<i class="bi bi-cart-plus"></i> Añadir
+								</a>
+								
 	                            <a th:href="@{/products/details/{id}(id=${product.id})}"
-	                                class="btn btn-secondary btn-sm">Details
+	                                class="btn btn-outline-secondary btn-sm d-flex align-items-center justify-content-center">Detalles
 	                            </a>
 
-	                            <a th:href="@{/cart/add/{id}(id=${product.id})}"
-	                                class="btn btn-success flex-fill">
-	                                <i class="bi bi-cart-plus"></i> Add
-	                            </a>
+	                            
 
-	                            <span sec:authorize="hasRole('ADMIN')">
+								<div sec:authorize="hasRole('ADMIN')" class="d-flex flex-column gap-1">
 
-	                                <a th:href="@{/products/edit/{id}(id=${product.id})}"
-	                                    class="btn btn-warning btn-sm"> Edit
-	                                </a>
+								    <a th:href="@{/products/edit/{id}(id=${product.id})}"
+								       class="btn btn-warning btn-sm">
+								        Editar
+								    </a>
 
-	                                <a th:href="@{/products/delete/{id}(id=${product.id})}"
-	                                    class="btn btn-danger btn-sm delete-btn"
-	                                    data-confirm="Delete product?">Delete
-	                                </a>
+								    <a th:href="@{/products/delete/{id}(id=${product.id})}"
+								       class="btn btn-danger btn-sm delete-btn"
+								       data-confirm="¿Borrar producto?">
+								        Borrar
+								    </a>
 
-	                            </span>
+								</div>
 
 	                        </div>
 
@@ -131,22 +129,22 @@
 	
 	
 	
-	<div class="d-flex justify-content-center mt-4">
+	<div class="d-flex justify-content-center mt-4 mb-5">
 
 		<!-- previous -->
 		<a th:if="${products.hasPrevious()}" th:href="@{/products/list(page=${products.number-1},size=${products.size})}"
-			class="btn btn-outline-success me-2">Previous
+			class="btn btn-outline-success me-2">Previa
 		</a>
 
 		<!-- page info -->
-		<span class="align-self-center">Page
-			<span th:text="${products.number + 1}"></span>of
+		<span class="align-self-center">Página
+			<span th:text="${products.number + 1}"></span>de
 			<span th:text="${products.totalPages}"></span>
 		</span>
 
 		<!-- next -->
 		<a th:if="${products.hasNext()}" th:href="@{/products/list(page=${products.number+1},size=${products.size})}"
-			class="btn btn-outline-success ms-2">Next
+			class="btn btn-outline-success ms-2">Siguiente
 		</a>
 
 	</div>

@@ -41,11 +41,11 @@ public class Order {
 	@Size(min = 3, max = 20, message = "Order code must be between 3 and 20 characters")*/
 	private String code;
 	
-	@Future(message = "Shipping date must be in the future")
-	@NotNull(message = "Shipping date is required")
+	@Future(message = "La fecha de envío debe ser futura.")
+	@NotNull(message = "Se requiere fecha de envío")
 	private LocalDate shippingDate;//en lugar de localdatetime
 	
-	@PositiveOrZero(message = "Order total cannot be negative")
+	@PositiveOrZero(message = "El total del pedido no puede ser negativo.")
 	private double total;
 	
 	/*@NotEmpty(message = "Order status is required")
@@ -59,7 +59,7 @@ public class Order {
 	//relación con customer
     @ManyToOne(fetch=FetchType.EAGER)
     @JoinColumn(foreignKey = @ForeignKey (name = "customer_id"))
-    @NotNull(message = "Order must be associated with a customer")
+    @NotNull(message = "El pedido debe estar asociado con un cliente.")
     private Customer customer;
 
     //relación con líneas

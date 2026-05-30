@@ -13,34 +13,37 @@
 	
 	<div class="container mt-5">
 
-	    <h1>Customer Form</h1>
+	    <h1>Formulario del cliente</h1>
 	    <form th:action="@{/customers/new/submit}" th:object="${customer}" method="post" class="needs-validation" novalidate>
 
 	        <input type="hidden" th:field="*{id}">
 
-	        <div class="mb-3">
-	            <label>Name</label>
-	            <input type="text" th:field="*{name}" class="form-control" maxlength="30" minlength="2" th:errorclass="is-invalid" required>
-	        </div>
-			<div class="invalid-feedback"><span th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></span></div>
-
+			<div class="row">
 			
-	        <div class="mb-3">
-	            <label>Email</label>
-	            <input type="email" th:field="*{email}" class="form-control" maxlength="320" th:errorclass="is-invalid" required>
-	        </div>
-			<div class="invalid-feedback"><span th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></span></div>
-
+		        <div class="col-md-4 mb-3">
+		            <label>Nombre</label>
+		            <input type="text" th:field="*{name}" class="form-control" maxlength="30" minlength="2" th:errorclass="is-invalid" required>
+					<div class="invalid-feedback"><span th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></span></div>
+		        </div>
+	
+				
+				<div class="col-md-4 mb-3">
+					<label>Teléfono</label>
+					<input type="text" th:field="*{phone}" class="form-control" maxlength="9" minlength="9" th:errorclass="is-invalid">
+					<div class="invalid-feedback"><span th:if="${#fields.hasErrors('phone')}" th:errors="*{phone}"></span></div>
+				</div>
+				
+							
+		        <div class="col-md-4 mb-3">
+		            <label>Email</label>
+		            <input type="email" th:field="*{email}" class="form-control" maxlength="320" th:errorclass="is-invalid" required>
+					<div class="invalid-feedback"><span th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></span></div>
+		        </div>
+				
+			</div>
 			
-	        <div class="mb-3">
-	            <label>Phone</label>
-	            <input type="text" th:field="*{phone}" class="form-control" maxlength="9" minlength="9" th:errorclass="is-invalid">
-	        </div>
-			<div class="invalid-feedback"><span th:if="${#fields.hasErrors('phone')}" th:errors="*{phone}"></span></div>
-			
-			
-	        <button type="submit"name="submit" value="submit" class="btn btn-success">Save</button>
-	        <a th:href="@{/customers/list}" class="btn btn-secondary">Cancel</a>
+	        <button type="submit"name="submit" value="submit" class="btn btn-success">Guardar</button>
+	        <a th:href="@{/customers/list}" class="btn btn-secondary">Cancelar</a>
 	    </form>
 
 	</div>

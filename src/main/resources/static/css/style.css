@@ -1,6 +1,6 @@
 body {
     font-family: 'Poppins', sans-serif;
-    background-color: #f8f9fa;
+    background-color: #ebe2db;
 }
 
 
@@ -17,13 +17,13 @@ h1, h2, h3, h4, h5 {
 }
 
 
-/* Cards */
+/* Cards 
 .card {
     border: none;
     border-radius: 16px;
 	transform: translateY(-5px);
 	box-shadow: 0 10px 20px rgba(0,0,0,0.1);
-}
+}*/
 
 
 /* Buttons */
@@ -40,18 +40,13 @@ h1, h2, h3, h4, h5 {
 /* Footer */
 footer a:hover {
     color: #198754 !important;
-    transition: 0.2s;
-	position: fixed;
-	  left: 0;
-	  bottom: 0;
-	  width: 100%;
-	  
+    transition: 0.2s;  
 }
 
 /* Background image */
 .background {
     background-image: url('/images/backgrounds/eco-bg-2.jpg');
-    background-size: cover;       
+    background-size: cover;
     background-position: center;   
     background-repeat: no-repeat;
     min-height: 100vh;            
@@ -105,4 +100,42 @@ a{
 }
 .product-card:hover img {
     transform: scale(1.08);
+}
+
+/*para los botones que tiene de más el admin para los cruds, pero en formato móvil*/
+@media (max-width: 576px) {
+    .product-card .d-flex.gap-2.mt-auto {
+        flex-wrap: wrap;
+    }
+    .product-card .d-flex.gap-2.mt-auto > * {
+        flex: 1 1 100%;
+    }
+}
+
+/*sidebar*/
+.sidebar-sticky {
+    position: sticky;
+    top: 100px;
+    height: fit-content;
+}
+
+/*en formato móvil no es sticky, se pierde al hacer scroll*/
+@media (max-width: 767px) {
+    .sidebar-sticky {
+        position: static;
+        top: auto;
+        margin-bottom: 1rem;
+    }
+}
+
+/*textarea limitado*/
+.limited-textarea {
+    resize: vertical;
+    max-height: 210px;
+}
+
+.price-c {
+    color:#FFB07C;
+    font-weight: bold;
+    font-size: 1.1rem; /*para destacar algo más*/
 }

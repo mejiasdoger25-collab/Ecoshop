@@ -66,7 +66,7 @@ public class ProductController {
 	*/
 	
 	@GetMapping({"/", "/list"})
-	public String findAll( @RequestParam(defaultValue = "0") int page, @RequestParam(defaultValue = "8") int size, Model model) {
+	public String findAll( @RequestParam(defaultValue = "0") int page, @RequestParam(defaultValue = "12") int size, Model model) {
 
 	    Pageable pageable = PageRequest.of(page, size);
 	    Page<Product> productPage = productRepository.findAllPaged(pageable);
@@ -78,6 +78,11 @@ public class ProductController {
 	@PreAuthorize("hasRole('ADMIN')")
 	@GetMapping("/new")
 	public String createForm(Model model) {
+		
+		//para settear la category de new product de una forma default
+		Product product = new Product();
+	    product.setCategory(new Category());
+		
 		model.addAttribute("product", new Product());
 		model.addAttribute("categories", categoryService.findAll());
 		return "products/form";
@@ -90,9 +95,12 @@ public class ProductController {
             return "products/form";
 		}
 		
-		 Category category =categoryService.findById(product.getCategory().getId()).get();
-		 product.setCategory(category);
 		
+		//para evitar que pete si no le pones nada en el select
+		if(product.getCategory() != null && product.getCategory().getId() != null) {
+			 Category category =categoryService.findById(product.getCategory().getId()).get();
+			 product.setCategory(category);
+		}
 		service.save(product);
 		return "redirect:/products/list";
 	}

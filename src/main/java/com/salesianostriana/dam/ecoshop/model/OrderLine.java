@@ -33,13 +33,13 @@ public class OrderLine {
 	@EmbeddedId//para indicar que la pk ahora es cun campo compuesto
     private OrderLinePK id;
 	
-	@Min(value = 1, message = "Quantity must be at least 1")	
+	@Min(value = 1, message = "La cantidad debe ser al menos 1")	
 	private int amount;
 	
-	@Positive(message = "Unit price must be greater than 0")
+	@Positive(message = "El precio unitario debe ser mayor que 0")
 	private double unitPrice;
 	
-	@PositiveOrZero(message = "Subtotal cannot be negative")
+	@PositiveOrZero(message = "El subtotal no puede ser negativo.")
 	private double subTotal;
 	
 	//relación con Order

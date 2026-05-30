@@ -24,7 +24,19 @@ public class CartService extends BaseServiceImp<Product, Long, ProductRepository
     }
 
     public void addProduct(Product p) {
-        products.merge(p, 1, Integer::sum);
+
+    	//fixeo del +1 button en el line del cart, no detectaba el mismo id y creaba una nueva línea de pedido igual
+        Product existing = products.keySet()
+                .stream()
+                .filter(prod -> prod.getId().equals(p.getId()))
+                .findFirst()
+                .orElse(null);
+
+        if (existing != null) {
+            products.put(existing, products.get(existing) + 1);
+        } else {
+            products.put(p, 1);
+        }
     }
 
     public void removeProduct(Product p) {

@@ -8,27 +8,31 @@
 			
 	<div th:fragment="sidebar">
 	
-	    <div class="card shadow-sm position-sticky">
-	
-	        <div class="card-header bg-secondary text-light">
-	            Categorías
-	        </div>
-	
-	        <div class="list-group list-group-flush">
-	
-	            <a th:href="@{/products/list}"
-	                class="list-group-item list-group-item-action">Todos
-	            </a>
-	
-	            <a th:each="c : ${categories}"
-	                th:href="@{/products/category/{id}(id=${c.id})}"
-	                th:text="${c.name}"
-	                class="list-group-item list-group-item-action">
-	            </a>
-	
-	        </div>
-	
-	    </div>
+		<div class="sidebar-sticky">
+		
+		    <div class="card shadow-sm">
+		
+		        <div class="card-header bg-secondary text-light">
+		            Categorías
+		        </div>
+		
+		        <div class="list-group list-group-flush">
+		
+		            <a th:href="@{/products/list}"
+		                class="list-group-item list-group-item-action">Todos
+		            </a>
+		
+		            <a th:each="c : ${categories}"
+		                th:href="@{/products/category/{id}(id=${c.id})}"
+		                th:text="${c.name}"
+		                class="list-group-item list-group-item-action">
+		            </a>
+		
+		        </div>
+		
+		    </div>
+		
+		</div>
 	
 	</div>
 

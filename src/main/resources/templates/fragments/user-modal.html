@@ -11,13 +11,13 @@
         <div class="modal-content">
 
             <div class="modal-header bg-dark text-white">
-                <h5 class="modal-title">User information</h5>
+                <h5 class="modal-title">Información del usuario</h5>
                 <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
             </div>
 
             <div class="modal-body">
                 <div class="mb-3">
-                    <strong>Username:</strong>
+                    <strong>Nombre de usuario:</strong>
                     <span sec:authentication="name"></span>
                 </div>
 
@@ -29,12 +29,12 @@
 				</div>
 
                 <hr>
-                <p class="text-muted mb-0">Welcome to EcoShop</p>
+                <p class="text-muted mb-0">Bienvenido a EcoShop</p>
             </div>
 
             <div class="modal-footer"><!--cambiado para que Cross Site Request Forgery no pase por thymeleaf con th:action. así no crea la session late y crashea el render-->
-				<a th:href="@{/logout}" class="btn btn-danger">Log out</a><!--hecho con if porque el token no existe en todas las request, solo en algunas-->
-				<a th:href="@{/orders/list}" class="btn btn-info">My orders</a><!--es por esto que lo he hecho con un enlace en lugar de formulario, para evitar todo el tema de los tokens-->
+				<a th:href="@{/logout}" class="btn btn-danger">Finalizar la sesión</a><!--hecho con if porque el token no existe en todas las request, solo en algunas-->
+				<a th:href="@{/orders/list}" class="btn btn-info">Mis pedidos</a><!--es por esto que lo he hecho con un enlace en lugar de formulario, para evitar todo el tema de los tokens-->
             </div>
 
         </div>
