@@ -39,30 +39,30 @@ public class Product {
 	@GeneratedValue
 	private Long id;
 	
-	@NotEmpty(message = "Product name is required")
-	@Size(min = 5, max = 30, message = "Product name must be between 2 and 100 characters")
+	@NotEmpty(message = "Se requiere el nombre del producto.")
+	@Size(min = 5, max = 30, message = "El nombre del producto debe tener entre 5 y 30 caracteres.")
 	private String name;
 	
-	@Positive(message = "Price must be greater than 0")
+	@Positive(message = "El precio debe ser mayor que 0")
 	private double price;
 	
-	@PositiveOrZero(message = "Stock cannot be negative")
+	@PositiveOrZero(message = "El stock no puede ser negativo")
 	private int stock;
 	
-	@Min(value = 0, message = "Minimum stock cannot be negative")
+	@Min(value = 0, message = "El stock mínimo no puede ser negativo")
 	private int minimumStock;
 	
-	@NotEmpty(message = "Product origin is required")
-	@Size(max = 30, message = "Origin cannot exceed 80 characters")
+	@NotEmpty(message = "Se requiere información sobre el origen del producto.")
+	@Size(max = 40, message = "El origen no puede exceder los 40 caracteres.")
 	private String origin;
 	
 	private boolean ecoCertificate;
 	
-	@NotEmpty(message = "Description is required")
-	@Size(max = 900, message = "Description must be between 10 and 900 characters")
+	@NotEmpty(message = "Se requiere descripción")
+	@Size(max = 900, message = "La descripción no puede exceder los 900 caracteres.")
 	private String description;
 	
-	@Future(message = "Expiration date must be in the future")
+	@Future(message = "La fecha de caducidad debe ser futura.")
 	private LocalDate expirationDate;
 	
 	private String image;

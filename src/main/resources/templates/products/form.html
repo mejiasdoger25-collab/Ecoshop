@@ -24,22 +24,22 @@
 				        <div class="col-md-6">
 				            <label class="form-label">Nombre</label>
 				            <input for="name" type="text" th:field="*{name}" class="form-control" maxlength="15" th:errorclass="is-invalid" required>
+							<div class="invalid-feedback"><span th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></span></div>
 				        </div>
-						<div class="invalid-feedback"><span th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></span></div>
 	
 						
 				        <div class="col-md-3">
 				            <label class="form-label">Precio (€)</label>
 				            <input type="number" th:field="*{price}" class="form-control" step="0.01" maxlength="6" min="0.1" max="999.99" th:errorclass="is-invalid" required><!--6 porque hasta 999, la coma y dos decimales = 6-->
+							<div class="invalid-feedback"><span th:if="${#fields.hasErrors('price')}" th:errors="*{price}"></span></div>
 				        </div>
-						<div class="invalid-feedback"><span th:if="${#fields.hasErrors('price')}" th:errors="*{price}"></span></div>
 	
 						
 				        <div class="col-md-3">
 				            <label class="form-label">Stock</label>
 				            <input type="number" th:field="*{stock}" class="form-control" step="0.01" maxlength="6" min="0.1" max="999.99" th:errorclass="is-invalid" required>
+							<div class="invalid-feedback"><span th:if="${#fields.hasErrors('stock')}" th:errors="*{stock}"></span></div>
 				        </div>
-						<div class="invalid-feedback"><span th:if="${#fields.hasErrors('stock')}" th:errors="*{stock}"></span></div>
 						
 	
 						
@@ -72,9 +72,9 @@
 						
 				        <div class="col-md-6">
 							<label class="form-label">Origen</label>
-				            <input type="text" th:field="*{origin}" class="form-control" maxlength="30" th:errorclass="is-invalid" required>
+				            <input type="text" th:field="*{origin}" class="form-control" maxlength="40" th:errorclass="is-invalid" required>
+							<div class="invalid-feedback"><span th:if="${#fields.hasErrors('origin')}" th:errors="*{origin}"></span></div>
 				        </div>
-						<div class="invalid-feedback"><span th:if="${#fields.hasErrors('origin')}" th:errors="*{origin}"></span></div>
 												
 	
 						<div class="col-6 mb-3">
@@ -86,8 +86,8 @@
 						<div class="col-12">
 							<label class="form-label">Descrición</label>
 							<textarea type="text" th:field="*{description}" class="form-control limited-textarea" maxlength="900" th:errorclass="is-invalid"></textarea>
+							<div class="invalid-feedback"><span th:if="${#fields.hasErrors('description')}" th:errors="*{description}"></span></div>
 						</div>
-						<div class="invalid-feedback"><span th:if="${#fields.hasErrors('description')}" th:errors="*{description}"></span></div>
 
 						
 				        <div class="col-12">

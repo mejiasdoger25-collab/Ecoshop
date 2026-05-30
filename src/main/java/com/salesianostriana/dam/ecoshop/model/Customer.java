@@ -34,16 +34,16 @@ public class Customer {
 	@GeneratedValue
 	private Long id;
 	
-	@NotEmpty(message = "Customer name is required")
-	@Size(min = 2, max = 30, message = "Customer name must be between 2 and 100 characters")
+	@NotEmpty(message = "Se requiere el nombre del cliente.")
+	@Size(min = 2, max = 30, message = "El nombre del cliente debe tener entre 2 y 100 caracteres.")
 	private String name;
 	
-	@NotEmpty(message = "Email is required")
-	@Email(message = "Invalid email format")
-	@Size(max = 320, message = "Email cannot exceed 120 characters")
+	@NotEmpty(message = "Se requiere correo electrónico")
+	@Email(message = "Formato de correo electrónico no válido")
+	@Size(max = 320, message = "El correo electrónico no puede exceder los 120 caracteres.")
 	private String email;
 	
-	@NotEmpty(message = "Phone number is required")
+	@NotEmpty(message = "Se requiere número de teléfono.")
 	@Pattern( regexp = "^[0-9]{9}$")
 	private String phone;
 	

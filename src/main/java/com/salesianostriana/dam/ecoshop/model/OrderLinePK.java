@@ -22,11 +22,11 @@ import jakarta.validation.constraints.Future;
 @AllArgsConstructor
 public class OrderLinePK implements Serializable {
 
-	@NotNull(message = "Order ID is required")
+	@NotNull(message = "Se requiere el ID del pedido.")
     private Long orderId;
 	
-	@NotNull(message = "Line number is required")
-	@Min(value = 1, message = "Line number must be greater than 0")
+	@NotNull(message = "Se requiere el número de línea.")
+	@Min(value = 1, message = "El número de línea debe ser mayor que 0.")
     private Long lineNumber;
 
 }
