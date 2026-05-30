@@ -43,10 +43,8 @@
 
 	                    <!--image-->
 	                    <a th:href="@{/products/details/{id}(id=${product.id})}">
-	                        <img
-	                            th:src="${product.image != null ? product.image : 'https://upload.wikimedia.org/wikipedia/commons/thumb/6/65/No-Image-Placeholder.svg/1920px-No-Image-Placeholder.svg.png'}"
-	                            class="card-img-top card-image"
-	                            alt="Product image">
+	                        <img th:src="${product.image != null ? product.image : 'https://upload.wikimedia.org/wikipedia/commons/thumb/6/65/No-Image-Placeholder.svg/1920px-No-Image-Placeholder.svg.png'}"
+	                            class="card-img-top card-image" alt="Product image">
 	                    </a>
 
 	                    <div class="card-body d-flex flex-column">
@@ -70,21 +68,16 @@
 	                        <!--stock + eco-->
 	                        <div class="mb-2">
 
-	                            <span class="badge bg-primary">
-	                                Stock:
+	                            <span class="badge bg-primary">Stock:
 	                                <span th:text="${product.stock}"></span>
 	                            </span>
 
-	                            <span
-	                                th:if="${product.ecoCertificate}"
-	                                class="badge bg-success">
-	                                Eco certified
+	                            <span th:if="${product.ecoCertificate}"
+	                                class="badge bg-success"> Eco certified
 	                            </span>
 
-	                            <span
-	                                th:unless="${product.ecoCertificate}"
-	                                class="badge bg-secondary">
-	                                Standard
+	                            <span th:unless="${product.ecoCertificate}"
+	                                class="badge bg-secondary">Standard
 	                            </span>
 
 	                        </div>
@@ -97,32 +90,24 @@
 	                        <!--actions-->
 	                        <div class="d-flex gap-2 mt-auto">
 
-	                            <a
-	                                th:href="@{/products/details/{id}(id=${product.id})}"
-	                                class="btn btn-secondary btn-sm">
-	                                Details
+	                            <a th:href="@{/products/details/{id}(id=${product.id})}"
+	                                class="btn btn-secondary btn-sm">Details
 	                            </a>
 
-	                            <a
-	                                th:href="@{/cart/add/{id}(id=${product.id})}"
+	                            <a th:href="@{/cart/add/{id}(id=${product.id})}"
 	                                class="btn btn-success flex-fill">
-	                                <i class="bi bi-cart-plus"></i>
-	                                Add
+	                                <i class="bi bi-cart-plus"></i> Add
 	                            </a>
 
 	                            <span sec:authorize="hasRole('ADMIN')">
 
-	                                <a
-	                                    th:href="@{/products/edit/{id}(id=${product.id})}"
-	                                    class="btn btn-warning btn-sm">
-	                                    Edit
+	                                <a th:href="@{/products/edit/{id}(id=${product.id})}"
+	                                    class="btn btn-warning btn-sm"> Edit
 	                                </a>
 
-	                                <a
-	                                    th:href="@{/products/delete/{id}(id=${product.id})}"
+	                                <a th:href="@{/products/delete/{id}(id=${product.id})}"
 	                                    class="btn btn-danger btn-sm delete-btn"
-	                                    data-confirm="Delete product?">
-	                                    Delete
+	                                    data-confirm="Delete product?">Delete
 	                                </a>
 
 	                            </span>
@@ -148,32 +133,23 @@
 	
 	<div class="d-flex justify-content-center mt-4">
 
-										    <!-- previous -->
-										    <a th:if="${products.hasPrevious()}"
-											th:href="@{/products/category/{id}(
-											    id=${selectedCategory},
-											    page=${products.number-1},
-											    size=${products.size})}"
-										       class="btn btn-outline-success me-2">
-										        Previous
-										    </a>
+		<!-- previous -->
+		<a th:if="${products.hasPrevious()}" th:href="@{/products/list(page=${products.number-1},size=${products.size})}"
+			class="btn btn-outline-success me-2">Previous
+		</a>
 
-										    <!-- page info -->
-										    <span class="align-self-center">
-										        Page
-										        <span th:text="${products.number + 1}"></span>
-										        of
-										        <span th:text="${products.totalPages}"></span>
-										    </span>
+		<!-- page info -->
+		<span class="align-self-center">Page
+			<span th:text="${products.number + 1}"></span>of
+			<span th:text="${products.totalPages}"></span>
+		</span>
 
-										    <!-- next -->
-										    <a th:href="@{/products/category/{id}(
-											    id=${selectedCategory},
-											    page=${products.number+1},
-											    size=${products.size})}">
-										    </a>
+		<!-- next -->
+		<a th:if="${products.hasNext()}" th:href="@{/products/list(page=${products.number+1},size=${products.size})}"
+			class="btn btn-outline-success ms-2">Next
+		</a>
 
-										</div>
+	</div>
 
 </div>
 
