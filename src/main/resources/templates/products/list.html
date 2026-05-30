@@ -54,12 +54,6 @@
 	                            th:text="${product.name}">
 	                        </h5>
 
-	                        <!--origin-->
-	                        <p class="text-muted mb-2">
-	                            <i class="bi bi-geo-alt"></i>
-	                            <span th:text="${product.origin}"></span>
-	                        </p>
-
 	                        <!--price-->
 	                        <h4 class="text-success fw-bold mb-3">
 	                            <span th:text="${#numbers.formatDecimal(product.price,1,2)}"></span>€
@@ -84,14 +78,14 @@
 
 	                        <!--description-->
 	                        <p class="card-text text-muted flex-grow-1"
-	                           th:text="${#strings.abbreviate(product.description,55)}">
+	                           th:text="${#strings.abbreviate(product.description,48)}">
 	                        </p>
 
 	                        <!--actions-->
 	                        <div class="d-flex gap-2 mt-auto">
 
 	                            <a th:href="@{/products/details/{id}(id=${product.id})}"
-	                                class="btn btn-secondary btn-sm">Detalles
+	                                class="btn btn-secondary btn-sm d-flex align-items-center justify-content-center">Detalles
 	                            </a>
 
 	                            <a th:href="@{/cart/add/{id}(id=${product.id})}"
@@ -99,18 +93,20 @@
 	                                <i class="bi bi-cart-plus"></i> Añadir
 	                            </a>
 
-	                            <span sec:authorize="hasRole('ADMIN')">
+								<div sec:authorize="hasRole('ADMIN')" class="d-flex flex-column gap-1">
 
-	                                <a th:href="@{/products/edit/{id}(id=${product.id})}"
-	                                    class="btn btn-warning btn-sm"> Editar
-	                                </a>
+								    <a th:href="@{/products/edit/{id}(id=${product.id})}"
+								       class="btn btn-warning btn-sm">
+								        Editar
+								    </a>
 
-	                                <a th:href="@{/products/delete/{id}(id=${product.id})}"
-	                                    class="btn btn-danger btn-sm delete-btn"
-	                                    data-confirm="Delete product?">Borrar
-	                                </a>
+								    <a th:href="@{/products/delete/{id}(id=${product.id})}"
+								       class="btn btn-danger btn-sm delete-btn"
+								       data-confirm="¿Borrar producto?">
+								        Borrar
+								    </a>
 
-	                            </span>
+								</div>
 
 	                        </div>
 

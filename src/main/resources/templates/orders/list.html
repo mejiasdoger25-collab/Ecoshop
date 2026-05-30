@@ -54,7 +54,7 @@
 					
 		            <td sec:authorize="hasRole('ADMIN')">
 		                <a th:href="@{/orders/edit/{id}(id=${order.id})}" class="btn btn-warning btn-sm">Editar</a>
-		                <a th:href="@{/orders/delete/{id}(id=${order.id})}" class="btn btn-danger btn-sm delete-btn" data-confirm="¿Delete product?">Borrar</a><!--con js porque Rafa no quiere onclick ;V-->
+		                <a th:href="@{/orders/delete/{id}(id=${order.id})}" class="btn btn-danger btn-sm delete-btn" data-confirm="¿Borrar pedido?">Borrar</a><!--con js porque Rafa no quiere onclick ;V-->
 		            </td>
 		        </tr>
 		        </tbody>
