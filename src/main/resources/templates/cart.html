@@ -80,9 +80,15 @@
                 </table>
             </div>
 
+			
+				
+			</div>
+			
             <div class="row mt-4">
 				<div class="col-12">
 
+					<h4>Total: <strong th:text="${#numbers.formatDecimal(total, 1, 2)} + ' €'"></strong></h4>
+					
 				    <div class="d-flex flex-column flex-md-row justify-content-md-end gap-2">
 
 				        <a th:href="@{/products/list}" class="btn btn-secondary">
