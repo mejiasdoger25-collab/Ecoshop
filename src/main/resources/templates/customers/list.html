@@ -44,8 +44,10 @@
 		            <td th:text="${customer.phone}"></td>
 					
 		            <td sec:authorize="hasRole('ADMIN')">
-		                <a th:href="@{/customers/edit/{id}(id=${customer.id})}" class="btn btn-warning btn-sm"> Editar</a>
-		                <a th:href="@{/customers/delete/{id}(id=${customer.id})}" class="btn btn-danger btn-sm delete-btn" data-confirm="¿Borrar cliente?">Borrar</a><!--con js porque Rafa no quiere onclick ;V-->
+						<div class="d-flex flex-column gap-1 align-items-start">
+			                <a th:href="@{/customers/edit/{id}(id=${customer.id})}" class="btn btn-warning btn-sm"> Editar</a>
+			                <a th:href="@{/customers/delete/{id}(id=${customer.id})}" class="btn btn-danger btn-sm delete-btn" data-confirm="¿Borrar cliente?">Borrar</a><!--con js porque Rafa no quiere onclick ;V-->
+						</div>
 		            </td>
 		        </tr>
 		        </tbody>
