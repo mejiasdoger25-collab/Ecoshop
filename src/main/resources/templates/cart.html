@@ -5,10 +5,12 @@
 <head th:replace="~{fragments/head :: head}"></head>
 
 <body class="d-flex flex-column min-vh-100">
+	
     <div th:replace="~{fragments/navbar :: navbar}"></div>
 
     <div class="container mt-5">
-        <h2 class="mb-4">Your cart</h2>
+		
+        <h1 class="mb-4">Your cart</h1>
 
 		<!-- Empty message -->
 		<div class="card bg-sinfo shadow-sm p-5 text-center"  th:if="${products == null or products.isEmpty()}">
@@ -16,7 +18,7 @@
 			<h4 class="card-title">Your cart is empty</h4>
 			<p class="mb-3">You don't have any product added yet</p>
 			<a th:href="@{/}" class="btn btn-secondary">
-				<i class="bi bi-arrow-left me-1"></i>Back to products
+				<i class="bi bi-box-arrow-left"></i></i> Back to products
 			</a>
 		</div>
 

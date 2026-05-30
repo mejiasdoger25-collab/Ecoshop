@@ -23,7 +23,7 @@
 	<div class="row">
 
 	    <!--SIDEBAR-->
-	    <div class="col-lg-2 col-md-3 mb-4 align-self-start">
+	    <div class="col-lg-2 col-md-3 mb-4 sidebar-sticky">
 
 	        <div
 	            th:replace="~{fragments/sidebar :: sidebar}">
@@ -131,7 +131,7 @@
 	
 	
 	
-	<div class="d-flex justify-content-center mt-4">
+	<div class="d-flex justify-content-center mt-4 mb-5">
 
 		<!-- previous -->
 		<a th:if="${products.hasPrevious()}" th:href="@{/products/list(page=${products.number-1},size=${products.size})}"

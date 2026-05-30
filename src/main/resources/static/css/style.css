@@ -17,13 +17,13 @@ h1, h2, h3, h4, h5 {
 }
 
 
-/* Cards */
+/* Cards 
 .card {
     border: none;
     border-radius: 16px;
 	transform: translateY(-5px);
 	box-shadow: 0 10px 20px rgba(0,0,0,0.1);
-}
+}*/
 
 
 /* Buttons */
@@ -40,18 +40,13 @@ h1, h2, h3, h4, h5 {
 /* Footer */
 footer a:hover {
     color: #198754 !important;
-    transition: 0.2s;
-	position: fixed;
-	  left: 0;
-	  bottom: 0;
-	  width: 100%;
-	  
+    transition: 0.2s;  
 }
 
 /* Background image */
 .background {
     background-image: url('/images/backgrounds/eco-bg-2.jpg');
-    background-size: cover;       
+    background-size: cover;
     background-position: center;   
     background-repeat: no-repeat;
     min-height: 100vh;            
@@ -105,4 +100,13 @@ a{
 }
 .product-card:hover img {
     transform: scale(1.08);
+}
+
+
+
+/*sidebar*/
+.sidebar-sticky {
+    position: sticky;
+    top: 100px;
+    height: fit-content;
 }
