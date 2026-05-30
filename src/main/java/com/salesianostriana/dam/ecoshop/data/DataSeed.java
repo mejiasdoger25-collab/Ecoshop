@@ -326,6 +326,134 @@ public class DataSeed implements CommandLineRunner {
                         .expirationDate(LocalDate.now().plusYears(2))
                         .image("https://panaldemiel.es/wp-content/uploads/2025/05/Miel_ecologica_al_por_mayor.webp")    // Miel / tarro de miel
                         .category(food)
+                        .build(),    
+                 
+                Product.builder()
+                        .name("Salsa de Tomate Artesanal")
+                        .price(4.95)
+                        .stock(60)
+                        .minimumStock(8)
+                        .origin("Italia")
+                        .ecoCertificate(true)
+                        .description("""
+                                Salsa elaborada con tomates seleccionados y recetas tradicionales.
+                                Ideal para pasta, pizzas y platos mediterráneos.
+                                """)
+                        .expirationDate(LocalDate.now().plusMonths(18))
+                        .image("https://www.aceitesdeolivadeespana.com/wp-content/uploads/2021/05/Salsa-de-tomate-casera.jpg")
+                        .category(food)
+                        .build(),
+                        
+               Product.builder()
+                        .name("Monitor UltraWide 34 Pulgadas")
+                        .price(399.99)
+                        .stock(12)
+                        .minimumStock(2)
+                        .origin("Corea del Sur")
+                        .ecoCertificate(false)
+                        .description("""
+                                Monitor panorámico de alta resolución ideal para productividad y multitarea.
+                                Incluye conexiones HDMI y DisplayPort.
+                                """)
+                        .expirationDate(null)
+                        .image("https://shopee.sg/blog/wp-content/uploads/2022/10/caspar-camille-rubin-0qvBNep1Y04-unsplash-1-e1664781436384.jpg")
+                        .category(tech)
+                        .build(),
+                        
+              Product.builder()
+                        .name("Chaqueta Vaquera")
+                        .price(59.95)
+                        .stock(22)
+                        .minimumStock(4)
+                        .origin("Turquía")
+                        .ecoCertificate(false)
+                        .description("""
+                                Chaqueta vaquera clásica confeccionada con tejido resistente.
+                                Una prenda versátil para cualquier temporada.
+                                """)
+                        .expirationDate(null)
+                        .image("https://cdn.create.vista.com/api/media/small/251710992/stock-photo-pretty-beautiful-young-woman-blonde-in-a-black-dress-in-a-long-denim-jacket-with")
+                        .category(fashion)
+                        .build(),
+                        
+              Product.builder()
+                        .name("Gafas de Sol Polarizadas")
+                        .price(44.90)
+                        .stock(35)
+                        .minimumStock(5)
+                        .origin("España")
+                        .ecoCertificate(false)
+                        .description("""
+                                Gafas con protección UV y lentes polarizadas.
+                                Diseñadas para ofrecer comodidad y protección visual.
+                                """)
+                        .expirationDate(null)
+                        .image("https://lh6.googleusercontent.com/proxy/k9Q8J3Cj2wTtgnjeAU6kqj-CYYOfQgHJLOKzYHUtiMTiAItky3jF29TM8lhher-hOMafHmK4lHBGTp6VUpzYGz39mHet0XyRqRgQt532vMV9bF5njooSQV5pOJTIVJKaKzimTQBqF7-WlBgPwME")
+                        .category(fashion)
+                        .build(),
+                        
+              Product.builder()
+                        .name("Robot Aspirador")
+                        .price(229.99)
+                        .stock(14)
+                        .minimumStock(2)
+                        .origin("China")
+                        .ecoCertificate(false)
+                        .description("""
+                                Robot aspirador programable con sensores inteligentes de navegación.
+                                Facilita la limpieza diaria del hogar.
+                                """)
+                        .expirationDate(null)
+                        .image("https://www.lacasadelelectrodomestico.com/public/storage/producto/174276/xiaowa-vacuum-cleaner-lite-c102-robot-aspirador-programable-0026314-600px.jpg")
+                        .category(home)
+                        .build(),
+                        
+              Product.builder()
+                        .name("Estantería de Bambú")
+                        .price(79.90)
+                        .stock(18)
+                        .minimumStock(3)
+                        .origin("Vietnam")
+                        .ecoCertificate(true)
+                        .description("""
+                                Estantería fabricada con bambú resistente y de crecimiento sostenible.
+                                Perfecta para organizar libros, plantas y decoración.
+                                """)
+                        .expirationDate(null)
+                        .image("https://st3.depositphotos.com/22220764/35742/i/450/depositphotos_357420464-stock-photo-modern-composition-living-room-design.jpg")
+                        .category(home)
+                        .build(),
+                        
+               Product.builder()
+                        .name("Crema de Cacahuete Natural")
+                        .price(6.50)
+                        .stock(45)
+                        .minimumStock(6)
+                        .origin("España")
+                        .ecoCertificate(false)
+                        .description("""
+                                Crema elaborada exclusivamente con cacahuetes tostados.
+                                Rica en proteínas y perfecta para desayunos y meriendas.
+                                """)
+                        .expirationDate(LocalDate.now().plusMonths(10))
+                        .image("https://st2.depositphotos.com/1007298/11090/i/450/depositphotos_110905796-stock-photo-creamy-peanut-butter-and-peanuts.jpg")
+                        .category(food)
+                        .build(),
+                        
+               Product.builder()
+                        .name("Reloj de Madera")
+                        .price(89.99)
+                        .stock(15)
+                        .minimumStock(3)
+                        .origin("Canadá")
+                        .ecoCertificate(true)
+                        .description("""
+                                Reloj fabricado con madera sostenible y correa ajustable.
+                                Combina diseño elegante y materiales respetuosos con el medio ambiente.
+                                """)
+                        .expirationDate(null)
+                        .image("https://i.pinimg.com/736x/b0/4d/23/b04d23d5d4d680f9a520d57b7bb5d3be.jpg")
+                        .category(fashion)
                         .build()
         );
 

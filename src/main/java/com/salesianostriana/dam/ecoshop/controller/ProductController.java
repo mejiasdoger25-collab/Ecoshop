@@ -66,7 +66,7 @@ public class ProductController {
 	*/
 	
 	@GetMapping({"/", "/list"})
-	public String findAll( @RequestParam(defaultValue = "0") int page, @RequestParam(defaultValue = "8") int size, Model model) {
+	public String findAll( @RequestParam(defaultValue = "0") int page, @RequestParam(defaultValue = "12") int size, Model model) {
 
 	    Pageable pageable = PageRequest.of(page, size);
 	    Page<Product> productPage = productRepository.findAllPaged(pageable);
