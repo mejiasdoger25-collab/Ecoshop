@@ -55,8 +55,10 @@
 			            <td sec:authorize="hasRole('ADMIN')" th:text="${order.customer.name}"></td>
 						
 			            <td sec:authorize="hasRole('ADMIN')">
-			                <a th:href="@{/orders/edit/{id}(id=${order.id})}" class="btn btn-warning btn-sm">Editar</a>
-			                <a th:href="@{/orders/delete/{id}(id=${order.id})}" class="btn btn-danger btn-sm delete-btn" data-confirm="¿Borrar pedido?">Borrar</a><!--con js porque Rafa no quiere onclick ;V-->
+							<div class="d-flex flex-column gap-1 align-items-start">
+				                <a th:href="@{/orders/edit/{id}(id=${order.id})}" class="btn btn-warning btn-sm">Editar</a>
+				                <a th:href="@{/orders/delete/{id}(id=${order.id})}" class="btn btn-danger btn-sm delete-btn" data-confirm="¿Borrar pedido?">Borrar</a><!--con js porque Rafa no quiere onclick ;V-->
+							</div>
 			            </td>
 			        </tr>
 			        </tbody>

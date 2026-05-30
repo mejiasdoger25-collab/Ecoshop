@@ -47,7 +47,7 @@
 				    <label sec:authorize="hasRole('ADMIN')">Cliente</label>
 				    <!--ADMIN-->
 				    <div th:if="${isAdmin}">
-				        <select th:field="*{customer}" class="form-select">
+				        <select th:field="*{customer}" class="form-select" required>
 				            <option value="">Seleccione cliente</option>
 				            <option
 				                    th:each="customer : ${customers}"
