@@ -110,3 +110,11 @@ a{
     top: 100px;
     height: fit-content;
 }
+
+
+
+/*textarea limitado*/
+.limited-textarea {
+    resize: vertical;
+    max-height: 150px;
+}

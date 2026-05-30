@@ -85,7 +85,7 @@
 						
 						<div class="col-12">
 							<label class="form-label">Descrición</label>
-							<textarea type="text" th:field="*{description}" class="form-control" maxlength="100" th:errorclass="is-invalid"></textarea>
+							<textarea type="text" th:field="*{description}" class="form-control limited-textarea" maxlength="100" th:errorclass="is-invalid"></textarea>
 						</div>
 						<div class="invalid-feedback"><span th:if="${#fields.hasErrors('description')}" th:errors="*{description}"></span></div>
 
