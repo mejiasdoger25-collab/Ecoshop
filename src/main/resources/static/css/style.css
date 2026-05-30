@@ -1,6 +1,6 @@
 body {
     font-family: 'Poppins', sans-serif;
-    background-color: #f8f9fa;
+    background-color: #ebe2db;
 }
 
 
@@ -132,4 +132,10 @@ a{
 .limited-textarea {
     resize: vertical;
     max-height: 210px;
+}
+
+.price-c {
+    color:#FFB07C;
+    font-weight: bold;
+    font-size: 1.1rem; /*para destacar algo más*/
 }

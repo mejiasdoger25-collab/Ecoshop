@@ -39,7 +39,7 @@
 	            <div class="col-6 col-sm-6 col-md-6 col-lg-4 col-xl-3"
 	                 th:each="product : ${products.content}">
 
-	                <div class="card product-card h-100 shadow-sm border-0">
+	                <div class="card product-card h-100 shadow border-0">
 
 	                    <!--image, antes hecho != null, pero si ponías mal url =! null -> bien -> no cargaba. ahora detecta el error y si es así, carga default wiki img-->
 						<a th:href="@{/products/details/{id}(id=${product.id})}">
@@ -55,7 +55,7 @@
 	                        </h5>
 
 	                        <!--price-->
-	                        <h4 class="text-success fw-bold mb-3">
+	                        <h4 class=" fw-bold mb-3 price-c">
 	                            <span th:text="${#numbers.formatDecimal(product.price,1,2)}"></span>€
 	                        </h4>
 
@@ -67,11 +67,11 @@
 	                            </span>
 
 	                            <span th:if="${product.ecoCertificate}"
-	                                class="badge bg-success"> Certificado ecológico
+	                                class="badge bg-success bg-opacity-25 text-success fw-semibold"> Eco
 	                            </span>
 
 	                            <span th:unless="${product.ecoCertificate}"
-	                                class="badge bg-secondary">No certificado ecológico
+	                                class="badge bg-danger bg-opacity-25 text-danger fw-semibold"> No eco
 	                            </span>
 
 	                        </div>
@@ -84,14 +84,16 @@
 	                        <!--actions-->
 	                        <div class="d-flex gap-2 mt-auto">
 
+								<a th:href="@{/cart/add/{id}(id=${product.id})}"
+									class="btn btn-success flex-fill">
+									<i class="bi bi-cart-plus"></i> Añadir
+								</a>
+								
 	                            <a th:href="@{/products/details/{id}(id=${product.id})}"
-	                                class="btn btn-secondary btn-sm d-flex align-items-center justify-content-center">Detalles
+	                                class="btn btn-outline-secondary btn-sm d-flex align-items-center justify-content-center">Detalles
 	                            </a>
 
-	                            <a th:href="@{/cart/add/{id}(id=${product.id})}"
-	                                class="btn btn-success flex-fill">
-	                                <i class="bi bi-cart-plus"></i> Añadir
-	                            </a>
+	                            
 
 								<div sec:authorize="hasRole('ADMIN')" class="d-flex flex-column gap-1">
 
