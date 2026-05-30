@@ -41,12 +41,12 @@
 
 	                <div class="card product-card h-100 shadow-sm border-0">
 
-	                    <!--image-->
-	                    <a th:href="@{/products/details/{id}(id=${product.id})}">
-	                        <img th:src="${product.image != null ? product.image : 'https://upload.wikimedia.org/wikipedia/commons/thumb/6/65/No-Image-Placeholder.svg/1920px-No-Image-Placeholder.svg.png'}"
-	                            class="card-img-top card-image" alt="Product image">
-	                    </a>
-
+	                    <!--image, antes hecho != null, pero si ponías mal url =! null -> bien -> no cargaba. ahora detecta el error y si es así, carga default wiki img-->
+						<a th:href="@{/products/details/{id}(id=${product.id})}">
+							<img th:src="${product.image}" class="card-img-top card-image" alt="Product image"
+							     onerror="this.onerror=null; this.src='https://upload.wikimedia.org/wikipedia/commons/thumb/6/65/No-Image-Placeholder.svg/1920px-No-Image-Placeholder.svg.png';">
+						</a>
+							 
 	                    <div class="card-body d-flex flex-column">
 
 	                        <!--name-->
