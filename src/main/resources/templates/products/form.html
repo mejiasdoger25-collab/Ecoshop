@@ -42,6 +42,34 @@
 						<div class="invalid-feedback"><span th:if="${#fields.hasErrors('stock')}" th:errors="*{stock}"></span></div>
 						
 	
+						
+						<div class="mb-3">
+						    <label class="form-label">
+						        Categoría
+						    </label>
+
+						    <select
+						        th:field="*{category}"
+						        class="form-select">
+
+						        <option value="">
+						            Selecciona categoría
+						        </option>
+
+						        <option
+						            th:each="c : ${categories}"
+						            th:value="${c.id}"
+						            th:text="${c.name}">
+						        </option>
+
+						    </select>
+						</div>
+						
+						
+						
+						
+						
+						
 				        <div class="col-md-6">
 							<label class="form-label">Origin</label>
 				            <input type="text" th:field="*{origin}" class="form-control" maxlength="30" th:errorclass="is-invalid" required>

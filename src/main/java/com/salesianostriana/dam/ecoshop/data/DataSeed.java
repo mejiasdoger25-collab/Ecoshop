@@ -5,7 +5,9 @@ import com.salesianostriana.dam.ecoshop.repository.ProductRepository;
 import com.salesianostriana.dam.ecoshop.security.user.Role;
 import com.salesianostriana.dam.ecoshop.security.user.User;
 import com.salesianostriana.dam.ecoshop.security.user.UserRepository;
+import com.salesianostriana.dam.ecoshop.model.Category;
 import com.salesianostriana.dam.ecoshop.model.Customer;
+import com.salesianostriana.dam.ecoshop.repository.CategoryRepository;
 import com.salesianostriana.dam.ecoshop.repository.CustomerRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.boot.CommandLineRunner;
@@ -24,16 +26,22 @@ public class DataSeed implements CommandLineRunner {
     private final UserRepository userRepository;
     private final CustomerRepository customerRepository;
     private final PasswordEncoder passwordEncoder;
+    private final CategoryRepository categoryRepository;
 
     @Override
     public void run(String ... args) throws Exception {
 
-        //users & customers
+    	//users & customers
         if (userRepository.count() == 0) {
             createDefaultUsersAndCustomers();
         }
-        
-        //products
+
+        //categories 
+        if (categoryRepository.count() == 0) {
+            createDefaultCategories();
+        }
+
+        //products 
         if (productRepository.count() == 0) {
             createDefaultProducts();
         }
@@ -115,6 +123,18 @@ public class DataSeed implements CommandLineRunner {
   //products
     private void createDefaultProducts() {
         
+    	Category food =
+    		    categoryRepository.findByName("Alimentación").get();
+
+    		Category tech =
+    		    categoryRepository.findByName("Tecnología").get();
+
+    		Category fashion =
+    		    categoryRepository.findByName("Moda").get();
+
+    		Category home =
+    		    categoryRepository.findByName("Hogar").get();
+    	
         List<Product> products = List.of(
                 Product.builder()
                         .name("Naranja")
@@ -129,6 +149,7 @@ public class DataSeed implements CommandLineRunner {
                                 """)
                         .expirationDate(LocalDate.now().plusWeeks(1))
                         .image("https://picsum.photos/id/1080/600/400")   // Naranjas
+                        .category(food)
                         .build(),
 
                 Product.builder()
@@ -144,6 +165,7 @@ public class DataSeed implements CommandLineRunner {
                                 """)
                         .expirationDate(null)
                         .image("https://picsum.photos/id/106/600/400")    // Botella / agua
+                        .category(home)
                         .build(),
 
                 Product.builder()
@@ -159,6 +181,7 @@ public class DataSeed implements CommandLineRunner {
                                 """)
                         .expirationDate(null)
                         .image("https://picsum.photos/id/201/600/400")    // Teléfono / móvil
+                        .category(tech)
                         .build(),
 
                 Product.builder()
@@ -174,6 +197,7 @@ public class DataSeed implements CommandLineRunner {
                                 """)
                         .expirationDate(LocalDate.now().plusWeeks(2))
                         .image("https://picsum.photos/id/1080/600/400")   // Manzanas (mismo que naranja, se ve bien)
+                        .category(food)
                         .build(),
 
                 Product.builder()
@@ -189,6 +213,7 @@ public class DataSeed implements CommandLineRunner {
                                 """)
                         .expirationDate(null)
                         .image("https://picsum.photos/id/1060/600/400")   // Camiseta / ropa
+                        .category(fashion)
                         .build(),
 
                 Product.builder()
@@ -204,6 +229,7 @@ public class DataSeed implements CommandLineRunner {
                                 """)
                         .expirationDate(null)
                         .image("https://picsum.photos/id/367/600/400")    // Auriculares
+                        .category(tech)
                         .build(),
 
                 Product.builder()
@@ -219,6 +245,7 @@ public class DataSeed implements CommandLineRunner {
                                 """)
                         .expirationDate(LocalDate.now().plusDays(10))
                         .image("https://picsum.photos/id/292/600/400")    // Leche / vaso de leche
+                        .category(food)
                         .build(),
 
                 Product.builder()
@@ -234,6 +261,7 @@ public class DataSeed implements CommandLineRunner {
                                 """)
                         .expirationDate(LocalDate.now().plusMonths(8))
                         .image("https://picsum.photos/id/292/600/400")    // Chocolate
+                        .category(food)
                         .build(),
 
                 Product.builder()
@@ -249,6 +277,7 @@ public class DataSeed implements CommandLineRunner {
                                 """)
                         .expirationDate(LocalDate.now().plusMonths(18))
                         .image("https://picsum.photos/id/1015/600/400")   // Detergente / limpieza
+                        .category(home)
                         .build(),
 
                 Product.builder()
@@ -264,6 +293,7 @@ public class DataSeed implements CommandLineRunner {
                                 """)
                         .expirationDate(LocalDate.now().plusMonths(12))
                         .image("https://picsum.photos/id/292/600/400")    // Café
+                        .category(food)
                         .build(),
 
                 Product.builder()
@@ -279,6 +309,7 @@ public class DataSeed implements CommandLineRunner {
                                 """)
                         .expirationDate(null)
                         .image("https://picsum.photos/id/180/600/400")    // Portátil / laptop
+                        .category(tech)
                         .build(),
 
                 Product.builder()
@@ -294,10 +325,42 @@ public class DataSeed implements CommandLineRunner {
                                 """)
                         .expirationDate(LocalDate.now().plusYears(2))
                         .image("https://picsum.photos/id/870/600/400")    // Miel / tarro de miel
+                        .category(food)
                         .build()
         );
 
         productRepository.saveAll(products);
+    }
+    
+    
+    
+    
+    //default categories
+    private void createDefaultCategories() {
+
+        categoryRepository.save(
+            Category.builder()
+                .name("Alimentación")
+                .build()
+        );
+
+        categoryRepository.save(
+            Category.builder()
+                .name("Tecnología")
+                .build()
+        );
+
+        categoryRepository.save(
+            Category.builder()
+                .name("Moda")
+                .build()
+        );
+
+        categoryRepository.save(
+            Category.builder()
+                .name("Hogar")
+                .build()
+        );
     }
     
 }

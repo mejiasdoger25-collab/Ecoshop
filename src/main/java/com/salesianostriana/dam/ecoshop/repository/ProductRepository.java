@@ -12,6 +12,7 @@ import org.springframework.stereotype.Repository;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
+import com.salesianostriana.dam.ecoshop.model.Category;
 import com.salesianostriana.dam.ecoshop.model.Product;
 import com.salesianostriana.dam.ecoshop.security.user.User;
 
@@ -46,6 +47,10 @@ public interface ProductRepository
     List<Product> findTop12ByEcoCertificateTrueOrderByStockDesc(); //eco-p w/ more stock
     
     
+    //para las categorías
+    List<Product> findByCategory(Category category);
+    List<Product> findByCategory_NameIgnoreCase(String name);
+    Page<Product> findByCategory_Id(Long id, Pageable pageable);
     
     
     //consultas manuales

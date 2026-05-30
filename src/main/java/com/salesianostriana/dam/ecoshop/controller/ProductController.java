@@ -1,5 +1,6 @@
 package com.salesianostriana.dam.ecoshop.controller;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -12,8 +13,10 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.salesianostriana.dam.ecoshop.model.Category;
 import com.salesianostriana.dam.ecoshop.model.Product;
 import com.salesianostriana.dam.ecoshop.repository.ProductRepository;
+import com.salesianostriana.dam.ecoshop.service.CategoryService;
 import com.salesianostriana.dam.ecoshop.service.ProductService;
 
 import org.springframework.data.domain.Page;
@@ -33,6 +36,14 @@ public class ProductController {
 
 	private final ProductService service;
 	private final ProductRepository productRepository;
+	private final CategoryService categoryService;
+	
+	
+	//para renderizar las categories
+	@ModelAttribute("categories")
+	public List<Category> categories() {
+	    return categoryService.findAll();
+	}
 	
 	/*
 	@GetMapping({"/", "/home"})
@@ -68,6 +79,7 @@ public class ProductController {
 	@GetMapping("/new")
 	public String createForm(Model model) {
 		model.addAttribute("product", new Product());
+		model.addAttribute("categories", categoryService.findAll());
 		return "products/form";
 	}
 	
@@ -77,6 +89,10 @@ public class ProductController {
 		if (bindingResult.hasErrors()) {
             return "products/form";
 		}
+		
+		 Category category =categoryService.findById(product.getCategory().getId()).get();
+		 product.setCategory(category);
+		
 		service.save(product);
 		return "redirect:/products/list";
 	}
@@ -92,6 +108,7 @@ public class ProductController {
 		
 		Product product = service.findById(id).orElse(null);
 		model.addAttribute("product", product);
+		model.addAttribute("categories", categoryService.findAll());
 		
 		//se reutiliza el form de create new products
 		return "products/form";
@@ -126,4 +143,18 @@ public class ProductController {
 	    return "products/details";
 	}
 	
+	
+	
+	
+	//reutilizado para las categories
+	@GetMapping("/category/{id}")
+	public String productsByCategory(@PathVariable Long id, Pageable pageable, Model model) {
+		Page<Product> page =
+			    productRepository.findByCategory_Id(id,pageable);
+		
+		model.addAttribute("products", page);
+		model.addAttribute("selectedCategory", id);
+		
+		return "products/list";
+	}
 }
