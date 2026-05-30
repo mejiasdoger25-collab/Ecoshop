@@ -81,22 +81,28 @@
             </div>
 
             <div class="row mt-4">
-                <div class="col-md-6">
-                    <h4>Total: <strong th:text="${#numbers.formatDecimal(total, 1, 2)} + ' €'"></strong></h4>
-                </div>
-				
-                <div class="col-md-6 text-end">
-                    <a href="/products/list" class="btn btn-secondary me-2">Continuar comprando</a>
-                    <form th:action="@{/cart/checkout}" method="post" style="display: inline;">
-                        <button type="submit" class="btn btn-success">Procesar pedido</button>
-                    </form>
-					
-					<!--este es el "tercer nivel" de borrado, es decir, el primero es a nivel de cantidad, el segundo es a nivel de línea de pedido y este es a nivel global, es decir, de todo el carrito-->
-					<a th:href="@{/cart/clear}" class="btn btn-danger">
-						<i class="bi bi-trash3"></i>Vaciar carrito
-					</a>
-					
-                </div>
+				<div class="col-12">
+
+				    <div class="d-flex flex-column flex-md-row justify-content-md-end gap-2">
+
+				        <a th:href="@{/products/list}" class="btn btn-secondary">
+				            Continuar comprando
+				        </a>
+
+				        <form th:action="@{/cart/checkout}" method="post">
+				            <button type="submit" class="btn btn-success w-100">
+				                Procesar pedido
+				            </button>
+				        </form>
+
+				        <a th:href="@{/cart/clear}" class="btn btn-danger">
+				            <i class="bi bi-trash3"></i>
+				            Vaciar carrito
+				        </a>
+
+				    </div>
+
+				</div>
             </div>
         </div>
     </div>

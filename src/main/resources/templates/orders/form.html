@@ -26,9 +26,9 @@
 			<div class="invalid-feedback"><span th:if="${#fields.hasErrors('code')}" th:errors="*{code}"></span></div>
 			-->
 
-			<div class="row">
+			<div class="row g-3">
 			
-		        <div class="col-md-6 mb-3">
+		        <div class="col-6 col-md-4 mb-3">
 		            <label>Fecha</label>
 					<input type="date" th:name="shippingDate" th:value="${#temporals.format(order.shippingDate, 'yyyy-MM-dd')}" th:errorclass="is-invalid"
 						class="form-control" required>	
@@ -36,14 +36,14 @@
 				</div>
 	
 				
-		        <div class="col-md-6 mb-3">
+		        <div class="col-6 col-md-4 mb-3">
 		            <label>Total</label>
 		            <input type="number" step="0.01" th:field="*{total}" th:value="${#numbers.formatDecimal(order.total, 1, 2)}" class="form-control" maxlength="6" min="0.1" max="999.99">
 					<div class="invalid-feedback"><span th:if="${#fields.hasErrors('total')}" th:errors="*{total}"></span></div>
 		        </div>
 	
 				
-				<div class="mb-3">
+				<div class="col-12 col-md-4 mb-3">
 				    <label sec:authorize="hasRole('ADMIN')">Cliente</label>
 				    <!--ADMIN-->
 				    <div th:if="${isAdmin}">

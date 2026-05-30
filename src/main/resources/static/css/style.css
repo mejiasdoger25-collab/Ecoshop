@@ -102,7 +102,15 @@ a{
     transform: scale(1.08);
 }
 
-
+/*para los botones que tiene de más el admin para los cruds, pero en formato móvil*/
+@media (max-width: 576px) {
+    .product-card .d-flex.gap-2.mt-auto {
+        flex-wrap: wrap;
+    }
+    .product-card .d-flex.gap-2.mt-auto > * {
+        flex: 1 1 100%;
+    }
+}
 
 /*sidebar*/
 .sidebar-sticky {
@@ -111,7 +119,14 @@ a{
     height: fit-content;
 }
 
-
+/*en formato móvil no es sticky, se pierde al hacer scroll*/
+@media (max-width: 767px) {
+    .sidebar-sticky {
+        position: static;
+        top: auto;
+        margin-bottom: 1rem;
+    }
+}
 
 /*textarea limitado*/
 .limited-textarea {

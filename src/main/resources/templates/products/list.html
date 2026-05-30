@@ -14,7 +14,7 @@
 <div class="container mt-5">
 
     <!--header-->
-    <div class="d-flex justify-content-between align-items-center mb-4">
+    <div class="d-flex justify-content-end align-items-center mb-4">
         <!--<h1>Products</h1>-->
         <a sec:authorize="hasRole('ADMIN')" th:href="@{/products/new}" class="btn btn-success">Nuevo producto</a>
     </div>
@@ -36,7 +36,7 @@
 
 	        <div class="row g-4">
 
-	            <div class="col-12 col-sm-6 col-md-6 col-lg-3 col-xl-3"
+	            <div class="col-6 col-sm-6 col-md-6 col-lg-4 col-xl-3"
 	                 th:each="product : ${products.content}">
 
 	                <div class="card product-card h-100 shadow-sm border-0">
