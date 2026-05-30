@@ -29,19 +29,19 @@
 	            <!--left menu-->
 	            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
 	                <li class="nav-item">
-	                    <a class="nav-link px-3" th:href="@{/products/list}"><i class="bi bi-box-seam me-1"></i>Products</a>
+	                    <a class="nav-link px-3" th:href="@{/products/list}"><i class="bi bi-box-seam me-1"></i>Productos</a>
 	                </li>
 
 	                <li class="nav-item" sec:authorize="hasRole('ADMIN')">
-	                    <a class="nav-link px-3" th:href="@{/customers/list}"><i class="bi bi-people me-1"></i>Customers</a>
+	                    <a class="nav-link px-3" th:href="@{/customers/list}"><i class="bi bi-people me-1"></i>Clientes</a>
 	                </li>
 
 	                <li class="nav-item">
-	                    <a class="nav-link px-3" th:href="@{/orders/list}"><i class="bi bi-bag me-1"></i>Orders</a>
+	                    <a class="nav-link px-3" th:href="@{/orders/list}"><i class="bi bi-bag me-1"></i>Pedidos</a>
 	                </li>
 					
 					<li class="nav-item d-flex align-items-center">
-					    <a class="btn btn-secondary btn-sm d-flex align-items-center gap-1 px-3" th:href="@{/cart}"><i class="bi bi-cart3 me-1"></i> Cart
+					    <a class="btn btn-secondary btn-sm d-flex align-items-center gap-1 px-3" th:href="@{/cart}"><i class="bi bi-cart3 me-1"></i> Carrito
 					        <span class="badge bg-light text-success ms-1" th:text="${cartCount}" th:if="${cartCount > 0}"></span>
 					    </a>
 					</li>
@@ -55,18 +55,18 @@
 
 	                    <button class="btn btn-light btn-sm dropdown-toggle d-flex align-items-center gap-2" type="button" data-bs-toggle="dropdown">
 	                        <i class="bi bi-plus-circle"></i>
-	                        <span class="fw-medium">New</span>
+	                        <span class="fw-medium">Nuevo</span>
 	                    </button>
 
 	                    <ul class="dropdown-menu dropdown-menu-end shadow">
 	                        <li sec:authorize="hasRole('ADMIN')">
-	                            <a class="dropdown-item" th:href="@{/products/new}"><i class="bi bi-box-seam text-success me-2"></i>Product</a>
+	                            <a class="dropdown-item" th:href="@{/products/new}"><i class="bi bi-box-seam text-success me-2"></i>Producto</a>
 	                        </li>
 	                        <li sec:authorize="hasRole('ADMIN')">
-	                            <a class="dropdown-item" th:href="@{/customers/new}"><i class="bi bi-people text-success me-2"></i>Customer</a>
+	                            <a class="dropdown-item" th:href="@{/customers/new}"><i class="bi bi-people text-success me-2"></i>Cliente</a>
 	                        </li>
 	                        <li sec:authorize="hasAnyRole('USER','VIP','ADMIN')">
-	                            <a class="dropdown-item" th:href="@{/orders/new}"><i class="bi bi-bag text-success me-2"></i>Order</a>
+	                            <a class="dropdown-item" th:href="@{/orders/new}"><i class="bi bi-bag text-success me-2"></i>Pedido</a>
 	                        </li>
 	                    </ul>
 
@@ -86,14 +86,14 @@
 	                        <ul class="dropdown-menu dropdown-menu-end shadow">
 	                            <li>
 	                                <span class="dropdown-item-text text-muted small px-3 py-2">
-	                                    Logged in as <strong sec:authentication="name"></strong>
+	                                    Sesión iniciada como <strong sec:authentication="name"></strong>
 	                                </span>
 	                            </li>
 	                            <li><hr class="dropdown-divider"></li>
 	                            <li>
 	                                <form th:action="@{/logout}" method="post">
 	                                    <button type="submit" class="dropdown-item text-danger">
-	                                        <i class="bi bi-box-arrow-right me-2"></i>Log out
+	                                        <i class="bi bi-box-arrow-right me-2"></i>Finalizar la sesión
 	                                    </button>
 	                                </form>
 	                            </li>
@@ -104,7 +104,7 @@
 	                    <!--my account button --modal-- -->
 	                    <button sec:authorize="isAuthenticated()" class="btn btn-outline-light btn-sm" data-bs-toggle="modal" data-bs-target="#userModal">
 	                        <i class="bi bi-person"></i>
-	                        <span class="ms-1 d-none d-md-inline">My Account</span>
+	                        <span class="ms-1 d-none d-md-inline">Mi cuenta</span>
 	                    </button>
 						
 	                </div>
@@ -113,11 +113,11 @@
 					<div sec:authorize="!isAuthenticated()" class="d-flex gap-2">
 
 					    <a th:href="@{/login}" class="btn btn-outline-light btn-sm">
-					        <i class="bi bi-box-arrow-in-right me-1"></i>Login
+					        <i class="bi bi-box-arrow-in-right me-1"></i>Acceso
 					    </a>
 
 					    <a th:href="@{/register}" class="btn btn-light btn-sm">
-					        <i class="bi bi-person-plus me-1"></i> Register
+					        <i class="bi bi-person-plus me-1"></i> Registro
 					    </a>
 
 					</div>

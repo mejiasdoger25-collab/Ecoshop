@@ -28,7 +28,7 @@
 
 			
 	        <div class="mb-3">
-	            <label>Date</label>
+	            <label>Fecha</label>
 	            <input type="date" th:field="*{shippingDate}" th:value="${order.shippingDate}" class="form-control" maxlength="10" required>
 	        </div>
 			<div class="invalid-feedback"><span th:if="${#fields.hasErrors('shippingDate')}" th:errors="*{shippingDate}"></span></div>
@@ -42,11 +42,11 @@
 
 			
 			<div class="mb-3">
-			    <label sec:authorize="hasRole('ADMIN')">Customer</label>
+			    <label sec:authorize="hasRole('ADMIN')">Cliente</label>
 			    <!--ADMIN-->
 			    <div th:if="${isAdmin}">
 			        <select th:field="*{customer}" class="form-select">
-			            <option value="">Select customer</option>
+			            <option value="">Seleccione cliente</option>
 			            <option
 			                    th:each="customer : ${customers}"
 			                    th:value="${customer.id}"
@@ -64,8 +64,8 @@
 			</div>
 
 			<!--<input type="hidden" th:field="*{id}">-->
-	        <button type="submit" class="btn btn-success">Save</button>
-	        <a th:href="@{/orders/list}" class="btn btn-secondary">Cancel</a>
+	        <button type="submit" class="btn btn-success">Guardar</button>
+	        <a th:href="@{/orders/list}" class="btn btn-secondary">Cancelar</a>
 
 	    </form>
 	</div>

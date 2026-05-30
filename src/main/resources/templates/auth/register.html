@@ -16,7 +16,7 @@
                     
                     <div class="text-center mb-4">
                         <h2 class="fw-bold text-success">EcoShop</h2>
-                        <h4>Create account</h4>
+                        <h4>Crear una cuenta</h4>
                     </div>
 
                     <!--error message-->
@@ -27,17 +27,17 @@
                     <form th:action="@{/register}" method="post" class="needs-validation" novalidate>
 
                         <div class="mb-3">
-                            <label class="form-label">User name</label>
+                            <label class="form-label">Nombre de usuario</label>
                             <input type="text" name="username" class="form-control" required>
                         </div>
 
                         <div class="mb-3">
-                            <label class="form-label">Password</label>
+                            <label class="form-label">Contraseña</label>
                             <input type="password" name="password" class="form-control" required>
                         </div>
 
                         <div class="mb-3">
-                            <label class="form-label">Full name</label>
+                            <label class="form-label">Nombre completo</label>
                             <input type="text" name="name" class="form-control" required>
                         </div>
 
@@ -47,22 +47,22 @@
                         </div>
 
                         <div class="mb-3">
-                            <label class="form-label">Telephone (9 digits)</label>
+                            <label class="form-label">Teléfono (9 dígitos)</label>
                             <input type="text" name="phone" class="form-control" pattern="[0-9]{9}" required>
                         </div>
 
                         <button type="submit" class="btn btn-success w-100 mb-3">
-                            Register
+                            Registro
                         </button>
 
                     </form>
 
 					<button class="btn btn-secondary w-100 rounded-3 mt-2">
-						<a th:href="@{/login}">Already have an account? Log in</a>
+						<a th:href="@{/login}">¿Ya tienes una cuenta? Inicia sesión</a>
 					</button>
 					
 					<button class="btn btn-secondary w-100 rounded-3 mt-2">
-						<a th:href="@{/products/list}">Back to list</a>
+						<a th:href="@{/products/list}">Vuelta a productos</a>
 					</button>
 
                 </div>

@@ -16,7 +16,7 @@
     <!--header-->
     <div class="d-flex justify-content-between align-items-center mb-4">
         <!--<h1>Products</h1>-->
-        <a sec:authorize="hasRole('ADMIN')" th:href="@{/products/new}" class="btn btn-success">New product</a>
+        <a sec:authorize="hasRole('ADMIN')" th:href="@{/products/new}" class="btn btn-success">Nuevo producto</a>
     </div>
 
 	<!--main layout-->
@@ -73,11 +73,11 @@
 	                            </span>
 
 	                            <span th:if="${product.ecoCertificate}"
-	                                class="badge bg-success"> Eco certified
+	                                class="badge bg-success"> Certificado ecológico
 	                            </span>
 
 	                            <span th:unless="${product.ecoCertificate}"
-	                                class="badge bg-secondary">Standard
+	                                class="badge bg-secondary">No certificado ecológico
 	                            </span>
 
 	                        </div>
@@ -91,23 +91,23 @@
 	                        <div class="d-flex gap-2 mt-auto">
 
 	                            <a th:href="@{/products/details/{id}(id=${product.id})}"
-	                                class="btn btn-secondary btn-sm">Details
+	                                class="btn btn-secondary btn-sm">Detalles
 	                            </a>
 
 	                            <a th:href="@{/cart/add/{id}(id=${product.id})}"
 	                                class="btn btn-success flex-fill">
-	                                <i class="bi bi-cart-plus"></i> Add
+	                                <i class="bi bi-cart-plus"></i> Añadir
 	                            </a>
 
 	                            <span sec:authorize="hasRole('ADMIN')">
 
 	                                <a th:href="@{/products/edit/{id}(id=${product.id})}"
-	                                    class="btn btn-warning btn-sm"> Edit
+	                                    class="btn btn-warning btn-sm"> Editar
 	                                </a>
 
 	                                <a th:href="@{/products/delete/{id}(id=${product.id})}"
 	                                    class="btn btn-danger btn-sm delete-btn"
-	                                    data-confirm="Delete product?">Delete
+	                                    data-confirm="Delete product?">Borrar
 	                                </a>
 
 	                            </span>
@@ -135,18 +135,18 @@
 
 		<!-- previous -->
 		<a th:if="${products.hasPrevious()}" th:href="@{/products/list(page=${products.number-1},size=${products.size})}"
-			class="btn btn-outline-success me-2">Previous
+			class="btn btn-outline-success me-2">Previa
 		</a>
 
 		<!-- page info -->
-		<span class="align-self-center">Page
-			<span th:text="${products.number + 1}"></span>of
+		<span class="align-self-center">Página
+			<span th:text="${products.number + 1}"></span>de
 			<span th:text="${products.totalPages}"></span>
 		</span>
 
 		<!-- next -->
 		<a th:if="${products.hasNext()}" th:href="@{/products/list(page=${products.number+1},size=${products.size})}"
-			class="btn btn-outline-success ms-2">Next
+			class="btn btn-outline-success ms-2">Siguiente
 		</a>
 
 	</div>
