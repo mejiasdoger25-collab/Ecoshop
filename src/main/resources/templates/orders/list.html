@@ -30,37 +30,41 @@
 		
 		<div th:if="${not orders.isEmpty()}">
 		
-		    <table class="table table-bordered">
-		        <thead class="table-dark">
-		        <tr>
-		            <!--<th>ID</th>-->
-		            <th>Código</th>
-		            <th>Fecha</th>
-		            <th>Total (€)</th>
-		            <th sec:authorize="hasRole('ADMIN')">Cliente</th>
-		            <th sec:authorize="hasRole('ADMIN')">Acciones</th>
-		        </tr>
-		        </thead>
-	
+			<div class="table-responsive">
 				
-		        <tbody>
+				<table class="table table-hover align-middle">
+				    <thead class="table-secondary">
+			        <tr>
+			            <!--<th>ID</th>-->
+			            <th>Código</th>
+			            <th>Fecha</th>
+			            <th>Total (€)</th>
+			            <th sec:authorize="hasRole('ADMIN')">Cliente</th>
+			            <th sec:authorize="hasRole('ADMIN')">Acciones</th>
+			        </tr>
+			        </thead>
+		
 					
-		        <tr th:each="order : ${orders}">
-					<!--<td th:text="${order.id}"></td>-->
-		            <td th:text="${order.code}"></td>
-		            <td th:text="${order.shippingDate}"></td>
-		            <td th:text="${#numbers.formatDecimal(order.total, 1, 2)}"></td>
-		            <td sec:authorize="hasRole('ADMIN')" th:text="${order.customer.name}"></td>
+			        <tbody>
+						
+			        <tr th:each="order : ${orders}">
+						<!--<td th:text="${order.id}"></td>-->
+			            <td th:text="${order.code}"></td>
+			            <td th:text="${order.shippingDate}"></td>
+			            <td th:text="${#numbers.formatDecimal(order.total, 1, 2)}"></td>
+			            <td sec:authorize="hasRole('ADMIN')" th:text="${order.customer.name}"></td>
+						
+			            <td sec:authorize="hasRole('ADMIN')">
+			                <a th:href="@{/orders/edit/{id}(id=${order.id})}" class="btn btn-warning btn-sm">Editar</a>
+			                <a th:href="@{/orders/delete/{id}(id=${order.id})}" class="btn btn-danger btn-sm delete-btn" data-confirm="¿Borrar pedido?">Borrar</a><!--con js porque Rafa no quiere onclick ;V-->
+			            </td>
+			        </tr>
+			        </tbody>
+		
 					
-		            <td sec:authorize="hasRole('ADMIN')">
-		                <a th:href="@{/orders/edit/{id}(id=${order.id})}" class="btn btn-warning btn-sm">Editar</a>
-		                <a th:href="@{/orders/delete/{id}(id=${order.id})}" class="btn btn-danger btn-sm delete-btn" data-confirm="¿Borrar pedido?">Borrar</a><!--con js porque Rafa no quiere onclick ;V-->
-		            </td>
-		        </tr>
-		        </tbody>
-	
+			    </table>
 				
-		    </table>
+			</div>
 
 		</div>
 			
