@@ -31,7 +31,7 @@
 		        <div class="col-md-6 mb-3">
 		            <label>Fecha</label>
 					<input type="date" th:name="shippingDate" th:value="${#temporals.format(order.shippingDate, 'yyyy-MM-dd')}"
-					    class="form-control" required>		        
+						class="form-control" required>		        
 				</div>
 				<div class="invalid-feedback"><span th:if="${#fields.hasErrors('shippingDate')}" th:errors="*{shippingDate}"></span></div>
 	

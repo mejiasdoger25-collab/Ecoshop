@@ -116,5 +116,5 @@ a{
 /*textarea limitado*/
 .limited-textarea {
     resize: vertical;
-    max-height: 150px;
+    max-height: 210px;
 }
