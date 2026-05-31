@@ -26,7 +26,6 @@ public interface ProductRepository
 	Optional<Product> findByName(String name);
 	
 	
-	List<Product> findByEcoCertificateTrue();                    //only eco products
     List<Product> findByEcoCertificateFalse();					 //only no eco products
     
     List<Product> findByStockGreaterThan(int stock);             //only stock availible stock products
@@ -51,6 +50,11 @@ public interface ProductRepository
     List<Product> findByCategory(Category category);
     List<Product> findByCategory_NameIgnoreCase(String name);
     Page<Product> findByCategory_Id(Long id, Pageable pageable);
+    
+    //para la nueva cateogoría
+    Page<Product> findByEcoCertificateTrue(Pageable pageable);
+    
+    Page<Product> findByEcoCertificateFalse(Pageable pageable);
     
     
     //consultas manuales

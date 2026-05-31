@@ -139,3 +139,16 @@ a{
     font-weight: bold;
     font-size: 1.1rem; /*para destacar algo más*/
 }
+
+
+
+/*para la imagen de los detalles de los productos*/
+.img-detail {
+	max-height: 420px; 
+	object-fit: contain;
+}
+
+.card-actions {
+    position: relative;
+    z-index: 2;
+}

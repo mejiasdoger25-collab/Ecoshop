@@ -39,6 +39,7 @@
 			            <th>Código</th>
 			            <th>Fecha</th>
 			            <th>Total (€)</th>
+						<th>Pedido</th>
 			            <th sec:authorize="hasRole('ADMIN')">Cliente</th>
 			            <th sec:authorize="hasRole('ADMIN')">Acciones</th>
 			        </tr>
@@ -47,20 +48,54 @@
 					
 			        <tbody>
 						
-			        <tr th:each="order : ${orders}">
-						<!--<td th:text="${order.id}"></td>-->
-			            <td th:text="${order.code}"></td>
-			            <td th:text="${order.shippingDate}"></td>
-			            <td th:text="${#numbers.formatDecimal(order.total, 1, 2)}"></td>
-			            <td sec:authorize="hasRole('ADMIN')" th:text="${order.customer.name}"></td>
-						
-			            <td sec:authorize="hasRole('ADMIN')">
-							<div class="d-flex flex-column gap-1 align-items-start">
-				                <a th:href="@{/orders/edit/{id}(id=${order.id})}" class="btn btn-warning btn-sm">Editar</a>
-				                <a th:href="@{/orders/delete/{id}(id=${order.id})}" class="btn btn-danger btn-sm delete-btn" data-confirm="¿Borrar pedido?">Borrar</a><!--con js porque Rafa no quiere onclick ;V-->
-							</div>
-			            </td>
-			        </tr>
+						<tr th:each="order : ${orders}">
+
+						    <td th:text="${order.code}"></td>
+
+						    <td th:text="${order.shippingDate}"></td>
+
+						    <td th:text="${#numbers.formatDecimal(order.total, 1, 2)}"></td>
+
+						    <!-- PEDIDO -->
+						    <td>
+						        <div class="d-flex flex-column flex-md-row gap-1">
+
+						            <a th:href="@{/orders/details/{id}(id=${order.id})}"
+						               class="btn btn-outline-secondary btn-sm">
+						                <i class="bi bi-eye"></i>
+						                Detalles
+						            </a>
+
+									<button onclick="window.print();" class="btn btn-outline-success btn-sm">
+									    <i class="bi bi-printer"></i>
+									    Imprimir
+									</button>
+
+						        </div>
+						    </td>
+
+						    <!-- CLIENTE -->
+						    <td sec:authorize="hasRole('ADMIN')"
+						        th:text="${order.customer.name}">
+						    </td>
+
+						    <!-- ACCIONES -->
+						    <td sec:authorize="hasRole('ADMIN')">
+						        <div class="d-flex flex-column gap-1 align-items-start">
+						            <a th:href="@{/orders/edit/{id}(id=${order.id})}"
+						               class="btn btn-warning btn-sm">
+						                Editar
+						            </a>
+
+						            <a th:href="@{/orders/delete/{id}(id=${order.id})}"
+						               class="btn btn-danger btn-sm delete-btn"
+						               data-confirm="¿Borrar pedido?">
+						                Borrar
+						            </a>
+						        </div>
+						    </td>
+
+						</tr>
 			        </tbody>
 		
 					

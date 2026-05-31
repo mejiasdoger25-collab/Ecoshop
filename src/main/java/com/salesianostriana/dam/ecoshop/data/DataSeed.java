@@ -139,8 +139,8 @@ public class DataSeed implements CommandLineRunner {
                 Product.builder()
                         .name("Naranja")
                         .price(2)
-                        .stock(10)
-                        .minimumStock(5)
+                        .stock(5)
+                        .minimumStock(10)
                         .origin("Fuengirola")
                         .ecoCertificate(true)
                         .description("""
@@ -155,8 +155,8 @@ public class DataSeed implements CommandLineRunner {
                 Product.builder()
                         .name("Botella")
                         .price(1.20)
-                        .stock(5000)
-                        .minimumStock(100)
+                        .stock(100)
+                        .minimumStock(5000)
                         .origin("Madrid")
                         .ecoCertificate(true)
                         .description("""
@@ -171,8 +171,8 @@ public class DataSeed implements CommandLineRunner {
                 Product.builder()
                         .name("Teléfono")
                         .price(500)
-                        .stock(10)
-                        .minimumStock(2)
+                        .stock(2)
+                        .minimumStock(10)
                         .origin("China")
                         .ecoCertificate(false)
                         .description("""
@@ -267,8 +267,8 @@ public class DataSeed implements CommandLineRunner {
                 Product.builder()
                         .name("Detergente Ecológico")
                         .price(6.75)
-                        .stock(90)
-                        .minimumStock(15)
+                        .stock(15)
+                        .minimumStock(90)
                         .origin("Madrid")
                         .ecoCertificate(true)
                         .description("""

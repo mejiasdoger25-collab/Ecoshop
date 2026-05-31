@@ -20,6 +20,7 @@ import com.salesianostriana.dam.ecoshop.service.CategoryService;
 import com.salesianostriana.dam.ecoshop.service.ProductService;
 
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -37,6 +38,7 @@ public class ProductController {
 	private final ProductService service;
 	private final ProductRepository productRepository;
 	private final CategoryService categoryService;
+	private final ProductService productService;
 	
 	
 	//para renderizar las categories
@@ -69,9 +71,10 @@ public class ProductController {
 	public String findAll( @RequestParam(defaultValue = "0") int page, @RequestParam(defaultValue = "12") int size, Model model) {
 
 	    Pageable pageable = PageRequest.of(page, size);
-	    Page<Product> productPage = productRepository.findAllPaged(pageable);
+	    Page<Product> productPage = productService.findAllRandomPaged(pageable);
 
 	    model.addAttribute("products", productPage);
+	    model.addAttribute("productService", productService);//para el mostrado de desc/aumento en la card con la lógica de negocio
 	    return "products/list";
 	}
 	
@@ -162,7 +165,69 @@ public class ProductController {
 		
 		model.addAttribute("products", page);
 		model.addAttribute("selectedCategory", id);
-		
+		model.addAttribute("productService", productService);
 		return "products/list";
+	}
+	
+	//"""categoría""" hecha con controller porque de esta forma los products pueden pertenercer a más de una, para no cambiar todo el modelo de datos, 
+	//por lo que de esta forma es como un filtro
+	@GetMapping("/eco")
+	public String ecoProducts(@RequestParam(defaultValue = "0") int page, @RequestParam(defaultValue = "12") int size, Model model) {
+
+	    Pageable pageable = PageRequest.of(page, size);
+
+	    Page<Product> ecoProducts = productRepository.findByEcoCertificateTrue(pageable);
+
+	    model.addAttribute("products", ecoProducts);
+	    model.addAttribute("productService", productService);
+	    model.addAttribute("ecoView", true);
+
+	    return "products/list";
+	}
+	
+	//"""categoría""" hecha con controller porque de esta forma los products pueden pertenercer a más de una, para no cambiar todo el modelo de datos, 
+	//por lo que de esta forma es como un filtro
+	@GetMapping("/category/no-eco")
+	public String nonEcoProducts(Pageable pageable, Model model) {
+
+	    model.addAttribute(
+	            "products",
+	            productService.getNonEcoProducts(pageable));
+
+	    model.addAttribute("productService", productService);
+
+	    return "products/list";
+	}
+	
+	
+	@GetMapping("/category/offers")
+	public String discountProducts(Pageable pageable, Model model) {
+
+	    model.addAttribute("products", productService.getDiscountProducts(pageable));
+	    model.addAttribute("productService", productService);
+
+	    return "products/list";
+	}
+	
+	
+	@GetMapping("/category/low-stock")
+	public String lowStockProducts(Pageable pageable, Model model) {
+
+	    model.addAttribute("products", productService.getLowStockProducts(pageable));
+	    model.addAttribute("productService", productService);
+
+	    return "products/list";
+	}
+	
+	@GetMapping("/category/daily-offer")
+	public String dailyOffer(Pageable pageable, Model model) {
+
+	    Product product = productService.getProductOfTheDay();
+	    Page<Product> page = new PageImpl<>( List.of(product),pageable,1);
+
+	    model.addAttribute("products", page);
+	    model.addAttribute("productService", productService);
+
+	    return "products/list";
 	}
 }

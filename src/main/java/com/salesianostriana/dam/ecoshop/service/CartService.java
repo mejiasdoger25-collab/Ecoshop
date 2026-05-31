@@ -18,9 +18,11 @@ import com.salesianostriana.dam.ecoshop.service.base.BaseServiceImp;
 public class CartService extends BaseServiceImp<Product, Long, ProductRepository> {
 
     private final Map<Product, Integer> products = new HashMap<>();
-
-    public CartService(ProductRepository repository) {
+    private final ProductService productService;
+    
+    public CartService(ProductRepository repository, ProductService productService) {
         super(repository);
+        this.productService = productService;
     }
 
     public void addProduct(Product p) {
@@ -72,7 +74,7 @@ public class CartService extends BaseServiceImp<Product, Long, ProductRepository
 
     public double getTotal() {
         return products.entrySet().stream()
-                .mapToDouble(entry -> entry.getKey().getPrice() * entry.getValue())
+                .mapToDouble(entry -> productService.getEffectivePrice(entry.getKey()) * entry.getValue())//cambiado por el method lógica negocio para descuentos si es eco // amento si stock is low
                 .sum();
     }
 

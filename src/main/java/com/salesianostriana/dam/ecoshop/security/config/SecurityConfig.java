@@ -56,6 +56,7 @@ public class SecurityConfig {
                     "/javascript/**",
                     "/images/**",//acceso cambiado para el login background
                     "/products/category/{id}",
+                    "/products/eco/**",
                     "/register"
                 ).permitAll()
 

@@ -12,8 +12,19 @@
 		
         <h1 class="mb-4">Tu carrito</h1>
 
+		<!--inssuficient stock exception error message-->
+		<div class="card bg-swarning shadow-sm p-5 text-center mb-4" th:if="${error}">
+		    <i class="bi bi-cart-x fs-1 d-block mb-3 text-danger"></i>
+		    <h4 class="card-title"> No se puede procesar el pedido</h4>
+			<p class="mb-3 text-muted" th:text="${error}"></p>
+		    <a th:href="@{/}" class="btn btn-secondary">
+				<i class="bi bi-box-arrow-left"></i></i> Volver a los productos
+			</a>
+		</div>
+		
+		
 		<!-- Empty message -->
-		<div class="card bg-sinfo shadow-sm p-5 text-center"  th:if="${products == null or products.isEmpty()}">
+		<div class="card bg-sinfo shadow-sm p-5 text-center" th:if="${products == null or products.isEmpty()}">
 			<i class="bi bi-cart-x fs-1 d-block mb-3 text-muted"></i>
 			<h4 class="card-title">Tu carrito está vacío</h4>
 			<p class="mb-3">Aún no has añadido ningún producto.</p>
@@ -27,7 +38,7 @@
                 <table class="table table-hover align-middle">
                     <thead class="table-secondary">
                         <tr>
-                            <th>Product</th>
+                            <th>Producto</th>
                             <th class="text-center">Precio unitario</th>
                             <th class="text-center">Cantidad</th>
                             <th class="text-center">Subtotal</th>
@@ -39,7 +50,33 @@
                             <td>
                                 <strong th:text="${entry.key.name}"></strong>
                             </td>
-                            <td class="text-center" th:text="${entry.key.price} + ' €'"></td>
+							
+							<!--precio unitario-->
+							<td class="text-center">
+
+							    <!-- Producto eco -->
+							    <div th:if="${entry.key.ecoCertificate}">
+
+							        <div class="text-decoration-line-through text-muted small">
+							            <span th:text="${#numbers.formatDecimal(entry.key.price,1,2)}"></span> €
+							        </div>
+							        <div class="fw-bold text-success">
+							            <span th:text="${#numbers.formatDecimal(productService.getEffectivePrice(entry.key),1,2)}"></span> €
+							        </div>
+							        <span class="badge bg-success">
+							            🌱 Eco -10%
+							        </span>
+
+							    </div>
+
+							    <!-- Producto normal -->
+							    <div th:unless="${entry.key.ecoCertificate}">
+
+							        <span th:text="${#numbers.formatDecimal(entry.key.price,1,2)}"></span> €
+
+							    </div>
+
+							</td>
                             
 							<!-- cantidad del orderLine -->
 							<td class="text-center">
@@ -47,10 +84,10 @@
 								th:text="${entry.value}"></span>
 							</td>							
 							
-                            <!-- Cantidad del product -->
+                            <!-- Cantidad del product / subotal-->
                             <td class="text-center">
                                 <span class="badge bg-light text-dark fs-6 border px-3 py-2" 
-                                      th:text="${#numbers.formatDecimal(entry.key.price * entry.value, 1, 2)} + ' €'"></span>
+                                      th:text="${#numbers.formatDecimal(productService.getEffectivePrice(entry.key) * entry.value,1,2)} + ' €'"></span>
                             </td>
 								
                             <!-- Botones + y - -->
