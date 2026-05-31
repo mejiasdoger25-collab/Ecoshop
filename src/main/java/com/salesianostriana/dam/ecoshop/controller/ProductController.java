@@ -70,7 +70,7 @@ public class ProductController {
 	public String findAll( @RequestParam(defaultValue = "0") int page, @RequestParam(defaultValue = "12") int size, Model model) {
 
 	    Pageable pageable = PageRequest.of(page, size);
-	    Page<Product> productPage = productRepository.findAllPaged(pageable);
+	    Page<Product> productPage = productService.findAllRandomPaged(pageable);
 
 	    model.addAttribute("products", productPage);
 	    model.addAttribute("productService", productService);//para el mostrado de desc/aumento en la card con la lógica de negocio
@@ -164,7 +164,7 @@ public class ProductController {
 		
 		model.addAttribute("products", page);
 		model.addAttribute("selectedCategory", id);
-		
+		model.addAttribute("productService", productService);
 		return "products/list";
 	}
 }

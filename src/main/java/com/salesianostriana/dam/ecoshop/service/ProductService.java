@@ -3,9 +3,13 @@ package com.salesianostriana.dam.ecoshop.service;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 import org.springframework.context.annotation.Bean;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import com.salesianostriana.dam.ecoshop.model.OrderLine;
@@ -53,6 +57,32 @@ public class ProductService extends BaseServiceImp <Product, Long, ProductReposi
 	    return price;
     }
 	
+	
+	//para randomizar las cards products cada vez que se le da a total category
+	public List<Product> findAllRandom() {
+
+	    List<Product> products = productRepository.findAll();
+
+	    Collections.shuffle(products);
+
+	    return products;
+	}
+	
+	
+	//para randomizar las cards products cada vez que se le da a total category V2, manteniendo la paginación
+	public Page<Product> findAllRandomPaged(Pageable pageable) {
+
+	    List<Product> products = productRepository.findAll();
+
+	    Collections.shuffle(products);
+
+	    int start = (int) pageable.getOffset();
+	    int end = Math.min(start + pageable.getPageSize(), products.size());
+
+	    List<Product> pageContent = products.subList(start, end);
+
+	    return new PageImpl<>(pageContent, pageable, products.size());
+	}
 	
 	/*
 	public List<Product> getLista() {
