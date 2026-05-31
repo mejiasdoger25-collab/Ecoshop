@@ -82,6 +82,11 @@
 	                        <!--stock + eco-->
 	                        <div class="mb-2">
 
+								<span th:unless="${product.stock < product.minimumStock}"
+								      class="badge bg-primary bg-opacity-25 text-primary fw-semibold">
+								    Stock: <span th:text="${product.stock}"></span>
+								</span>
+
 								<span th:if="${product.stock < product.minimumStock}"
 								      class="badge bg-warning text-dark">
 								    Stock bajo
