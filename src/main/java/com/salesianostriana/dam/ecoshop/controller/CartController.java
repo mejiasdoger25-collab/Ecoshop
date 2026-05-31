@@ -1,6 +1,7 @@
 package com.salesianostriana.dam.ecoshop.controller;
 
 import com.salesianostriana.dam.ecoshop.data.DataSeed;
+import com.salesianostriana.dam.ecoshop.exception.InsufficientStockException;
 import com.salesianostriana.dam.ecoshop.model.Customer;
 import com.salesianostriana.dam.ecoshop.model.Order;
 import com.salesianostriana.dam.ecoshop.model.OrderLine;
@@ -18,6 +19,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.security.Principal;
 import java.time.LocalDate;
@@ -90,50 +92,66 @@ public class CartController {
     }
 
     @PostMapping("/checkout")
-    public String checkout(Principal principal) {
+    public String checkout(Principal principal, RedirectAttributes redirectAttributes) {
 
-        if (cartService.isEmpty()) {
-            return "redirect:/products/list";
-        }
-
-        String username = principal.getName();
-        Customer customer = customerService.findByUsername(username)
-                .orElseThrow(() -> new IllegalArgumentException("Customer not found"));
-
-        //crear el pedido
-        Order order = Order.builder()
-                .code("ORD-" + System.currentTimeMillis())
-                .shippingDate(LocalDate.now().plusDays(3))
-                .status("PENDING")
-                .customer(customer)
-                .total(cartService.getTotal())
-                .build();
-
-        order = orderService.save(order);
-
-        //crear las líneas de pedido
-        Map<Product, Integer> cartItems = cartService.getProductsInCart();
-        int lineNumber = 1;
-
-        for (Map.Entry<Product, Integer> entry : cartItems.entrySet()) {
-            Product product = entry.getKey();
-            int quantity = entry.getValue();
-
-            OrderLine line = OrderLine.builder()
-                    .id(new OrderLinePK(order.getId(), (long) lineNumber++))
-                    .amount(quantity)
-                    .unitPrice(product.getPrice())
-                    .subTotal(product.getPrice() * quantity)
-                    .order(order)
-                    .product(product)
-                    .build();
-
-            order.getLines().add(line);
-        }
-
-        orderService.save(order);
-        cartService.clearCart();
-
-        return "redirect:/orders/list";
+    	try {
+    		
+	        if (cartService.isEmpty()) {
+	            return "redirect:/products/list";
+	        }
+	
+	        String username = principal.getName();
+	        Customer customer = customerService.findByUsername(username)
+	                .orElseThrow(() -> new IllegalArgumentException("Customer not found"));
+	
+	        //crear el pedido
+	        Order order = Order.builder()
+	                .code("ORD-" + System.currentTimeMillis())
+	                .shippingDate(LocalDate.now().plusDays(3))
+	                .status("PENDING")
+	                .customer(customer)
+	                .total(cartService.getTotal())
+	                .build();
+	
+	        order = orderService.save(order);
+	
+	        //crear las líneas de pedido
+	        Map<Product, Integer> cartItems = cartService.getProductsInCart();
+	        int lineNumber = 1;
+	
+	        for (Map.Entry<Product, Integer> entry : cartItems.entrySet()) {
+	            Product product = entry.getKey();
+	            
+	            int quantity = entry.getValue();
+	            //para cancelar la compra si tienes más cantidad de proeucts en el cart que el stock que tiene la tienda
+	            if (quantity > product.getStock()) {
+	                throw new InsufficientStockException("No hay suficiente stock para "+ product.getName()+ ". Disponible: "+ product.getStock());
+	            }
+	            
+	            OrderLine line = OrderLine.builder()
+	                    .id(new OrderLinePK(order.getId(), (long) lineNumber++))
+	                    .amount(quantity)
+	                    .unitPrice(product.getPrice())
+	                    .subTotal(product.getPrice() * quantity)
+	                    .order(order)
+	                    .product(product)
+	                    .build();
+	
+	            order.getLines().add(line);
+	            product.setStock( product.getStock() - quantity);
+	
+	            productService.save(product);
+	        }
+	
+	        orderService.save(order);
+	        cartService.clearCart();
+	
+	        return "redirect:/orders/list";
+	        
+	        
+    	} catch (InsufficientStockException e) {
+            redirectAttributes.addFlashAttribute("error",e.getMessage());
+            return "redirect:/cart";
+       }
     }
 }

@@ -12,8 +12,19 @@
 		
         <h1 class="mb-4">Tu carrito</h1>
 
+		<!--inssuficient stock exception error message-->
+		<div class="card bg-swarning shadow-sm p-5 text-center mb-4" th:if="${error}">
+		    <i class="bi bi-cart-x fs-1 d-block mb-3 text-danger"></i>
+		    <h4 class="card-title"> No se puede procesar el pedido</h4>
+			<p class="mb-3 text-muted" th:text="${error}"></p>
+		    <a th:href="@{/}" class="btn btn-secondary">
+				<i class="bi bi-box-arrow-left"></i></i> Volver a los productos
+			</a>
+		</div>
+		
+		
 		<!-- Empty message -->
-		<div class="card bg-sinfo shadow-sm p-5 text-center"  th:if="${products == null or products.isEmpty()}">
+		<div class="card bg-sinfo shadow-sm p-5 text-center" th:if="${products == null or products.isEmpty()}">
 			<i class="bi bi-cart-x fs-1 d-block mb-3 text-muted"></i>
 			<h4 class="card-title">Tu carrito está vacío</h4>
 			<p class="mb-3">Aún no has añadido ningún producto.</p>
