@@ -94,6 +94,11 @@
 	                            <span th:unless="${product.ecoCertificate}"
 	                                class="badge bg-danger bg-opacity-25 text-danger fw-semibold"> No eco
 	                            </span>
+								
+								<span th:if="${product.id == productService.getProductOfTheDay().id}"
+								      class="badge bg-warning text-dark fw-bold">
+								    🗓️ Oferta del día
+								</span>
 
 	                        </div>
 

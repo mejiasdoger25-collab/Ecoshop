@@ -20,6 +20,7 @@ import com.salesianostriana.dam.ecoshop.service.CategoryService;
 import com.salesianostriana.dam.ecoshop.service.ProductService;
 
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -213,6 +214,18 @@ public class ProductController {
 	public String lowStockProducts(Pageable pageable, Model model) {
 
 	    model.addAttribute("products", productService.getLowStockProducts(pageable));
+	    model.addAttribute("productService", productService);
+
+	    return "products/list";
+	}
+	
+	@GetMapping("/category/daily-offer")
+	public String dailyOffer(Pageable pageable, Model model) {
+
+	    Product product = productService.getProductOfTheDay();
+	    Page<Product> page = new PageImpl<>( List.of(product),pageable,1);
+
+	    model.addAttribute("products", page);
 	    model.addAttribute("productService", productService);
 
 	    return "products/list";

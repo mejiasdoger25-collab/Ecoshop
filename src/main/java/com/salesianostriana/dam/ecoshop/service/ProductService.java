@@ -54,6 +54,12 @@ public class ProductService extends BaseServiceImp <Product, Long, ProductReposi
 	        price *= 1.10;
 	    }
 
+	    
+	    //para elegir el de la oferta diaria con llamada al method
+	    if(product.equals(getProductOfTheDay())) {
+	        price *= 0.85;
+	    }
+	    
 	    return price;
     }
 	
@@ -123,6 +129,20 @@ public class ProductService extends BaseServiceImp <Product, Long, ProductReposi
 	            products.size()
 	    );
 	}
+	
+	//para el objt diario de oferta random
+	public Product getProductOfTheDay() {
+
+	    List<Product> products = findAll();
+
+	    if(products.isEmpty())
+	        return null;
+
+	    int day = LocalDate.now().getDayOfYear();
+
+	    return products.get(day % products.size());
+	}
+	
 	/*
 	public List<Product> getLista() {
 		return Arrays.asList(
