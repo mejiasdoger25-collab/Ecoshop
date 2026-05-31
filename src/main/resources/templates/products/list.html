@@ -82,9 +82,10 @@
 	                        <!--stock + eco-->
 	                        <div class="mb-2">
 
-	                            <span class="badge bg-primary">Stock:
-	                                <span th:text="${product.stock}"></span>
-	                            </span>
+								<span th:if="${product.stock < product.minimumStock}"
+								      class="badge bg-warning text-dark">
+								    Stock bajo
+								</span>
 
 	                            <span th:if="${product.ecoCertificate}"
 	                                class="badge bg-success bg-opacity-25 text-success fw-semibold"> 🌱 Eco -10%

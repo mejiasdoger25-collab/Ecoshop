@@ -84,6 +84,45 @@ public class ProductService extends BaseServiceImp <Product, Long, ProductReposi
 	    return new PageImpl<>(pageContent, pageable, products.size());
 	}
 	
+	//para la ""categoría"" (filtro) de products no eco en el sidebar
+	public Page<Product> getNonEcoProducts(Pageable pageable) {
+	    return productRepository.findByEcoCertificateFalse(pageable);
+	}
+	
+	//para la ""categoría"" (filtro) de products ofertas en el sidebar 
+	public Page<Product> getDiscountProducts(Pageable pageable) {
+
+	    List<Product> products = findAll().stream()
+	            .filter(product -> getEffectivePrice(product) < product.getPrice()).toList();
+
+	    int start = (int) pageable.getOffset();
+	    int end = Math.min(start + pageable.getPageSize(), products.size());
+
+	    return new PageImpl<>(
+	            products.subList(start, end),
+	            pageable,
+	            products.size()
+	    );
+	}
+	
+	//para la ""categoría"" (filtro) de products stock bajo en el sidebar 
+	public Page<Product> getLowStockProducts(Pageable pageable) {
+
+	    List<Product> products = findAll().stream()
+	            .filter(product ->
+	                product.getStock() < product.getMinimumStock()
+	            )
+	            .toList();
+
+	    int start = (int) pageable.getOffset();
+	    int end = Math.min(start + pageable.getPageSize(), products.size());
+
+	    return new PageImpl<>(
+	            products.subList(start, end),
+	            pageable,
+	            products.size()
+	    );
+	}
 	/*
 	public List<Product> getLista() {
 		return Arrays.asList(

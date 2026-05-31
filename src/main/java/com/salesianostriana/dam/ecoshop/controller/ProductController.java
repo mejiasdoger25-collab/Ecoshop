@@ -167,4 +167,54 @@ public class ProductController {
 		model.addAttribute("productService", productService);
 		return "products/list";
 	}
+	
+	//"""categoría""" hecha con controller porque de esta forma los products pueden pertenercer a más de una, para no cambiar todo el modelo de datos, 
+	//por lo que de esta forma es como un filtro
+	@GetMapping("/eco")
+	public String ecoProducts(@RequestParam(defaultValue = "0") int page, @RequestParam(defaultValue = "12") int size, Model model) {
+
+	    Pageable pageable = PageRequest.of(page, size);
+
+	    Page<Product> ecoProducts = productRepository.findByEcoCertificateTrue(pageable);
+
+	    model.addAttribute("products", ecoProducts);
+	    model.addAttribute("productService", productService);
+	    model.addAttribute("ecoView", true);
+
+	    return "products/list";
+	}
+	
+	//"""categoría""" hecha con controller porque de esta forma los products pueden pertenercer a más de una, para no cambiar todo el modelo de datos, 
+	//por lo que de esta forma es como un filtro
+	@GetMapping("/category/no-eco")
+	public String nonEcoProducts(Pageable pageable, Model model) {
+
+	    model.addAttribute(
+	            "products",
+	            productService.getNonEcoProducts(pageable));
+
+	    model.addAttribute("productService", productService);
+
+	    return "products/list";
+	}
+	
+	
+	@GetMapping("/category/offers")
+	public String discountProducts(Pageable pageable, Model model) {
+
+	    model.addAttribute("products", productService.getDiscountProducts(pageable));
+	    model.addAttribute("productService", productService);
+
+	    return "products/list";
+	}
+	
+	
+	@GetMapping("/category/low-stock")
+	public String lowStockProducts(Pageable pageable, Model model) {
+
+	    model.addAttribute("products", productService.getLowStockProducts(pageable));
+	    model.addAttribute("productService", productService);
+
+	    return "products/list";
+	}
 }
