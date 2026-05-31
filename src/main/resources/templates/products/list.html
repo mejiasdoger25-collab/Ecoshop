@@ -39,10 +39,10 @@
 	            <div class="col-6 col-sm-6 col-md-6 col-lg-4 col-xl-3"
 	                 th:each="product : ${products.content}">
 
-	                <div class="card product-card h-100 shadow border-0">
+	                <div class="card product-card h-100 shadow border-0 position-relative">
 
 	                    <!--image, antes hecho != null, pero si ponías mal url =! null -> bien -> no cargaba. ahora detecta el error y si es así, carga default wiki img-->
-						<a th:href="@{/products/details/{id}(id=${product.id})}">
+						<a th:href="@{/products/details/{id}(id=${product.id})}" class="stretched-link">
 							<img th:src="${product.image}" class="card-img-top card-image" alt="Product image"
 							     onerror="this.onerror=null; this.src='https://upload.wikimedia.org/wikipedia/commons/thumb/6/65/No-Image-Placeholder.svg/1920px-No-Image-Placeholder.svg.png';">
 						</a>
@@ -102,29 +102,31 @@
 	                        </p>
 
 	                        <!--actions-->
-	                        <div class="d-flex gap-2 mt-auto">
+	                        <div class="mt-auto card-actions">
 
-								<a th:href="@{/cart/add/{id}(id=${product.id})}"
-									class="btn btn-success flex-fill">
-									<i class="bi bi-cart-plus"></i> Añadir
-								</a>
-								
-	                            <a th:href="@{/products/details/{id}(id=${product.id})}"
-	                                class="btn btn-outline-secondary btn-sm d-flex align-items-center justify-content-center">
-									<i class="bi bi-eye"></i>Detalles
-	                            </a>
+								<div class="d-flex gap-2 mb-2">
 
-	                            
+								    <a th:href="@{/cart/add/{id}(id=${product.id})}"
+								        class="btn btn-success flex-fill">
+								        <i class="bi bi-cart-plus"></i> Añadir
+								    </a>
 
-								<div sec:authorize="hasRole('ADMIN')" class="d-flex flex-column gap-1">
+								    <a th:href="@{/products/details/{id}(id=${product.id})}"
+								    	class="btn btn-outline-secondary btn-sm d-flex align-items-center justify-content-center">
+								        <i class="bi bi-eye me-1"></i>Detalles
+								    </a>
+
+								</div>
+
+								<div sec:authorize="hasRole('ADMIN')" class="d-flex gap-2">
 
 								    <a th:href="@{/products/edit/{id}(id=${product.id})}"
-								       class="btn btn-warning btn-sm">
+								       class="btn btn-warning btn-sm flex-fill">
 								        Editar
 								    </a>
 
 								    <a th:href="@{/products/delete/{id}(id=${product.id})}"
-								       class="btn btn-danger btn-sm delete-btn"
+								       class="btn btn-danger btn-sm flex-fill delete-btn"
 								       data-confirm="¿Borrar producto?">
 								        Borrar
 								    </a>
