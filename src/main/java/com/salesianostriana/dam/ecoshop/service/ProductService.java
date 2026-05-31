@@ -36,6 +36,23 @@ public class ProductService extends BaseServiceImp <Product, Long, ProductReposi
     }
 	
 	
+	//lógica de negocio
+	
+	//descuento del 10% a los productos que tienen ecoCertificate = true, aumento 10% si el stock es bajo
+	public double getEffectivePrice(Product product) {
+		double price = product.getPrice();
+
+	    if(product.isEcoCertificate()) {
+	        price *= 0.90;
+	    }
+
+	    if(product.getStock() < product.getMinimumStock()) {
+	        price *= 1.10;
+	    }
+
+	    return price;
+    }
+	
 	
 	/*
 	public List<Product> getLista() {

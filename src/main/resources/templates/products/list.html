@@ -55,9 +55,29 @@
 	                        </h5>
 
 	                        <!--price-->
-	                        <h4 class=" fw-bold mb-3 price-c">
-	                            <span th:text="${#numbers.formatDecimal(product.price,1,2)}"></span>€
-	                        </h4>
+							<div class="mb-3">
+
+							    <!-- Producto ecológico -->
+							    <div th:if="${product.ecoCertificate}">
+
+							        <span class="text-decoration-line-through text-muted me-2">
+							            <span th:text="${#numbers.formatDecimal(product.price,1,2)}"></span>€
+							        </span>
+
+							        <span class="fw-bold mb-3 price-c fs-5">
+							            <span th:text="${#numbers.formatDecimal(productService.getEffectivePrice(product),1,2)}"></span>€
+							        </span>
+
+							    </div>
+
+							    <!-- Producto normal -->
+							    <div th:unless="${product.ecoCertificate}">
+							        <span class="fw-bold fs-5 price-c">
+							            <span th:text="${#numbers.formatDecimal(product.price,1,2)}"></span>€
+							        </span>
+							    </div>
+
+							</div>
 
 	                        <!--stock + eco-->
 	                        <div class="mb-2">
@@ -67,7 +87,7 @@
 	                            </span>
 
 	                            <span th:if="${product.ecoCertificate}"
-	                                class="badge bg-success bg-opacity-25 text-success fw-semibold"> Eco
+	                                class="badge bg-success bg-opacity-25 text-success fw-semibold"> 🌱 Eco -10%
 	                            </span>
 
 	                            <span th:unless="${product.ecoCertificate}"
@@ -90,7 +110,8 @@
 								</a>
 								
 	                            <a th:href="@{/products/details/{id}(id=${product.id})}"
-	                                class="btn btn-outline-secondary btn-sm d-flex align-items-center justify-content-center">Detalles
+	                                class="btn btn-outline-secondary btn-sm d-flex align-items-center justify-content-center">
+									<i class="bi bi-eye"></i>Detalles
 	                            </a>
 
 	                            

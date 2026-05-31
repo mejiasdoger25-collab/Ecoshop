@@ -37,6 +37,7 @@ public class ProductController {
 	private final ProductService service;
 	private final ProductRepository productRepository;
 	private final CategoryService categoryService;
+	private final ProductService productService;
 	
 	
 	//para renderizar las categories
@@ -72,6 +73,7 @@ public class ProductController {
 	    Page<Product> productPage = productRepository.findAllPaged(pageable);
 
 	    model.addAttribute("products", productPage);
+	    model.addAttribute("productService", productService);//para el mostrado de desc/aumento en la card con la lógica de negocio
 	    return "products/list";
 	}
 	

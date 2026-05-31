@@ -1,1 +1,126 @@
-<!--<div th:replace="~{fragments/user-modal :: userModal}"></div>-->
+<!DOCTYPE html>
+<html lang="es"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+<head th:replace="~{fragments/head :: head}"></head>
+
+<body class="d-flex flex-column min-vh-100">
+
+<div th:replace="~{fragments/navbar :: navbar}"></div>
+
+<div class="container mt-5">
+
+    <div class="d-flex justify-content-between align-items-center mb-4">
+
+        <h1>Detalle del pedido</h1>
+
+        <a th:href="@{/orders/list}"
+           class="btn btn-secondary">
+            Volver
+        </a>
+
+    </div>
+
+    <div class="card shadow-sm border-0 mb-4">
+
+        <div class="card-body">
+
+            <div class="row">
+
+                <div class="col-md-6 mb-3">
+
+                    <h6 class="text-muted">Código</h6>
+                    <p th:text="${order.code}"></p>
+
+                </div>
+
+                <div class="col-md-6 mb-3">
+
+                    <h6 class="text-muted">Estado</h6>
+                    <p th:text="${order.status}"></p>
+
+                </div>
+
+                <div class="col-md-6 mb-3">
+
+                    <h6 class="text-muted">Fecha de envío</h6>
+                    <p th:text="${order.shippingDate}"></p>
+
+                </div>
+
+                <div class="col-md-6 mb-3">
+
+                    <h6 class="text-muted">Total con descuentos aplicados (si los tiene)</h6>
+                    <p>
+                        <strong th:text="${#numbers.formatDecimal(order.total,1,2)} + ' €'"></strong>
+                    </p>
+
+                </div>
+
+               
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <div class="card shadow-sm border-0">
+
+        <div class="card-header bg-light">
+
+            <h5 class="mb-0">
+                Productos comprados
+            </h5>
+
+        </div>
+
+        <div class="card-body">
+
+            <div class="table-responsive">
+
+                <table class="table table-hover">
+
+                    <thead>
+
+                    <tr>
+                        <th>Producto</th>
+                        <th>Cantidad</th>
+                        <th>Precio unitario</th>
+                        <th>Subtotal</th>
+                    </tr>
+
+                    </thead>
+
+                    <tbody>
+
+                    <tr th:each="line : ${order.lines}">
+
+                        <td th:text="${line.product.name}"></td>
+
+                        <td th:text="${line.amount}"></td>
+
+                        <td th:text="${#numbers.formatDecimal(line.unitPrice,1,2)} + ' €'"></td>
+
+                        <td th:text="${#numbers.formatDecimal(line.subTotal,1,2)} + ' €'"></td>
+
+                    </tr>
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<div th:replace="~{fragments/user-modal :: userModal}"></div>
+<div th:replace="~{fragments/footer :: footer}"></div>
+
+</body>
+</html>

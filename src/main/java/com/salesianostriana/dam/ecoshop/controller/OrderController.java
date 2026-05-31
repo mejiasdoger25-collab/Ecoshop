@@ -147,4 +147,13 @@ public class OrderController {
 		
 		return "redirect:/orders/list";
 	}
+	
+	
+	@GetMapping("/details/{id}")
+	public String details(@PathVariable Long id, Model model) {
+	    Order order = service.findById(id).orElseThrow(() -> new NoSuchElementException("Order not found"));
+
+	    model.addAttribute("order", order);
+	    return "orders/details";
+	}
 }

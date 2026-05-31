@@ -41,6 +41,7 @@ public class CartController {
     public String showCart(Model model) {
         model.addAttribute("products", cartService.getProductsInCart());
         model.addAttribute("total", cartService.getTotal());
+        model.addAttribute("productService", productService);//para hacer la llamada en el front thymeleaf y así mostrar el price's product con el desc de la lógica de negocio doble, aumento y descuento
         return "cart";
     }
 
