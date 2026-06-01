@@ -18,9 +18,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.salesianostriana.dam.ecoshop.model.Customer;
 import com.salesianostriana.dam.ecoshop.model.Order;
+import com.salesianostriana.dam.ecoshop.model.OrderLine;
+import com.salesianostriana.dam.ecoshop.model.OrderLinePK;
 import com.salesianostriana.dam.ecoshop.model.Product;
 import com.salesianostriana.dam.ecoshop.service.CustomerService;
 import com.salesianostriana.dam.ecoshop.service.OrderService;
+import com.salesianostriana.dam.ecoshop.service.ProductService;
 
 import jakarta.validation.Valid;
 import lombok.Data;
@@ -36,6 +39,7 @@ public class OrderController {
 
 	private final OrderService service;
 	private final CustomerService customerService;
+	private final ProductService productService;
 	private final Validator validator;
 	
 	@PreAuthorize("hasAnyRole('USER','VIP','ADMIN')")
@@ -63,7 +67,15 @@ public class OrderController {
 	@PreAuthorize("hasAnyRole('USER','VIP','ADMIN')")
 	@GetMapping("/new")
 	public String createForm(Model model, Principal principal) {
-	    model.addAttribute("order",new Order());
+
+		Order order = new Order();
+	    OrderLine line = new OrderLine();
+	    
+	    line.setId(new OrderLinePK()); //para la PK embebida
+	    order.getLines().add(line);
+
+	    model.addAttribute("order", order);
+	    model.addAttribute("products", productService.findAll()); //así podemos ver todos y tiene más sentido el create order
 
 	    if(principal.getName().equals("admin")) {
 	        model.addAttribute("customers", customerService.findAll());
@@ -84,44 +96,55 @@ public class OrderController {
 	@PostMapping("/new/submit")
 	public String save (@Valid @ModelAttribute("order") Order order, BindingResult bindingResult, Model model, Principal principal) {
 		if (bindingResult.hasErrors()) {
-
+	        //rellenar datos para volver al form
+	        model.addAttribute("products", productService.findAll());
 	        if(principal.getName().equals("admin")) {
-	            model.addAttribute("customers",customerService.findAll());
+	            model.addAttribute("customers", customerService.findAll());
 	        } else {
-
-	            Customer customer = customerService
-	                    .findByUsername(principal.getName())
-	                    .orElseThrow(() -> new NoSuchElementException("Customer not found"));//con exception genérica
-
-	            model.addAttribute("customers", List.of(customer));
+	            model.addAttribute("customers", List.of(customerService.findByUsername(principal.getName()).orElseThrow()));
 	        }
-
-	        model.addAttribute("isAdmin", principal.getName().equals("admin"));//para pasar al form template y coger el id auto si no eres rol admin
-
+	        model.addAttribute("isAdmin", principal.getName().equals("admin"));
 	        return "orders/form";
 	    }
 
-		 if(!principal.getName().equals("admin")) {
+	    //lógica usuario normal
+	    if(!principal.getName().equals("admin")) {
+	        Customer customer = customerService.findByUsername(principal.getName()).orElseThrow();
+	        order.setCustomer(customer);
+	    }
 
-		        Customer customer = customerService
-		                .findByUsername(principal.getName())
-		                .orElseThrow(() -> new NoSuchElementException("Customer not found"));//con exception genérica
+	    //procesar la línea
+	    if (!order.getLines().isEmpty()) {
+	        OrderLine line = order.getLines().get(0);
+	        
+	        //cargar producto real
+	        Product product = productService.findById(line.getProduct().getId())
+	                .orElseThrow(() -> new RuntimeException("Producto no encontrado"));
 
-		        order.setCustomer(customer);
-		    }
+	        line.setProduct(product);
+	        line.setOrder(order);                //relación bidireccional
+	        line.setUnitPrice(product.getPrice());
+	        line.setSubTotal(product.getPrice() * line.getAmount());
 
-		 
-		//generación del code auto order
-		    if (order.getCode() == null || order.getCode().trim().isEmpty()) {
-		        int randomNumber = (int) (Math.random() * 900000) + 100000; //6dígitos
-		        order.setCode("ORD-" + randomNumber);
-		    }
+	        //generar PK
+	        if (line.getId() == null) {
+	            line.setId(new OrderLinePK());
+	        }
+	        line.getId().setOrderId(null); //se asignará al guardar
+	        line.getId().setLineNumber(1L);
+	    }
 
-		 
-		    service.save(order);
+	    //datos del pedido
+	    if (order.getCode() == null || order.getCode().trim().isEmpty()) {
+	        order.setCode("ORD-" + (int)(Math.random() * 900000 + 100000));
+	    }
+	    order.setStatus("PENDIENTE");
+	    order.setTotal(order.getLines().stream().mapToDouble(OrderLine::getSubTotal).sum());
 
-		    return "redirect:/orders/list";
-		}
+	    service.save(order);
+
+	    return "redirect:/orders/list";
+	}
 	
 	
 	
