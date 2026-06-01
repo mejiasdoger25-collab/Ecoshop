@@ -18,9 +18,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.salesianostriana.dam.ecoshop.model.Customer;
 import com.salesianostriana.dam.ecoshop.model.Order;
+import com.salesianostriana.dam.ecoshop.model.OrderLine;
+import com.salesianostriana.dam.ecoshop.model.OrderLinePK;
 import com.salesianostriana.dam.ecoshop.model.Product;
 import com.salesianostriana.dam.ecoshop.service.CustomerService;
 import com.salesianostriana.dam.ecoshop.service.OrderService;
+import com.salesianostriana.dam.ecoshop.service.ProductService;
 
 import jakarta.validation.Valid;
 import lombok.Data;
@@ -36,6 +39,7 @@ public class OrderController {
 
 	private final OrderService service;
 	private final CustomerService customerService;
+	private final ProductService productService;
 	private final Validator validator;
 	
 	@PreAuthorize("hasAnyRole('USER','VIP','ADMIN')")
@@ -49,7 +53,7 @@ public class OrderController {
 	    } else {
 	        Customer customer = customerService
 	                .findByUsername(username)
-	                .orElseThrow(() -> new NoSuchElementException("Customer not found"));//con exception genérica
+	                .orElseThrow(() -> new NoSuchElementException("Customer not found"));//con exception genérica, mejora: hacer la mía propia
 
 	        model.addAttribute("orders",customer.getOrders());
 	    }
@@ -63,7 +67,15 @@ public class OrderController {
 	@PreAuthorize("hasAnyRole('USER','VIP','ADMIN')")
 	@GetMapping("/new")
 	public String createForm(Model model, Principal principal) {
-	    model.addAttribute("order",new Order());
+
+		Order order = new Order();
+	    OrderLine line = new OrderLine();
+	    
+	    line.setId(new OrderLinePK()); //para la PK embebida
+	    order.getLines().add(line);
+
+	    model.addAttribute("order", order);
+	    model.addAttribute("products", productService.findAll()); //así podemos ver todos y tiene más sentido el create order
 
 	    if(principal.getName().equals("admin")) {
 	        model.addAttribute("customers", customerService.findAll());
@@ -81,59 +93,102 @@ public class OrderController {
 	}
 	
 	@PreAuthorize("hasAnyRole('USER','VIP','ADMIN')")
-	@PostMapping("/new/submit")
-	public String save (@Valid @ModelAttribute("order") Order order, BindingResult bindingResult, Model model, Principal principal) {
-		if (bindingResult.hasErrors()) {
+	@PostMapping({"/new/submit", "/edit/{id}"})
+	public String save(@Valid @ModelAttribute("order") Order order,   BindingResult bindingResult,  Model model,  Principal principal) {
 
-	        if(principal.getName().equals("admin")) {
-	            model.addAttribute("customers",customerService.findAll());
+	    if (bindingResult.hasErrors()) {
+	        //poner los datos otra vez para volver al formulario
+	        model.addAttribute("products", productService.findAll());
+	        if (principal.getName().equals("admin")) {
+	            model.addAttribute("customers", customerService.findAll());
 	        } else {
-
-	            Customer customer = customerService
-	                    .findByUsername(principal.getName())
-	                    .orElseThrow(() -> new NoSuchElementException("Customer not found"));//con exception genérica
-
-	            model.addAttribute("customers", List.of(customer));
+	            model.addAttribute("customers", List.of(customerService.findByUsername(principal.getName()).orElseThrow()));
 	        }
-
-	        model.addAttribute("isAdmin", principal.getName().equals("admin"));//para pasar al form template y coger el id auto si no eres rol admin
-
+	        model.addAttribute("isAdmin", principal.getName().equals("admin"));
+	        model.addAttribute("isEdit", order.getId() != null); 
 	        return "orders/form";
 	    }
 
-		 if(!principal.getName().equals("admin")) {
+	    boolean isEdit = order.getId() != null;
 
-		        Customer customer = customerService
-		                .findByUsername(principal.getName())
-		                .orElseThrow(() -> new NoSuchElementException("Customer not found"));//con exception genérica
+	    //asignar cliente, lógica de usuario normal
+	    if (!principal.getName().equals("admin")) {
+	        Customer customer = customerService.findByUsername(principal.getName()).orElseThrow();
+	        order.setCustomer(customer);
+	    }
 
-		        order.setCustomer(customer);
-		    }
+	    //procesar líneas de pedido
+	    if (!order.getLines().isEmpty()) {
+	        for (int i = 0; i < order.getLines().size(); i++) {
+	            OrderLine line = order.getLines().get(i);
+	            
+	            if (line.getProduct() == null || line.getProduct().getId() == null) {
+	                continue;
+	            }
 
-		 
-		//generación del code auto order
-		    if (order.getCode() == null || order.getCode().trim().isEmpty()) {
-		        int randomNumber = (int) (Math.random() * 900000) + 100000; //6dígitos
-		        order.setCode("ORD-" + randomNumber);
-		    }
+	            Product product = productService.findById(line.getProduct().getId())
+	                    .orElseThrow(() -> new RuntimeException("Producto no encontrado"));
 
-		 
-		    service.save(order);
+	            line.setProduct(product);
+	            line.setOrder(order);
+	            line.setUnitPrice(product.getPrice());
+	            line.setSubTotal(product.getPrice() * line.getAmount());
 
-		    return "redirect:/orders/list";
-		}
+	            //clave compuesta
+	            if (line.getId() == null) {
+	                line.setId(new OrderLinePK());
+	            }
+
+	            if (isEdit && line.getId().getOrderId() == null) {
+	                line.getId().setOrderId(order.getId()); //mantener id existente en edición
+	            } else if (!isEdit) {
+	                line.getId().setOrderId(null); //asignación auto al hacer save en el edit
+	                line.getId().setLineNumber((long) (i + 1));
+	            }
+	        }
+	    }
+
+	    //datos del pedido
+	    if (order.getCode() == null || order.getCode().trim().isEmpty()) {
+	        order.setCode("ORD-" + System.currentTimeMillis());
+	    }
+	    order.setStatus("PENDIENTE");
+	    order.setTotal(order.getLines().stream()
+	            .mapToDouble(OrderLine::getSubTotal)
+	            .sum());
+
+	    service.save(order); 
+
+	    return "redirect:/orders/list";
+	}
 	
 	
 	
 	
 	@GetMapping("/edit/{id}")
-	public String editForm (@PathVariable Long id, Model model) {
-		
-		Order order = service.findById(id).orElse(null);
-		model.addAttribute("order", order);
-		model.addAttribute("customers", customerService.findAll());
-		
-		return "/orders/form";
+	public String editForm(@PathVariable Long id, Model model, Principal principal) {
+	    
+	    Order order = service.findById(id).orElseThrow(() -> new NoSuchElementException("Pedido no encontrado"));
+
+	    if (order.getLines().isEmpty()) {
+	        OrderLine line = new OrderLine();
+	        line.setId(new OrderLinePK());
+	        order.getLines().add(line);
+	    }
+
+	    model.addAttribute("order", order);
+	    model.addAttribute("products", productService.findAll());
+	    model.addAttribute("isEdit", true);
+	    model.addAttribute("isAdmin", principal.getName().equals("admin"));
+
+	    if (principal.getName().equals("admin")) {
+	        model.addAttribute("customers", customerService.findAll());
+	    } else {
+	        Customer customer = customerService.findByUsername(principal.getName()).orElseThrow(() -> new NoSuchElementException("Cliente no encontrado"));
+	        model.addAttribute("customers", List.of(customer));
+	    }
+
+	    return "orders/form";
 	}
 	
 	

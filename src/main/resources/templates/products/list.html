@@ -91,7 +91,7 @@
 								</span>
 
 	                            <span th:if="${product.ecoCertificate}"
-	                                class="badge bg-success bg-opacity-25 text-success fw-semibold"> 🌱 Eco -10%
+	                                class="badge bg-success bg-opacity-25 text-success fw-semibold"> <i class="bi bi-leaf me-1"></i> Eco -10%
 	                            </span>
 
 	                            <span th:unless="${product.ecoCertificate}"
@@ -100,7 +100,7 @@
 								
 								<span th:if="${product.id == productService.getProductOfTheDay().id}"
 								      class="badge bg-warning text-dark fw-bold">
-								    🗓️ Oferta del día
+								    <i class="bi bi-calendar-check"></i> Oferta del día
 								</span>
 
 	                        </div>
@@ -170,7 +170,7 @@
 
 		<!-- page info -->
 		<span class="align-self-center">Página
-			<span th:text="${products.number + 1}"></span>de
+			<span th:text="${products.number + 1}"></span> de
 			<span th:text="${products.totalPages}"></span>
 		</span>
 

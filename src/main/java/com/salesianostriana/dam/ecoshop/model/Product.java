@@ -78,5 +78,7 @@ public class Product {
 	//relación con category
 	@ManyToOne
 	@JoinColumn(name="category_id")
+	@ToString.Exclude          
+    @EqualsAndHashCode.Exclude
 	private Category category;
 }

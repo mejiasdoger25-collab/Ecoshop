@@ -64,7 +64,7 @@
 							            <span th:text="${#numbers.formatDecimal(productService.getEffectivePrice(entry.key),1,2)}"></span> €
 							        </div>
 							        <span class="badge bg-success">
-							            🌱 Eco -10%
+							            <i class="bi bi-leaf me-1"></i> Eco -10%
 							        </span>
 
 							    </div>
@@ -122,7 +122,7 @@
 			</div>
 			
             <div class="row mt-4">
-				<div class="col-12">
+				<div th:unless="${products == null or products.isEmpty()}" class="col-12">
 
 					<h4>Total: <strong th:text="${#numbers.formatDecimal(total, 1, 2)} + ' €'"></strong></h4>
 					
