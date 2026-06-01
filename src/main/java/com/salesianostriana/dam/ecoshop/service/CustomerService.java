@@ -52,4 +52,8 @@ public class CustomerService extends BaseServiceImp <Customer, Long, CustomerRep
         return repository.findByUserUsername(username);
     }
 	
+	//para no pillar el logueado
+	public List<Customer> findAllExceptUsername(String username) {
+	    return repository.findAllExceptUsername(username);
+	}
 }

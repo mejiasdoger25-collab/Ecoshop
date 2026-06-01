@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.salesianostriana.dam.ecoshop.model.Customer;
 import com.salesianostriana.dam.ecoshop.model.Order;
@@ -64,7 +65,7 @@ public class OrderController {
 	
 	
 	
-	@PreAuthorize("hasAnyRole('USER','VIP','ADMIN')")
+	@PreAuthorize("hasRole('ADMIN')")
 	@GetMapping("/new")
 	public String createForm(Model model, Principal principal) {
 
@@ -92,9 +93,9 @@ public class OrderController {
 	    return "orders/form";
 	}
 	
-	@PreAuthorize("hasAnyRole('USER','VIP','ADMIN')")
+	@PreAuthorize("hasRole('ADMIN')")
 	@PostMapping({"/new/submit", "/edit/{id}"})
-	public String save(@Valid @ModelAttribute("order") Order order,   BindingResult bindingResult,  Model model,  Principal principal) {
+	public String save(@Valid @ModelAttribute("order") Order order,   BindingResult bindingResult,  Model model,  Principal principal, @RequestParam(required = false) Long deleteLine) {
 
 	    if (bindingResult.hasErrors()) {
 	        //poner los datos otra vez para volver al formulario
@@ -111,6 +112,32 @@ public class OrderController {
 
 	    boolean isEdit = order.getId() != null;
 
+	    //lógica de borrado de línea de producto entera en el order edit form
+	    if (deleteLine != null) {
+
+	        order.getLines().removeIf(line ->
+	                line.getId() != null
+	                && line.getId().getLineNumber() != null
+	                && line.getId().getLineNumber().equals(deleteLine));
+
+	        model.addAttribute("order", order);
+	        model.addAttribute("products", productService.findAll());
+
+	        if (principal.getName().equals("admin")) {
+	            model.addAttribute("customers", customerService.findAll());
+	        } else {
+	            Customer customer = customerService
+	                    .findByUsername(principal.getName())
+	                    .orElseThrow();
+	            model.addAttribute("customers", List.of(customer));
+	        }
+
+	        model.addAttribute("isAdmin", principal.getName().equals("admin"));
+	        model.addAttribute("isEdit", true);
+
+	        return "orders/form";
+	    }
+	    
 	    //asignar cliente, lógica de usuario normal
 	    if (!principal.getName().equals("admin")) {
 	        Customer customer = customerService.findByUsername(principal.getName()).orElseThrow();
@@ -164,11 +191,11 @@ public class OrderController {
 	
 	
 	
-	
+	@PreAuthorize("hasRole('ADMIN')")
 	@GetMapping("/edit/{id}")
 	public String editForm(@PathVariable Long id, Model model, Principal principal) {
 	    
-	    Order order = service.findById(id).orElseThrow(() -> new NoSuchElementException("Pedido no encontrado"));
+	    Order order = service.findById(id).orElse(null);
 
 	    if (order.getLines().isEmpty()) {
 	        OrderLine line = new OrderLine();
@@ -192,18 +219,17 @@ public class OrderController {
 	}
 	
 	
+	@PreAuthorize("hasRole('ADMIN')")
 	@GetMapping("/delete/{id}")
 	public String delete (@PathVariable Long id, Model model) {
 		
-		Optional<Order> order = service.findById(id);
-		
-		if(order.isPresent())
-			service.deleteById(id);
+		Order order = service.findById(id).orElseThrow(() -> new NoSuchElementException("Pedido no encontrado"));
+		service.deleteById(id);
 		
 		return "redirect:/orders/list";
 	}
 	
-	
+	@PreAuthorize("hasAnyRole('USER','VIP','ADMIN')")
 	@GetMapping("/details/{id}")
 	public String details(@PathVariable Long id, Model model) {
 	    Order order = service.findById(id).orElseThrow(() -> new NoSuchElementException("Order not found"));
