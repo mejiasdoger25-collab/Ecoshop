@@ -36,7 +36,7 @@
 				</div>
 	
 				
-				<!-- Cliente -->
+				<!--Cliente-->
 				        <div class="col-12 col-md-6 mb-3">
 				            <label sec:authorize="hasRole('ADMIN')">Cliente</label>
 				            <div th:if="${isAdmin}">
@@ -50,20 +50,50 @@
 				            </div>
 				        </div>
 
-				        <!-- Producto -->
-				        <div class="col-12 col-md-6 mb-3">
-				            <label>Producto</label>
-				            <select th:field="*{lines[0].product}" class="form-select" required>
-				                <option value="">Seleccione producto</option>
-				                <option th:each="p : ${products}" th:value="${p.id}" th:text="${p.name} + ' - ' + ${p.price} + '€'"></option>
-				            </select>
-				        </div>
+								<!--lineas de pedido-->
+						        <div class="col-12">
+						            <label class="form-label fw-bold">Productos del pedido</label>
+						            
+						            <div th:each="line, iter : *{lines}" class="border rounded p-3 mb-3 bg-light">
+						                
+						                <!--campos ocultos para la clave compuesta-->
+						                <input type="hidden" th:field="*{lines[__${iter.index}__].id.orderId}" />
+						                <input type="hidden" th:field="*{lines[__${iter.index}__].id.lineNumber}" />
 
-				        <!-- Cantidad -->
-				        <div class="col-12 col-md-6 mb-3">
-				            <label>Cantidad</label>
-				            <input type="number" min="1" th:field="*{lines[0].amount}" class="form-control" required>
-				        </div>
+						                <div class="row g-3">
+						                    <!--Producto-->
+						                    <div class="col-12 col-md-7">
+						                        <label class="form-label">Producto</label>
+						                        <select th:field="*{lines[__${iter.index}__].product}" class="form-select" required>
+						                            <option value="">Seleccione producto</option>
+						                            <option th:each="p : ${products}" 
+						                                    th:value="${p.id}" 
+						                                    th:text="${p.name} + ' - ' + ${p.price} + '€'">
+						                            </option>
+						                        </select>
+						                    </div>
+
+						                    <!--cantidad-->
+						                    <div class="col-12 col-md-3">
+						                        <label class="form-label">Cantidad</label>
+						                        <input type="number" 
+						                               min="1" 
+						                               th:field="*{lines[__${iter.index}__].amount}" 
+						                               class="form-control" 
+						                               required>
+						                    </div>
+
+						                    <!--botón eliminar-->
+						                    <div class="col-12 col-md-2 d-flex align-items-end">
+						                        <button type="button" class="btn btn-danger btn-sm" 
+						                                th:if="${order.id != null}" 
+						                                onclick="this.closest('.border').remove()">
+						                            Eliminar
+						                        </button>
+						                    </div>
+						                </div>
+						            </div>
+						        </div>
 				
 			</div>
 
