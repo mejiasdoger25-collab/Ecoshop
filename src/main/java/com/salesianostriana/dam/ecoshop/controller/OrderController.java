@@ -168,7 +168,7 @@ public class OrderController {
 	@GetMapping("/edit/{id}")
 	public String editForm(@PathVariable Long id, Model model, Principal principal) {
 	    
-	    Order order = service.findById(id).orElseThrow(() -> new NoSuchElementException("Pedido no encontrado"));
+	    Order order = service.findById(id).orElse(null);
 
 	    if (order.getLines().isEmpty()) {
 	        OrderLine line = new OrderLine();

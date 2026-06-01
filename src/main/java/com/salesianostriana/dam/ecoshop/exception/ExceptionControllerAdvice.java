@@ -38,8 +38,10 @@ public class ExceptionControllerAdvice {
     //Find an Id that doesnt exists
     @ExceptionHandler(NoSuchElementException.class)
     public String handleNotFound(NoSuchElementException ex, Model model) {
-        model.addAttribute("titleError", "Element not found");
-        model.addAttribute("messageError", "The requested product does not exist in our database.");
+
+        model.addAttribute("errorTitulo", "Elemento no encontrado");
+        model.addAttribute("errorMensaje", ex.getMessage());
+
         return "error/error";
     }
 
