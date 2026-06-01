@@ -172,6 +172,8 @@ public class OrderController {
 		}
 
 		model.addAttribute("isAdmin", principal.getName().equals("admin"));
+		model.addAttribute("isEdit", true);
+		
 		return "orders/form";
 	}
 	
