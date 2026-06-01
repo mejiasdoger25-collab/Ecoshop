@@ -85,11 +85,13 @@
 
 						                    <!--botón eliminar-->
 						                    <div class="col-12 col-md-2 d-flex align-items-end">
-						                        <button type="button" class="btn btn-danger btn-sm" 
-						                                th:if="${order.id != null}" 
-						                                onclick="this.closest('.border').remove()">
-						                            Eliminar
-						                        </button>
+												<button type="submit"
+												        class="btn btn-danger btn-sm"
+												        th:if="${order.id != null}"
+												        name="deleteLine"
+												        th:value="${line.id.lineNumber}">
+												    Eliminar
+												</button>
 						                    </div>
 						                </div>
 						            </div>
