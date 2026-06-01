@@ -150,13 +150,29 @@ public class OrderController {
 	
 	
 	@GetMapping("/edit/{id}")
-	public String editForm (@PathVariable Long id, Model model) {
+	public String editForm (@PathVariable Long id, Model model, Principal principal) {
 		
-		Order order = service.findById(id).orElse(null);
+		Order order = service.findById(id).orElseThrow();
+		
+		//para que no pete si no tiene ninguna línea created
+		if (order.getLines().isEmpty()) {
+			OrderLine line = new OrderLine();
+			line.setId(new OrderLinePK());
+			order.getLines().add(line);
+		}
+		
 		model.addAttribute("order", order);
 		model.addAttribute("customers", customerService.findAll());
 		
-		return "/orders/form";
+		if(principal.getName().equals("admin")) {
+			model.addAttribute("customers", customerService.findAll());
+		} else {
+			Customer customer = customerService.findByUsername(principal.getName()).orElseThrow();
+			model.addAttribute("customers", List.of(customer));
+		}
+
+		model.addAttribute("isAdmin", principal.getName().equals("admin"));
+		return "orders/form";
 	}
 	
 	

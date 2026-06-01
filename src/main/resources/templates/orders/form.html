@@ -14,7 +14,9 @@
 	<div class="container mt-5">
 
 	    <h1>Formulario del pedido</h1>
-	    <form th:action="@{/orders/new/submit}" th:object="${order}" method="post" class="needs-validation" novalidate>
+		<h1 th:text="${order.id != null} ? 'Editar Pedido #' + ${order.id} : 'Nuevo Pedido'">Formulario del pedido</h1>
+		<form th:action="@{${order.id} != null ? '/orders/edit/' + ${order.id} : '/orders/new/submit'}"
+		      th:object="${order}" method="post" class="needs-validation" novalidate>
 	        <input type="hidden" th:field="*{id}">
 
 			<!--
