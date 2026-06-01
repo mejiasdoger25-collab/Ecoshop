@@ -14,8 +14,8 @@
 	<div class="container mt-5">
 
 	    <h1>Formulario del pedido</h1>
-		<h1 th:text="${order.id != null} ? 'Editar Pedido #' + ${order.id} : 'Nuevo Pedido'">Formulario del pedido</h1>
-		<form th:action="@{${order.id} != null ? '/orders/edit/' + ${order.id} : '/orders/new/submit'}"
+		<h1 th:text="${order.id != null ? 'Editar Pedido #' + order.id : 'Nuevo Pedido'}">Formulario del pedido</h1>
+		<form th:action="${order.id != null} ? @{/orders/edit/{id}(id=${order.id})} : @{/orders/new/submit}"
 		      th:object="${order}" method="post" class="needs-validation" novalidate>
 	        <input type="hidden" th:field="*{id}">
 
@@ -40,7 +40,7 @@
 				        <div class="col-12 col-md-6 mb-3">
 				            <label sec:authorize="hasRole('ADMIN')">Cliente</label>
 				            <div th:if="${isAdmin}">
-				                <select th:field="*{customer}" class="form-select" required>
+				                <select th:field="*{customer.id}" class="form-select" required>
 				                    <option value="">Seleccione cliente</option>
 				                    <option th:each="c : ${customers}" th:value="${c.id}" th:text="${c.name}"></option>
 				                </select>

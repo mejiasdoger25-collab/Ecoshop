@@ -1,6 +1,7 @@
 package com.salesianostriana.dam.ecoshop.controller;
 
 import java.security.Principal;
+import java.util.NoSuchElementException;
 import java.util.Optional;
 
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -72,7 +73,7 @@ public class CustomerController {
 	@GetMapping("/edit/{id}")
 	public String editForm (@PathVariable Long id, Model model) {
 		
-		Customer customer = service.findById(id).orElse(null);
+		Customer customer = service.findById(id).orElseThrow(() -> new NoSuchElementException("Cliente no encontrado"));
 		model.addAttribute("customer", customer);
 		
 		return "customers/form";

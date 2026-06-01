@@ -64,7 +64,7 @@ public class OrderController {
 	
 	
 	
-	@PreAuthorize("hasAnyRole('USER','VIP','ADMIN')")
+	@PreAuthorize("hasRole('ADMIN')")
 	@GetMapping("/new")
 	public String createForm(Model model, Principal principal) {
 
@@ -92,7 +92,7 @@ public class OrderController {
 	    return "orders/form";
 	}
 	
-	@PreAuthorize("hasAnyRole('USER','VIP','ADMIN')")
+	@PreAuthorize("hasRole('ADMIN')")
 	@PostMapping({"/new/submit", "/edit/{id}"})
 	public String save(@Valid @ModelAttribute("order") Order order,   BindingResult bindingResult,  Model model,  Principal principal) {
 
@@ -164,7 +164,7 @@ public class OrderController {
 	
 	
 	
-	
+	@PreAuthorize("hasRole('ADMIN')")
 	@GetMapping("/edit/{id}")
 	public String editForm(@PathVariable Long id, Model model, Principal principal) {
 	    
@@ -192,18 +192,17 @@ public class OrderController {
 	}
 	
 	
+	@PreAuthorize("hasRole('ADMIN')")
 	@GetMapping("/delete/{id}")
 	public String delete (@PathVariable Long id, Model model) {
 		
-		Optional<Order> order = service.findById(id);
-		
-		if(order.isPresent())
-			service.deleteById(id);
+		Order order = service.findById(id).orElseThrow(() -> new NoSuchElementException("Pedido no encontrado"));
+		service.deleteById(id);
 		
 		return "redirect:/orders/list";
 	}
 	
-	
+	@PreAuthorize("hasAnyRole('USER','VIP','ADMIN')")
 	@GetMapping("/details/{id}")
 	public String details(@PathVariable Long id, Model model) {
 	    Order order = service.findById(id).orElseThrow(() -> new NoSuchElementException("Order not found"));
