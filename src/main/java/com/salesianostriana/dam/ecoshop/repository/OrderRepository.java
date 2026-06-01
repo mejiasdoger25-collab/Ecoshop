@@ -58,8 +58,8 @@ public interface OrderRepository
     	    """)
     	List<Order> findOrdersByStatus(@Param("status") String status);
 
-    	//por status completado del p
-    	@Query("SELECT SUM(o.total) FROM Order o WHERE o.status = 'COMPLETED'")
+    	//dashboard
+    	@Query("SELECT COALESCE(SUM(o.total), 0) FROM Order o")
     	Double getTotalRevenue();
 
     	//entre x e y por fecha de envío, ordenado por fecha de envío

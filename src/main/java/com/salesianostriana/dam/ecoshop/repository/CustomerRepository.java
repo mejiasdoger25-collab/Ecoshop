@@ -63,4 +63,24 @@ public interface CustomerRepository
     		    WHERE c.user.username <> :username
     		""")
     		List<Customer> findAllExceptUsername(@Param("username") String username);
+    	
+    	
+    	//dashboard
+    	@Query("""
+    		       SELECT c
+    		       FROM Customer c
+    		       JOIN Order o ON o.customer.id = c.id
+    		       GROUP BY c
+    		       ORDER BY SUM(o.total) DESC
+    		       """)
+    		List<Customer> findTopCustomersByRevenue();
+    	
+    	
+    	
+    	@Query("""
+    		       SELECT COALESCE(SUM(o.total),0)
+    		       FROM Order o
+    		       WHERE o.customer.id = :customerId
+    		       """)
+    		Double getCustomerTotalSpent(@Param("customerId") Long customerId);
 }
