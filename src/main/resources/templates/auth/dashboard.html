@@ -58,10 +58,10 @@
 	
 	
 	
-		<div class="row g-4">
+		<div class="row g-4 align-items-stretch">
 
 		    <div class="col-lg-6">
-		        <div class="card shadow border-0">
+		        <div class="card shadow border-0 h-100">
 		            <div class="card-header">
 		                Bajo stock
 		            </div>
@@ -82,7 +82,7 @@
 		    </div>
 
 		    <div class="col-lg-6">
-		        <div class="card shadow border-0 mb-3">
+		        <div class="card shadow border-0 mb-3 h-100">
 		            <div class="card-header">
 		                Top clientes
 		            </div>
@@ -94,11 +94,57 @@
 		                    <tr th:each="c : ${topCustomers}">
 		                        <td th:text="${c.name}"></td>
 		                        <td>
-		                            <span th:text="${#numbers.formatDecimal(c.totalSpent,1,2)}"></span>€
+		                            <span th:text="${#numbers.formatDecimal(customerTotals[c.id],1,2)}"></span>€
 		                        </td>
 		                    </tr>
 
 		                </table>
+
+		            </div>
+		        </div>
+		    </div>
+
+		</div>
+		
+		<div class="row g-4 mt-4 mb-4">
+
+		    <div class="col-md-6">
+		        <div class="card shadow border-0 h-100">
+		            <div class="card-body text-center mt-4">
+
+						<h6>Categoría más vendida</h6>
+						
+						<span th:if="${bestCategoryUnits == 0}">
+						    Sin ventas
+						</span>
+
+						<div th:if="${bestCategoryUnits > 0}">
+						    <h4 th:text="${bestCategory.name}"></h4>
+						    <p th:text="${bestCategoryUnits + ' productos vendidos'}"></p>
+						</div>
+						
+		                
+
+		            </div>
+		        </div>
+		    </div>
+
+		    <div class="col-md-6">
+		        <div class="card shadow border-0 h-100">
+					
+		            <div class="card-body text-center mt-4">
+
+						<h6>Categoría menos vendida</h6>
+
+						<span th:if="${worstCategoryUnits == 0}">
+						    Sin ventas
+						</span>
+
+						<div th:if="${worstCategoryUnits > 0}">
+						    <h4 th:text="${worstCategory.name}"></h4>
+						    <p th:text="${worstCategoryUnits + ' productos vendidos'}"></p>
+						</div>
+		                
 
 		            </div>
 		        </div>
