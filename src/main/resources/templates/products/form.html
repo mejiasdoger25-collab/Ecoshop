@@ -30,14 +30,14 @@
 						
 				        <div class="col-6 col-md-3">
 				            <label class="form-label">Precio (€)</label>
-				            <input type="number" th:field="*{price}" class="form-control" step="0.01" maxlength="6" min="0.1" max="999.99" th:errorclass="is-invalid" required><!--6 porque hasta 999, la coma y dos decimales = 6-->
+				            <input type="number" th:field="*{price}" class="form-control" step="0.10" maxlength="6" min="0.1" max="999.99" th:errorclass="is-invalid" required><!--6 porque hasta 999, la coma y dos decimales = 6-->
 							<div class="invalid-feedback"><span th:if="${#fields.hasErrors('price')}" th:errors="*{price}"></span></div>
 				        </div>
 	
 						
 				        <div class="col-6 col-md-3">
 				            <label class="form-label">Stock</label>
-				            <input type="number" th:field="*{stock}" class="form-control" step="0.01" maxlength="6" min="0.1" max="999.99" th:errorclass="is-invalid" required>
+				            <input type="number" th:field="*{stock}" class="form-control" step="1" maxlength="6" min="0" max="999" th:errorclass="is-invalid" required>
 							<div class="invalid-feedback"><span th:if="${#fields.hasErrors('stock')}" th:errors="*{stock}"></span></div>
 				        </div>
 						
