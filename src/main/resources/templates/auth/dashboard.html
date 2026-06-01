@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+<head th:replace="~{fragments/head :: head}"></head>
+
+<body class="d-flex flex-column min-vh-100">
+	
+	<div th:replace="~{fragments/navbar :: navbar}"></div>
+	
+	<div class="container mt-5">
+
+	    <h2 class="mb-4">
+	        Dashboard Admin
+	    </h2>
+
+	    <div class="row g-4 mb-4">
+
+	        <div class="col-md-3">
+	            <div class="card shadow border-0 h-100">
+	                <div class="card-body text-center">
+	                    <h6>Productos</h6>
+	                    <h2 th:text="${productsCount}"></h2>
+	                </div>
+	            </div>
+	        </div>
+
+	        <div class="col-md-3">
+	            <div class="card shadow border-0 h-100">
+	                <div class="card-body text-center">
+	                    <h6>Clientes</h6>
+	                    <h2 th:text="${customersCount}"></h2>
+	                </div>
+	            </div>
+	        </div>
+
+	        <div class="col-md-3">
+	            <div class="card shadow border-0 h-100">
+	                <div class="card-body text-center">
+	                    <h6>Pedidos</h6>
+	                    <h2 th:text="${ordersCount}"></h2>
+	                </div>
+	            </div>
+	        </div>
+
+	        <div class="col-md-3">
+	            <div class="card shadow border-0 h-100">
+	                <div class="card-body text-center">
+	                    <h6>Facturación</h6>
+	                    <h2>
+	                        <span th:text="${#numbers.formatDecimal(revenue,1,2)}"></span>€
+	                    </h2>
+	                </div>
+	            </div>
+	        </div>
+
+	    </div>
+	
+	
+	
+		<div class="row g-4">
+
+		    <div class="col-lg-6">
+		        <div class="card shadow border-0">
+		            <div class="card-header">
+		                Bajo stock
+		            </div>
+
+		            <div class="card-body">
+
+		                <table class="table">
+
+		                    <tr th:each="p : ${lowStockProducts}">
+		                        <td th:text="${p.name}"></td>
+		                        <td th:text="${p.stock}"></td>
+		                    </tr>
+
+		                </table>
+
+		            </div>
+		        </div>
+		    </div>
+
+		    <div class="col-lg-6">
+		        <div class="card shadow border-0 mb-3">
+		            <div class="card-header">
+		                Top clientes
+		            </div>
+
+		            <div class="card-body">
+
+		                <table class="table">
+
+		                    <tr th:each="c : ${topCustomers}">
+		                        <td th:text="${c.name}"></td>
+		                        <td>
+		                            <span th:text="${#numbers.formatDecimal(c.totalSpent,1,2)}"></span>€
+		                        </td>
+		                    </tr>
+
+		                </table>
+
+		            </div>
+		        </div>
+		    </div>
+
+		</div>
+	
+	</div>
+	
+	
+	<div th:replace="~{fragments/user-modal :: userModal}"></div>
+	<div th:replace="~{fragments/footer :: footer}"></div>
+
+	
+</body>
+</html>	
