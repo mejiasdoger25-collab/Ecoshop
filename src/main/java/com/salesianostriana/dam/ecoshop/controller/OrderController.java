@@ -232,6 +232,7 @@ public class OrderController {
 	public String details(@PathVariable Long id, Model model, Principal principal) {
 	    Order order = service.findById(id).orElseThrow(() -> new NoSuchElementException("Order not found"));
 
+	    //con la política de borrado, editar
 	    String username = principal.getName();
 	    boolean isAdmin = username.equals("admin"); 
 	    if (!isAdmin && !order.getCustomer().getUser().getUsername().equals(username)) {
