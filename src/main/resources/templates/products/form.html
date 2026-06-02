@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org"
+			xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+
+<!--HEAD CON FRAGMENT, para evitar repetir los mismos enlaces en todos los templates-->
+<head th:replace="~{fragments/head :: head}"></head>
+
+
+<body class="d-flex flex-column min-vh-100"><!--falta ipmlementar todos los estilos-->
+
+	<div th:replace="~{fragments/navbar :: navbar}"></div>
+	
+	<div class="container mt-5">
+
+			    <h1>Formulario del producto</h1>
+
+			    <form th:action="@{/products/new/submit}" th:object="${product}" method="post" class="needs-validation" novalidate>
+					
+			        <input type="hidden" th:field="*{id}"><!--type="hidden", lo enseño porque es para testing-->
+
+					<div class="row g-3">
+					
+				        <div class="col-md-6">
+				            <label class="form-label">Nombre</label>
+				            <input for="name" type="text" th:field="*{name}" class="form-control" maxlength="15" th:errorclass="is-invalid" required>
+							<div class="invalid-feedback"><span th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></span></div>
+				        </div>
+	
+						
+				        <div class="col-6 col-md-3">
+				            <label class="form-label">Precio (€)</label>
+				            <input type="number" th:field="*{price}" class="form-control" step="0.10" maxlength="6" min="0.1" max="999.99" th:errorclass="is-invalid" required><!--6 porque hasta 999, la coma y dos decimales = 6-->
+							<div class="invalid-feedback"><span th:if="${#fields.hasErrors('price')}" th:errors="*{price}"></span></div>
+				        </div>
+	
+						
+				        <div class="col-6 col-md-3">
+				            <label class="form-label">Stock</label>
+				            <input type="number" th:field="*{stock}" class="form-control" step="1" maxlength="6" min="0" max="999" th:errorclass="is-invalid" required>
+							<div class="invalid-feedback"><span th:if="${#fields.hasErrors('stock')}" th:errors="*{stock}"></span></div>
+				        </div>
+						
+	
+						
+						<div class="col-12 mb-3">
+						    <label class="form-label">
+						        Categoría
+						    </label>
+
+						    <select
+						        th:field="*{category.id}"
+						        class="form-select" required>
+
+						        <option value="">
+						            Selecciona categoría
+						        </option>
+
+						        <option
+						            th:each="c : ${categories}"
+						            th:value="${c.id}"
+						            th:text="${c.name}">
+						        </option>
+
+						    </select>
+						</div>
+						
+						
+						
+						
+						
+						
+				        <div class="col-md-6">
+							<label class="form-label">Origen</label>
+				            <input type="text" th:field="*{origin}" class="form-control" maxlength="40" th:errorclass="is-invalid" required>
+							<div class="invalid-feedback"><span th:if="${#fields.hasErrors('origin')}" th:errors="*{origin}"></span></div>
+				        </div>
+												
+	
+						<div class="col-12 col-md-6 mb-3">
+						    <label for="image" class="form-label">URL de la Imagen</label>
+						    <input type="url" class="form-control"  id="image"  name="image"  th:field="*{image}" placeholder="https://images...">
+						</div>
+						
+						
+						<div class="col-12">
+							<label class="form-label">Descrición</label>
+							<textarea type="text" th:field="*{description}" class="form-control limited-textarea" maxlength="900" th:errorclass="is-invalid"></textarea>
+							<div class="invalid-feedback"><span th:if="${#fields.hasErrors('description')}" th:errors="*{description}"></span></div>
+						</div>
+
+						
+				        <div class="col-12">
+				            <input type="checkbox" th:field="*{ecoCertificate}" class="form-check-input">
+				            <label class="form-check-label">Certificado ecológico</label>
+				        </div>
+	
+						
+				        <button type="submit" name="submit" value="submit" class="btn btn-success">Guardar</button>
+				        <a th:href="@{/products/list}" class="btn btn-secondary">Cancelar</a>
+						
+					</div>	
+
+			    </form>
+
+	</div>
+			
+<div th:replace="~{fragments/user-modal :: userModal}"></div>
+			
+<div th:replace="~{fragments/footer :: footer}"></div>
+
+</body>
+
+</html>

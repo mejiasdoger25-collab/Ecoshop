@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org"
+			xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+
+<!--HEAD CON FRAGMENT, para evitar repetir los mismos enlaces en todos los templates-->
+<head th:replace="~{fragments/head :: head}"></head>
+
+
+<body class="d-flex flex-column min-vh-100"><!--falta ipmlementar todos los estilos y validaciones-->
+	
+	<div th:replace="~{fragments/navbar :: navbar}"></div>
+	
+	<div class="container mt-5">
+	
+		
+	    <div class="d-flex justify-content-between mb-4">
+	
+	        <h1>Lista de clientes</h1>
+	        <a sec:authorize="hasRole('ADMIN')" th:href="@{/customers/new}" class="btn btn-success"> Nuevo cliente</a>
+	
+	    </div>
+		
+		<div class="table-responsive">
+			
+			<table class="table table-hover align-middle">
+	
+			    <thead class="table-secondary">
+		        <tr>
+		            <!--<th>ID</th>-->
+		            <th>Nombre</th>
+		            <th>Email</th>
+		            <th>Teléfono</th>
+		            <th>Acciones</th>
+		        </tr>
+		        </thead>
+		
+				
+		        <tbody>
+		        <tr th:each="customer : ${customers}">
+		            <!--<td th:text="${customer.id}"></td>-->
+		            <td th:text="${customer.name}"></td>
+		            <td th:text="${customer.email}"></td>
+		            <td th:text="${customer.phone}"></td>
+					
+		            <td sec:authorize="hasRole('ADMIN')">
+						<div class="d-flex flex-column gap-1 align-items-start">
+			                <a th:href="@{/customers/edit/{id}(id=${customer.id})}" class="btn btn-warning btn-sm"> Editar</a>
+			                <a th:href="@{/customers/delete/{id}(id=${customer.id})}" class="btn btn-danger btn-sm delete-btn" data-confirm="¿Borrar cliente?">Borrar</a><!--con js porque Rafa no quiere onclick ;V-->
+						</div>
+		            </td>
+		        </tr>
+		        </tbody>
+		
+				
+		    </table>
+			
+		</div>
+	
+	</div>
+	
+	<div th:replace="~{fragments/user-modal :: userModal}"></div>
+	
+	<div th:replace="~{fragments/footer :: footer}"></div>
+
+</body>
+</html>

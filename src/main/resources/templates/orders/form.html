@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org"
+			xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+
+<!--HEAD CON FRAGMENT, para evitar repetir los mismos enlaces en todos los templates-->
+<head th:replace="~{fragments/head :: head}"></head>
+
+
+<body class="d-flex flex-column min-vh-100"><!--falta ipmlementar todos los estilos-->
+
+	<div th:replace="~{fragments/navbar :: navbar}"></div>
+	
+	<div class="container mt-5">
+
+	    <h1>Formulario del pedido</h1>
+		<h1 th:text="${order.id != null ? 'Editar Pedido #' + order.id : 'Nuevo Pedido'}">Formulario del pedido</h1>
+		<form th:action="${order.id != null} ? @{/orders/edit/{id}(id=${order.id})} : @{/orders/new/submit}"
+		      th:object="${order}" method="post" class="needs-validation" novalidate>
+	        <input type="hidden" th:field="*{id}">
+
+			<!--
+	        <div class="mb-3">
+	            <label>Code</label>
+	            <input type="text" th:field="*{code}" class="form-control" maxlength="20" min="3" max="15" required>
+	        </div>
+			<div class="invalid-feedback"><span th:if="${#fields.hasErrors('code')}" th:errors="*{code}"></span></div>
+			-->
+
+			<div class="row g-3">
+			
+		        <div class="col-12 col-md-6 mb-3">
+		            <label>Fecha</label>
+					<input type="date" th:name="shippingDate" th:value="${#temporals.format(order.shippingDate, 'yyyy-MM-dd')}" th:errorclass="is-invalid" class="form-control" required>	
+					<div class="invalid-feedback"><span th:if="${#fields.hasErrors('shippingDate')}" th:errors="*{shippingDate}"></span></div>	        
+				</div>
+	
+				
+				<!--Cliente-->
+				        <div class="col-12 col-md-6 mb-3">
+				            <label sec:authorize="hasRole('ADMIN')">Cliente</label>
+				            <div th:if="${isAdmin}">
+				                <select th:field="*{customer.id}" class="form-select" required>
+				                    <option value="">Seleccione cliente</option>
+				                    <option th:each="c : ${customers}" th:value="${c.id}" th:text="${c.name}"></option>
+				                </select>
+				            </div>
+				            <div th:unless="${isAdmin}">
+				                <input type="hidden" th:field="*{customer.id}" th:value="${customers[0].id}" />
+				            </div>
+				        </div>
+
+								<!--lineas de pedido-->
+						        <div class="col-12">
+						            <label class="form-label fw-bold">Productos del pedido</label>
+						            
+						            <div th:each="line, iter : *{lines}" class="border rounded p-3 mb-3 bg-light">
+						                
+						                <!--campos ocultos para la clave compuesta-->
+						                <input type="hidden" th:field="*{lines[__${iter.index}__].id.orderId}" />
+						                <input type="hidden" th:field="*{lines[__${iter.index}__].id.lineNumber}" />
+
+						                <div class="row g-3">
+						                    <!--Producto-->
+						                    <div class="col-12 col-md-7">
+						                        <label class="form-label">Producto</label>
+						                        <select th:field="*{lines[__${iter.index}__].product}" class="form-select" required>
+						                            <option value="">Seleccione producto</option>
+						                            <option th:each="p : ${products}" 
+						                                    th:value="${p.id}" 
+						                                    th:text="${p.name} + ' - ' + ${p.price} + '€'">
+						                            </option>
+						                        </select>
+						                    </div>
+
+						                    <!--cantidad-->
+						                    <div class="col-12 col-md-3">
+						                        <label class="form-label">Cantidad</label>
+						                        <input type="number" 
+						                               min="1" 
+						                               th:field="*{lines[__${iter.index}__].amount}" 
+						                               class="form-control" 
+						                               required>
+						                    </div>
+
+						                    <!--botón eliminar-->
+						                    <div class="col-12 col-md-2 d-flex align-items-end">
+												<button type="submit"
+												        class="btn btn-danger btn-sm"
+												        th:if="${order.id != null}"
+												        name="deleteLine"
+												        th:value="${line.id.lineNumber}">
+												    Eliminar
+												</button>
+						                    </div>
+						                </div>
+						            </div>
+						        </div>
+				
+			</div>
+
+			<!--<input type="hidden" th:field="*{id}">-->
+	        <button type="submit" class="btn btn-success">Guardar</button>
+	        <a th:href="@{/orders/list}" class="btn btn-secondary">Cancelar</a>
+
+	    </form>
+	</div>
+
+	<div th:replace="~{fragments/user-modal :: userModal}"></div>
+	
+	<div th:replace="~{fragments/footer :: footer}"></div>
+	
+	</body>
+	</html>

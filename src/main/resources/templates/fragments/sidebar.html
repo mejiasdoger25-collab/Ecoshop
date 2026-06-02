@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org"
+			xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+<div th:replace="~{fragments/head :: head}"></div>
+	
+<body>		
+			
+	<div th:fragment="sidebar">
+	
+		<div class="sidebar-sticky">
+		
+		    <div class="card shadow-sm">
+		
+		        <div class="card-header bg-secondary text-light">
+		            Categorías
+		        </div>
+		
+		        <div class="list-group list-group-flush">
+		
+		            <a th:href="@{/products/list}"
+		                class="list-group-item list-group-item-action">Todos
+		            </a>
+		
+		            <a th:each="c : ${categories}"
+		                th:href="@{/products/category/{id}(id=${c.id})}"
+		                th:text="${c.name}"
+		                class="list-group-item list-group-item-action">
+		            </a>
+					
+					<a th:href="@{/products/eco}"
+					   class="list-group-item list-group-item-action">
+					    <i class="bi bi-leaf-fill"></i> Eco
+					</a>
+		
+					<a th:href="@{/products/category/no-eco}"
+						class="list-group-item list-group-item-action">
+					    <i class="bi bi-ban"></i> No Eco
+					</a>
+					
+					<a th:href="@{/products/category/offers}"
+					   class="list-group-item list-group-item-action">
+					    <i class="bi bi-fire"></i> Ofertas
+					</a>
+					
+					<a th:href="@{/products/category/low-stock}"
+					   class="list-group-item list-group-item-action">
+					    <i class="bi bi-exclamation-triangle"></i> Bajo stock
+					</a>
+					
+					<a th:href="@{/products/category/daily-offer}"
+					   class="list-group-item list-group-item-action">
+					    <i class="bi bi-calendar-check"></i> Oferta del día
+					</a>
+					
+		        </div>
+		
+		    </div>
+		
+		</div>
+	
+	</div>
+
+</body>
+</html>

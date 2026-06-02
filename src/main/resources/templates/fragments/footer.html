@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org"
+			xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+
+<!--HEAD CON FRAGMENT, para evitar repetir los mismos enlaces en todos los templates-->
+<div th:replace="~{fragments/head :: head}"></div>
+
+
+<body><!--falta ipmlementar todos los estilos-->
+
+	<!-- Footer -->
+	<footer th:fragment="footer" class="bg-dark text-light py-5 mt-auto">
+
+	    <div class="container">
+			
+	        <div class="row gy-4">
+
+				
+	            <!-- Brand -->
+	            <div class="col-lg-4">
+
+	                <h4 class="fw-bold text-success">
+	                    <i class="bi bi-leaf-fill"></i>EcoShop
+	                </h4>
+
+	                <p class="text-light-emphasis mb-0">
+						Mercado online sostenible centrado en
+						productos ecológicos y respetuosos con el medio ambiente.
+	                </p>
+
+	            </div>
+
+				
+	            <!-- Navigation -->
+	            <div class="col-lg-2 col-6">
+
+	                <h6 class="fw-semibold mb-3">Navegación</h6>
+
+	                <ul class="list-unstyled">
+	                    <li class="mb-2">
+	                        <a th:href="@{/products/list}" class="text-decoration-none text-light-emphasis"> Productos</a>
+	                    </li>
+
+	                    <li class="mb-2" sec:authorize="hasRole('ADMIN')">
+	                        <a th:href="@{/customers/list}" class="text-decoration-none text-light-emphasis">Clientes</a>
+	                    </li>
+
+	                    <li>
+	                        <a th:href="@{/orders/list}" class="text-decoration-none text-light-emphasis"> Pedidos</a>
+	                    </li>
+	                </ul>
+
+	            </div>
+
+				
+	            <!-- Eco values -->
+	            <div class="col-lg-2 col-6">
+
+	                <h6 class="fw-semibold mb-3">Valores ecológicos</h6>
+
+	                <ul class="list-unstyled text-light-emphasis">
+	                    <li class="mb-2">Productos orgánicos</li>
+	                    <li class="mb-2">Embalaje sostenible</li>
+	                    <li>Comercio verde (Green commerce)</li>
+	                </ul>
+
+	            </div>
+
+				
+	            <!-- Newsletter -->
+	            <div class="col-lg-4">
+
+	                <h6 class="fw-semibold mb-3">Suscríbete a nuestro boletín informativo</h6>
+
+	                <p class="text-light-emphasis small">
+						Recibe novedades sobre productos sostenibles
+						y tendencias ecológicas.
+	                </p>
+
+	                <div class="input-group">
+						
+	                    <input type="email" class="form-control" placeholder="Your email">
+	                    <button class="btn btn-success">Suscribir</button>
+						
+	                </div>
+
+	            </div>
+
+				
+	        </div>
+
+			
+	        <!-- Divider -->
+	        <hr class="border-secondary my-4">
+
+			
+	        <!-- Bottom -->
+	        <div class="d-flex flex-column flex-md-row justify-content-between align-items-center gap-2">
+
+	            <small class="text-light-emphasis">© 2026 EcoShop · Proyecto de aplicación web · Salesianos Triana</small>
+
+	            <div class="d-flex gap-3">
+
+					<a th:href="@{https://www.youtube.com/watch?v=dQw4w9WgXcQ}" target="_blank" class="text-decoration-none text-light-emphasis"> <i class="bi bi-youtube"></i> </a>
+	                <a th:href="@{https://github.com/mejiasdoger25-collab}" target="_blank" class="text-decoration-none text-light-emphasis"> <i class="bi bi-instagram"></i> </a>
+					<a th:href="@{https://github.com/mejiasdoger25-collab}" target="_blank" class="text-decoration-none text-light-emphasis"> <i class="bi bi-twitter-x"></i> </a>
+					<a th:href="@{https://github.com/mejiasdoger25-collab}" target="_blank" class="text-decoration-none text-light-emphasis"> <i class="bi bi-github"></i> </a>      
+
+	            </div>
+
+	        </div>
+
+			
+	    </div>
+
+	</footer>
+	
+</body>
+</html>

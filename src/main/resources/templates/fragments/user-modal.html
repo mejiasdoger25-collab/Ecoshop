@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org"
+			xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+<body>
+
+<div th:fragment="userModal" class="modal fade" id="userModal" tabindex="-1" aria-hidden="true">
+
+    <div class="modal-dialog modal-dialog-centered">
+
+        <div class="modal-content">
+
+            <div class="modal-header bg-secondary text-white">
+                <h5 class="modal-title">Información del usuario</h5>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+            </div>
+
+            <div class="modal-body">
+                <div class="mb-3">
+                    <strong>Nombre de usuario:</strong>
+                    <span sec:authentication="name"></span>
+                </div>
+
+				<div class="mb-3">
+				    <strong>Role:</strong>
+				    <span sec:authorize="hasRole('ADMIN')">ADMIN</span>
+				    <span sec:authorize="hasRole('USER')">USER</span>
+				    <span sec:authorize="hasRole('VIP')">VIP</span>
+				</div>
+
+                <hr>
+                <p class="text-muted mb-0">Bienvenido a EcoShop</p>
+            </div>
+
+            <div class="modal-footer"><!--cambiado para que Cross Site Request Forgery no pase por thymeleaf con th:action. así no crea la session late y crashea el render-->
+				<a th:href="@{/logout}" class="btn btn-danger">Finalizar la sesión</a><!--hecho con if porque el token no existe en todas las request, solo en algunas-->
+				<a th:href="@{/orders/list}" class="btn btn-info">Mis pedidos</a><!--es por esto que lo he hecho con un enlace en lugar de formulario, para evitar todo el tema de los tokens-->
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+</body>
+</html>

@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org"
+			xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+
+<!--HEAD CON FRAGMENT, para evitar repetir los mismos enlaces en todos los templates-->
+<head th:replace="~{fragments/head :: head}"></head>
+
+
+<body class="d-flex flex-column min-vh-100"><!--falta ipmlementar todos los estilos-->
+
+	<div th:replace="~{fragments/navbar :: navbar}"></div>
+	
+	<div class="container mt-5">
+
+	    <div class="d-flex justify-content-between mb-4">
+	        <h1>Order List</h1>
+	        <a th:href="@{/orders/new}" class="btn btn-success" sec:authorize="hasRole('ADMIN')">Nuevo pedido</a><!--sec:authorize="hasAnyRole(['ADMIN', 'USER', 'VIP'])-->
+	    </div>
+
+		<!-- Empty message -->
+		<div class="card bg-sinfo shadow-sm p-5 text-center"  th:if="${orders == null or orders.isEmpty()}">
+			<i class="bi bi-calendar-x fs-1 d-block mb-3 text-muted"></i>
+			<h4 class="card-title">Todavía no tienes ningún pedido.</h4>
+			<p class="mb-3">Realiza al menos un pedido para ver un pedido.</p>
+			<a th:href="@{/}" class="btn btn-secondary">
+				<i class="bi bi-box-arrow-left"></i></i> Volver a los productos
+			</a>
+		</div>
+		
+		<div th:if="${not orders.isEmpty()}">
+		
+			<div class="table-responsive">
+				
+				<table class="table table-hover align-middle">
+				    <thead class="table-secondary">
+			        <tr>
+			            <!--<th>ID</th>-->
+			            <th>Código</th>
+			            <th>Fecha</th>
+			            <th>Total (€)</th>
+						<th>Pedido</th>
+			            <th sec:authorize="hasRole('ADMIN')">Cliente</th>
+			            <th sec:authorize="hasRole('ADMIN')">Acciones</th>
+			        </tr>
+			        </thead>
+		
+					
+			        <tbody>
+						
+						<tr th:each="order : ${orders}">
+
+						    <td th:text="${order.code}"></td>
+
+						    <td th:text="${order.shippingDate}"></td>
+
+						    <td th:text="${#numbers.formatDecimal(order.total, 1, 2)}"></td>
+
+						    <!-- PEDIDO -->
+						    <td>
+						        <div class="d-flex flex-column flex-md-row gap-1">
+
+						            <a th:href="@{/orders/details/{id}(id=${order.id})}"
+						               class="btn btn-outline-secondary btn-sm">
+						                <i class="bi bi-eye"></i>
+						                Detalles
+						            </a>
+
+									<button onclick="window.print();" class="btn btn-outline-success btn-sm">
+									    <i class="bi bi-printer"></i>
+									    Imprimir
+									</button>
+
+						        </div>
+						    </td>
+
+						    <!-- CLIENTE -->
+						    <td sec:authorize="hasRole('ADMIN')"
+						        th:text="${order.customer.name}">
+						    </td>
+
+						    <!-- ACCIONES -->
+						    <td sec:authorize="hasRole('ADMIN')">
+						        <div class="d-flex flex-column gap-1 align-items-start">
+						            <a th:href="@{/orders/edit/{id}(id=${order.id})}"
+						               class="btn btn-warning btn-sm">
+						                Editar
+						            </a>
+
+						            <a th:href="@{/orders/delete/{id}(id=${order.id})}"
+						               class="btn btn-danger btn-sm delete-btn"
+						               data-confirm="¿Borrar pedido?">
+						                Borrar
+						            </a>
+						        </div>
+						    </td>
+
+						</tr>
+			        </tbody>
+		
+					
+			    </table>
+				
+			</div>
+
+		</div>
+			
+	</div>
+	
+	<div th:replace="~{fragments/user-modal :: userModal}"></div>
+	
+	<div th:replace="~{fragments/footer :: footer}"></div>
+	
+</body>
+</html>

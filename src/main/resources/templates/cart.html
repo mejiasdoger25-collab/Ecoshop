@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+<head th:replace="~{fragments/head :: head}"></head>
+
+<body class="d-flex flex-column min-vh-100">
+	
+    <div th:replace="~{fragments/navbar :: navbar}"></div>
+
+    <div class="container mt-5">
+		
+        <h1 class="mb-4">Tu carrito</h1>
+
+		<!--inssuficient stock exception error message-->
+		<div class="card bg-swarning shadow-sm p-5 text-center mb-4" th:if="${error}">
+		    <i class="bi bi-cart-x fs-1 d-block mb-3 text-danger"></i>
+		    <h4 class="card-title"> No se puede procesar el pedido</h4>
+			<p class="mb-3 text-muted" th:text="${error}"></p>
+		    <a th:href="@{/}" class="btn btn-secondary">
+				<i class="bi bi-box-arrow-left"></i></i> Volver a los productos
+			</a>
+		</div>
+		
+		
+		<!-- Empty message -->
+		<div class="card bg-sinfo shadow-sm p-5 text-center" th:if="${products == null or products.isEmpty()}">
+			<i class="bi bi-cart-x fs-1 d-block mb-3 text-muted"></i>
+			<h4 class="card-title">Tu carrito está vacío</h4>
+			<p class="mb-3">Aún no has añadido ningún producto.</p>
+			<a th:href="@{/}" class="btn btn-secondary">
+				<i class="bi bi-box-arrow-left"></i></i> Volver a los productos
+			</a>
+		</div>
+
+        <div th:if="${not products.isEmpty()}">
+            <div class="table-responsive">
+                <table class="table table-hover align-middle">
+                    <thead class="table-secondary">
+                        <tr>
+                            <th>Producto</th>
+                            <th class="text-center">Precio unitario</th>
+                            <th class="text-center">Cantidad</th>
+                            <th class="text-center">Subtotal</th>
+                            <th class="text-end">Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr th:each="entry : ${products}">
+                            <td>
+                                <strong th:text="${entry.key.name}"></strong>
+                            </td>
+							
+							<!--precio unitario-->
+							<td class="text-center">
+
+							    <!-- Producto eco -->
+							    <div th:if="${entry.key.ecoCertificate}">
+
+							        <div class="text-decoration-line-through text-muted small">
+							            <span th:text="${#numbers.formatDecimal(entry.key.price,1,2)}"></span> €
+							        </div>
+							        <div class="fw-bold text-success">
+							            <span th:text="${#numbers.formatDecimal(productService.getEffectivePrice(entry.key),1,2)}"></span> €
+							        </div>
+							        <span class="badge bg-success">
+							            <i class="bi bi-leaf me-1"></i> Eco -10%
+							        </span>
+
+							    </div>
+
+							    <!-- Producto normal -->
+							    <div th:unless="${entry.key.ecoCertificate}">
+
+							        <span th:text="${#numbers.formatDecimal(entry.key.price,1,2)}"></span> €
+
+							    </div>
+
+							</td>
+                            
+							<!-- cantidad del orderLine -->
+							<td class="text-center">
+								<span class="badge bg-light text-dark fs-6 border px-3 py-2"
+								th:text="${entry.value}"></span>
+							</td>							
+							
+                            <!-- Cantidad del product / subotal-->
+                            <td class="text-center">
+                                <span class="badge bg-light text-dark fs-6 border px-3 py-2" 
+                                      th:text="${#numbers.formatDecimal(productService.getEffectivePrice(entry.key) * entry.value,1,2)} + ' €'"></span>
+                            </td>
+								
+                            <!-- Botones + y - -->
+                            <td class="text-end">
+                                <div class="btn-group btn-group-sm" role="group">
+                                    <!-- Quitar una unidad -->
+                                    <a th:href="@{/cart/removeOne/{id}(id=${entry.key.id})}" 
+                                       class="btn btn-outline-secondary" title="Retire una unidad">
+                                        <i class="bi bi-dash"></i>
+                                    </a>
+                                    
+                                    <!-- Añadir una unidad, cambiado el redirect para que no use el del controller y te lleve a /products7list -->
+                                    <a th:href="@{/cart/add/{id}(id=${entry.key.id},redirect='/cart')}"
+                                       class="btn btn-outline-secondary" title="Añade una unidad">
+                                        <i class="bi bi-plus"></i>
+                                    </a>
+									
+									<!--los anteriores son para cantidades del mismo product, es decir, +x o -x, este es para borrar la línea entera del tirón-->
+									<a th:href="@{/cart/remove/{id}(id=${entry.key.id})}"
+									   class="btn btn-outline-danger" title="Eliminar línea de productos">
+									    <i class="bi bi-trash"></i>
+									</a>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+			
+				
+			</div>
+			
+            <div class="row mt-4">
+				<div th:unless="${products == null or products.isEmpty()}" class="col-12">
+
+					<h4>Total: <strong th:text="${#numbers.formatDecimal(total, 1, 2)} + ' €'"></strong></h4>
+					
+				    <div class="d-flex flex-column flex-md-row justify-content-md-end gap-2">
+
+				        <a th:href="@{/products/list}" class="btn btn-secondary">
+				            Continuar comprando
+				        </a>
+
+				        <form th:action="@{/cart/checkout}" method="post">
+				            <button type="submit" class="btn btn-success w-100">
+				                Procesar pedido
+				            </button>
+				        </form>
+
+				        <a th:href="@{/cart/clear}" class="btn btn-danger">
+				            <i class="bi bi-trash3"></i>
+				            Vaciar carrito
+				        </a>
+
+				    </div>
+
+				</div>
+            </div>
+        </div>
+    </div>
+
+    <div th:replace="~{fragments/user-modal :: userModal}"></div>
+    <div th:replace="~{fragments/footer :: footer}"></div>
+</body>
+</html>
