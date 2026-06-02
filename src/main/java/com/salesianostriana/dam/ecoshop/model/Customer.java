@@ -6,6 +6,7 @@ import java.util.List;
 
 import com.salesianostriana.dam.ecoshop.security.user.User;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
@@ -59,7 +60,7 @@ public class Customer {
 	private double balance;
 	
 	//relación con pedidos
-    @OneToMany(mappedBy = "customer", fetch=FetchType.EAGER)
+	@OneToMany(mappedBy = "customer",  fetch = FetchType.EAGER, cascade = CascadeType.ALL, orphanRemoval = true)           
     @Builder.Default
     @ToString.Exclude
     @EqualsAndHashCode.Exclude
