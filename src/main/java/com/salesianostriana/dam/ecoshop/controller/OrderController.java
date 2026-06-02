@@ -229,9 +229,15 @@ public class OrderController {
 	
 	@PreAuthorize("hasAnyRole('USER','VIP','ADMIN')")
 	@GetMapping("/details/{id}")
-	public String details(@PathVariable Long id, Model model) {
+	public String details(@PathVariable Long id, Model model, Principal principal) {
 	    Order order = service.findById(id).orElseThrow(() -> new NoSuchElementException("Order not found"));
 
+	    String username = principal.getName();
+	    boolean isAdmin = username.equals("admin"); 
+	    if (!isAdmin && !order.getCustomer().getUser().getUsername().equals(username)) {
+	        throw new org.springframework.security.access.AccessDeniedException("No tienes permiso para ver este pedido");
+	    }
+	    
 	    model.addAttribute("order", order);
 	    return "orders/details";
 	}
