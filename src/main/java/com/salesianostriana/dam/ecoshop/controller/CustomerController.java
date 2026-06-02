@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.salesianostriana.dam.ecoshop.model.Customer;
 import com.salesianostriana.dam.ecoshop.model.Product;
+import com.salesianostriana.dam.ecoshop.security.user.User;
 import com.salesianostriana.dam.ecoshop.service.CustomerService;
 
 import jakarta.validation.Valid;
@@ -54,18 +55,32 @@ public class CustomerController {
 	@PreAuthorize("hasRole('ADMIN')")
 	@GetMapping("/new")
 	public String createForm (Model model) {
+		Customer customer = new Customer();
+	    customer.setUser(new User());
 		model.addAttribute("customer", new Customer());
 		return "customers/form";
 	}
 	
 	@PreAuthorize("hasRole('ADMIN')")
 	@PostMapping("/new/submit")
-	public String save (@Valid @ModelAttribute("customer") Customer customer, BindingResult bindingResult) {
+	public String save (@Valid @ModelAttribute("customer") Customer customer, BindingResult bindingResult, Principal principal, Model model) {
 		if (bindingResult.hasErrors()) {
             return "customers/form";
 		}
-		service.save(customer);
-		return "redirect:/customers/list";
+		try {
+	        //si el admin no pone el user, se pone auto default en null para que entre en la query
+	        if (customer.getUser() != null &&  (customer.getUser().getUsername() == null || customer.getUser().getUsername().trim().isEmpty())) {
+	            customer.setUser(null);
+	        }
+
+	        service.save(customer);
+	        return "redirect:/customers/list";
+	        
+	    } catch (Exception e) {
+	    		model.addAttribute("error", e.getMessage()); 
+	        return "customers/form";
+	    }
+		
 	}
 	
 	

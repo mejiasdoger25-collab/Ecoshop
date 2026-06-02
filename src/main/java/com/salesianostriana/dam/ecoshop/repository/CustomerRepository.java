@@ -56,13 +56,22 @@ public interface CustomerRepository
     	Double getAverageCustomerSpending();
     
     	
+    	
+    	
+    	
     	//para hacer el findall de los customers pero sin el que está inciado
     	@Query("""
     		    SELECT c
     		    FROM Customer c
-    		    WHERE c.user.username <> :username
+    		    LEFT JOIN FETCH c.user u
+    		    WHERE (u IS NULL OR u.username <> :username)
     		""")
     		List<Customer> findAllExceptUsername(@Param("username") String username);
+    	
+    	
+    	
+    	
+    	
     	
     	
     	//dashboard
