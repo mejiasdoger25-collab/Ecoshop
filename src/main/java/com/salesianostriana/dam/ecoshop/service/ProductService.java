@@ -2,28 +2,22 @@ package com.salesianostriana.dam.ecoshop.service;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Arrays;
+
 import java.util.Collections;
 import java.util.List;
 
-import org.springframework.context.annotation.Bean;
+
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
-import com.salesianostriana.dam.ecoshop.model.OrderLine;
+
 import com.salesianostriana.dam.ecoshop.model.Product;
-import com.salesianostriana.dam.ecoshop.repository.CustomerRepository;
-import com.salesianostriana.dam.ecoshop.repository.OrderLineRepository;
+
 import com.salesianostriana.dam.ecoshop.repository.ProductRepository;
 import com.salesianostriana.dam.ecoshop.service.base.BaseServiceImp;
 
-import jakarta.annotation.PostConstruct;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.NoArgsConstructor;
-import lombok.RequiredArgsConstructor;
 
 
 @Service

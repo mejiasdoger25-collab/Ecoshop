@@ -1,6 +1,5 @@
 package com.salesianostriana.dam.ecoshop.security.user;
 
-import jakarta.annotation.PostConstruct;
 import lombok.RequiredArgsConstructor;
 
 import java.time.LocalDateTime;

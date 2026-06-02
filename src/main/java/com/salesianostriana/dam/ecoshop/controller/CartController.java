@@ -24,7 +24,6 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import java.security.Principal;
 import java.time.LocalDate;
 import java.util.Map;
-import java.util.NoSuchElementException;
 
 @Controller
 @RequestMapping("/cart")
