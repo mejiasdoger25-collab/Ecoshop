@@ -14,7 +14,6 @@ import org.springframework.data.domain.Pageable;
 
 import com.salesianostriana.dam.ecoshop.model.Category;
 import com.salesianostriana.dam.ecoshop.model.Product;
-import com.salesianostriana.dam.ecoshop.security.user.User;
 
 @Repository
 public interface ProductRepository

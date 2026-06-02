@@ -1,5 +1,34 @@
 # 🌱 EcoShop
 
+# Ejecución
+
+## Requisitos
+
+- Java 21 (o versión configurada en Maven)
+- Maven
+
+## Arranque
+
+```bash
+git clone <repositorio>
+cd ecoshop
+mvn spring-boot:run
+```
+
+Acceso:
+
+```text
+http://localhost:9000/
+```
+
+---
+
+## Usuarios
+
+- Rol admin: Usuario -> admin / Contraseña -> admin
+- Rol user: Usuario -> user / Contraseña -> user
+- Rol vip: Usuario -> vip / Contraseña -> vip
+
 ## Descripción
 
 EcoShop es una aplicación web desarrollada con Spring Boot para la gestión y venta de productos ecológicos y sostenibles.
@@ -399,28 +428,6 @@ static/
 
 ---
 
-# Ejecución
-
-## Requisitos
-
-- Java 21 (o versión configurada en Maven)
-- Maven
-
-## Arranque
-
-```bash
-git clone <repositorio>
-cd ecoshop
-mvn spring-boot:run
-```
-
-Acceso:
-
-```text
-http://localhost:9000/
-```
-
----
 
 # Mejoras respecto al enunciado original
 

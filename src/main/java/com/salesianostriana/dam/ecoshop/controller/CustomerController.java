@@ -1,7 +1,7 @@
 package com.salesianostriana.dam.ecoshop.controller;
 
 import java.security.Principal;
-import java.util.NoSuchElementException;
+
 import java.util.Optional;
 
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.salesianostriana.dam.ecoshop.model.Customer;
-import com.salesianostriana.dam.ecoshop.model.Product;
+
 import com.salesianostriana.dam.ecoshop.security.user.User;
 import com.salesianostriana.dam.ecoshop.service.CustomerService;
 
