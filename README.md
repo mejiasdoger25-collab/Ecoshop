@@ -1,4 +1,40 @@
-# 🌱 EcoShop
+<p align="center">
+    <img src="docs/images/banner.jpg" alt="EcoShop Banner">
+</p>
+
+
+## Descripción
+
+EcoShop es una aplicación web desarrollada con Spring Boot para la gestión y venta de productos ecológicos y sostenibles.
+
+El proyecto parte de un enunciado académico que requería la implementación de una tienda ecológica con gestión de productos, clientes y pedidos. Sin embargo, durante su desarrollo se ha ampliado significativamente tanto el modelo de datos como la lógica de negocio, incorporando nuevas funcionalidades orientadas a una experiencia de compra más realista y una administración más completa de la plataforma.
+
+---
+
+# Índice
+
+- [Ejecución](#ejecución) 
+- [Usuarios](#usuarios) 
+- [Objetivos del proyecto](#objetivos-del-proyecto) 
+- [Tecnologías utilizadas](#tecnologías-utilizadas) 
+- [Arquitectura](#arquitectura) 
+- [Modelo de datos](#modelo-de-datos) 
+- [Ampliaciones realizadas](#ampliaciones-realizadas) 
+- [Modelo de producto ampliado](#modelo-de-producto-ampliado) 
+- [Modelo de cliente ampliado](#modelo-de-cliente-ampliado) 
+- [Modelo de pedido ampliado](#modelo-de-pedido-ampliado) 
+- [Lógica de negocio implementada](#lógica-de-negocio-implementada) 
+- [Validaciones](#validaciones) 
+- [Gestión de excepciones](#gestión-de-excepciones) 
+- [Consultas implementadas](#consultas-implementadas) 
+- [Seguridad](#seguridad) 
+- [Interfaz web](#interfaz-web) 
+- [Datos de prueba](#datos-de-prueba) 
+- [Estructura principal del proyecto](#estructura-principal-del-proyecto) 
+- [Mejoras respecto al enunciado original](#mejoras-respecto-al-enunciado-original) 
+- [Autor](#autor)
+
+---
 
 # Ejecución
 
@@ -28,12 +64,6 @@ http://localhost:9000/
 - Rol admin: Usuario -> admin / Contraseña -> admin
 - Rol user: Usuario -> user / Contraseña -> user
 - Rol vip: Usuario -> vip / Contraseña -> vip
-
-## Descripción
-
-EcoShop es una aplicación web desarrollada con Spring Boot para la gestión y venta de productos ecológicos y sostenibles.
-
-El proyecto parte de un enunciado académico que requería la implementación de una tienda ecológica con gestión de productos, clientes y pedidos. Sin embargo, durante su desarrollo se ha ampliado significativamente tanto el modelo de datos como la lógica de negocio, incorporando nuevas funcionalidades orientadas a una experiencia de compra más realista y una administración más completa de la plataforma.
 
 ---
 
